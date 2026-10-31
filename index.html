@@ -1,0 +1,2112 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>工程數學 手寫講義精讀｜23 頁全解</title>
+<meta name="description" content="把 23 頁手寫的工程數學講義，一頁一頁拆解成零基礎也看得懂的講解：每個例題都有思路、計算、答案與提醒。">
+<link rel="stylesheet" href="assets/katex/katex.min.css">
+<style>
+:root{
+  --bg:#faf8f4; --bg2:#f3efe7; --card:#ffffff; --ink:#20201d; --muted:#6f6a61;
+  --line:#e5dfd3; --accent:#0f6b5c; --accent-soft:#e8f3f0;
+  --warm:#a8540c; --warm-soft:#fbf0e4; --blue:#1f4e8c; --blue-soft:#e9f0f9;
+  --shadow:0 1px 2px rgba(35,30,20,.05), 0 8px 24px rgba(35,30,20,.05);
+  --display:"Songti TC","Noto Serif TC","Source Han Serif TC",Georgia,"Times New Roman",serif;
+  --sans:-apple-system,BlinkMacSystemFont,"Segoe UI","PingFang TC","Microsoft JhengHei","Noto Sans TC",system-ui,sans-serif;
+  --mono:"SFMono-Regular",ui-monospace,Menlo,Consolas,monospace;
+}
+html[data-theme="dark"]{
+  --bg:#16181a; --bg2:#1d2023; --card:#1f2226; --ink:#e9e6e0; --muted:#9b968d;
+  --line:#2e3236; --accent:#5fd0b8; --accent-soft:#1c2f2c;
+  --warm:#e2a56a; --warm-soft:#2c2419; --blue:#8fb6ea; --blue-soft:#1b2430;
+  --shadow:0 1px 2px rgba(0,0,0,.3), 0 10px 30px rgba(0,0,0,.25);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0; background:var(--bg); color:var(--ink); font-family:var(--sans);
+  font-size:17px; line-height:1.85; -webkit-text-size-adjust:100%;
+  text-rendering:optimizeLegibility;
+}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--accent);text-decoration:none}
+a:hover{text-decoration:underline}
+code{font-family:var(--mono);font-size:.9em;background:var(--bg2);padding:.1em .35em;border-radius:5px}
+
+/* ---------- top bar ---------- */
+.topbar{
+  position:sticky; top:0; z-index:40; background:color-mix(in srgb,var(--bg) 88%,transparent);
+  backdrop-filter:saturate(180%) blur(12px); border-bottom:1px solid var(--line);
+}
+.topbar-in{display:flex;align-items:center;gap:12px;padding:10px 18px;max-width:1400px;margin:0 auto}
+.brand{font-family:var(--display);font-weight:700;font-size:16px;letter-spacing:.02em}
+.brand small{display:block;font-family:var(--sans);font-weight:400;font-size:11.5px;color:var(--muted);letter-spacing:.08em}
+.topbar .spacer{flex:1}
+.tbtn{
+  border:1px solid var(--line); background:var(--card); color:var(--ink); border-radius:999px;
+  padding:7px 14px; font-size:13.5px; font-family:var(--sans); cursor:pointer; line-height:1.2;
+}
+.tbtn:hover{border-color:var(--accent);color:var(--accent)}
+#progress{height:2px;background:var(--accent);width:0;transition:width .15s}
+
+/* ---------- shell ---------- */
+.shell{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:280px minmax(0,1fr);gap:0}
+nav.toc{
+  position:sticky; top:52px; align-self:start; height:calc(100vh - 52px); overflow-y:auto;
+  padding:26px 16px 60px 22px; border-right:1px solid var(--line); font-size:14.2px;
+}
+nav.toc h4{margin:0 0 10px;font-size:11.5px;letter-spacing:.16em;color:var(--muted);font-weight:600;text-transform:uppercase}
+nav.toc ol{list-style:none;margin:0;padding:0}
+nav.toc li{margin:1px 0}
+nav.toc a{display:block;padding:5px 9px;border-radius:8px;color:var(--ink);line-height:1.45}
+nav.toc a .n{display:inline-block;min-width:1.5em;color:var(--muted);font-variant-numeric:tabular-nums;font-size:12.5px}
+nav.toc a:hover{background:var(--bg2);text-decoration:none}
+nav.toc a.on{background:var(--accent-soft);color:var(--accent);font-weight:600}
+nav.toc a.on .n{color:var(--accent)}
+nav.toc .pg{display:block;font-size:11.5px;color:var(--muted);margin:2px 0 8px 9px}
+
+main{padding:0 26px 120px;min-width:0}
+article{max-width:46rem;margin:0 auto}
+section{scroll-margin-top:70px;padding-top:26px}
+.rule{border:0;border-top:1px solid var(--line);margin:56px 0 0}
+
+/* ---------- typography ---------- */
+h1{font-family:var(--display);font-size:clamp(26px,4.4vw,38px);line-height:1.3;margin:.2em 0 .3em;letter-spacing:.01em}
+h2{font-family:var(--display);font-size:clamp(21px,3vw,26px);line-height:1.4;margin:0 0 .2em;display:flex;flex-wrap:wrap;align-items:baseline;gap:10px}
+h3{font-size:18px;margin:34px 0 .3em;letter-spacing:.01em}
+h4{font-size:15.5px;margin:22px 0 .2em;color:var(--muted);letter-spacing:.04em;font-weight:600}
+p{margin:.7em 0}
+ul,ol{padding-left:1.35em}
+li{margin:.3em 0}
+.lede{font-size:18px;color:var(--muted);line-height:1.9}
+.chip{
+  display:inline-flex;align-items:center;justify-content:center;font-family:var(--sans);
+  background:var(--ink);color:var(--bg);border-radius:8px;font-size:13px;font-weight:600;
+  padding:2px 9px;letter-spacing:.02em;line-height:1.6;font-variant-numeric:tabular-nums;
+}
+.pgbadge{font-size:12.5px;color:var(--muted);border:1px solid var(--line);border-radius:999px;padding:2px 10px;white-space:nowrap}
+
+/* ---------- boxes ---------- */
+.box{border:1px solid var(--line);background:var(--card);border-radius:14px;padding:16px 18px;margin:18px 0;box-shadow:var(--shadow)}
+.box > :first-child{margin-top:0}
+.box > :last-child{margin-bottom:0}
+.box.idea{background:var(--accent-soft);border-color:color-mix(in srgb,var(--accent) 25%,var(--line))}
+.box.idea .lab{color:var(--accent)}
+.box.warn{background:var(--warm-soft);border-color:color-mix(in srgb,var(--warm) 28%,var(--line))}
+.box.warn .lab{color:var(--warm)}
+.lab{display:block;font-size:12px;letter-spacing:.14em;font-weight:700;text-transform:uppercase;margin-bottom:6px;color:var(--muted)}
+
+/* example card */
+.eg{border:1px solid var(--line);background:var(--card);border-radius:16px;margin:22px 0;overflow:hidden;box-shadow:var(--shadow)}
+.eg-head{
+  display:flex;align-items:center;gap:10px;padding:11px 18px;border-bottom:1px solid var(--line);
+  background:linear-gradient(to right,color-mix(in srgb,var(--blue) 7%,transparent),transparent);
+  font-size:13.5px;color:var(--muted);letter-spacing:.03em;
+}
+.eg-head b{color:var(--ink);font-weight:600}
+.eg-body{padding:6px 18px 18px}
+.eg-body h5{margin:16px 0 6px;font-size:13px;letter-spacing:.14em;text-transform:uppercase;color:var(--blue)}
+.eg-q{background:var(--bg2);border-radius:10px;padding:11px 14px;margin:12px 0}
+.eg .sol{margin:8px 0}
+.ans{
+  background:color-mix(in srgb,var(--accent) 12%,transparent);border-left:3px solid var(--accent);
+  padding:8px 14px;border-radius:0 10px 10px 0;margin:12px 0;
+}
+.think li{margin:.45em 0}
+
+/* tables */
+table{border-collapse:collapse;width:100%;margin:16px 0;font-size:15.5px}
+th,td{border:1px solid var(--line);padding:8px 11px;text-align:left;vertical-align:top}
+th{background:var(--bg2);font-weight:600}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch}
+
+/* scans */
+.scan{margin:18px 0;border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--bg2)}
+.scan img{cursor:zoom-in;width:100%}
+.scan figcaption{font-size:12.5px;color:var(--muted);padding:7px 12px;border-top:1px solid var(--line);background:var(--card)}
+.scan.small img{max-height:230px;object-fit:cover;object-position:top}
+
+/* lightbox */
+.lb{position:fixed;inset:0;background:rgba(12,10,8,.9);display:none;z-index:100;padding:22px;overflow:auto}
+.lb.on{display:block}
+.lb img{margin:0 auto;max-width:min(1000px,100%);border-radius:8px}
+.lb .close{position:fixed;top:14px;right:16px;color:#fff;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.35);border-radius:999px;padding:6px 14px;cursor:pointer;font-size:14px}
+
+/* self check */
+details.sc{border:1px dashed var(--line);border-radius:12px;padding:10px 14px;margin:12px 0;background:var(--card)}
+details.sc summary{cursor:pointer;font-weight:600;font-size:15.5px}
+details.sc[open] summary{margin-bottom:8px}
+details.sc .a{color:var(--accent);font-weight:600}
+
+/* katex */
+.katex{font-size:1.06em}
+.katex-display{overflow-x:auto;overflow-y:hidden;padding:6px 2px;margin:.9em 0 !important}
+figure{margin:18px 0}
+figcaption{font-size:13px;color:var(--muted);text-align:center;margin-top:6px}
+
+/* misc */
+.grid{display:grid;gap:14px;grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.card-mini{border:1px solid var(--line);background:var(--card);border-radius:13px;padding:13px 15px}
+.card-mini b{display:block;font-size:15.5px;margin-bottom:2px}
+.card-mini span{font-size:14px;color:var(--muted);line-height:1.7}
+.card-mini a{display:block;height:100%}
+.kbd{font-family:var(--mono);font-size:.85em;border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:.1em .4em;background:var(--card)}
+footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:var(--muted);font-size:14.5px}
+#totop{position:fixed;right:18px;bottom:18px;z-index:50;display:none}
+#totop.on{display:block}
+
+/* ---------- mobile ---------- */
+@media (max-width:900px){
+  body{font-size:16.5px}
+  .shell{grid-template-columns:minmax(0,1fr)}
+  nav.toc{
+    position:fixed;inset:52px 0 0 0;height:auto;background:var(--bg);z-index:45;display:none;
+    padding:20px 20px 80px;border-right:0;
+  }
+  nav.toc.open{display:block}
+  main{padding:0 18px 100px}
+  .eg-body{padding:4px 14px 16px}
+  .eg-head{padding:10px 14px}
+  .box{padding:14px 15px}
+  table{font-size:14.5px}
+  th,td{padding:7px 9px}
+}
+@media print{
+  nav.toc,.topbar,#totop{display:none}
+  .shell{display:block}
+}
+
+/* ---------- interactive English terms ---------- */
+.term{
+  font-family:var(--sans); font-size:.9em; color:var(--accent); background:none; border:0;
+  border-bottom:1px dashed color-mix(in srgb,var(--accent) 50%,transparent); padding:0 1px;
+  cursor:pointer; line-height:inherit;
+}
+.term:hover{background:var(--accent-soft)}
+.term::after{content:"i";display:inline-flex;align-items:center;justify-content:center;box-sizing:border-box;
+  width:1.3em;height:1.3em;border:1.5px solid currentColor;border-radius:50%;
+  font:italic 700 .72em/1 Georgia,"Times New Roman",serif;vertical-align:.4em;margin-left:3px;opacity:.6}
+.ekw{display:flex;flex-wrap:wrap;align-items:center;gap:6px;margin:16px 0 6px}
+.ekw .lbl2{font-size:11px;letter-spacing:.16em;color:var(--muted);font-weight:700;text-transform:uppercase;margin-right:2px}
+.ekw .term{font-size:14.5px;padding:1px 6px;border:1px solid var(--line);border-radius:999px}
+.ekw .term::after{display:none}
+#pop{
+  position:absolute;z-index:95;max-width:330px;background:var(--card);border:1px solid var(--line);
+  border-radius:13px;padding:12px 14px;box-shadow:var(--shadow);display:none;font-size:14.5px;line-height:1.75;
+}
+#pop.on{display:block}
+#pop .pzh{font-weight:700;font-size:16px;letter-spacing:.01em}
+#pop .pen{font-size:12.5px;letter-spacing:.04em;color:var(--muted);margin-bottom:2px}
+#pop .pnote{margin:.4em 0 0;font-size:14.5px}
+.gsearch{
+  width:100%;padding:11px 14px;border:1px solid var(--line);border-radius:12px;background:var(--card);
+  color:var(--ink);font-family:var(--sans);font-size:16px;margin:6px 0 4px;
+}
+.gsearch:focus{outline:none;border-color:var(--accent)}
+.ghint{font-size:13.5px;color:var(--muted);margin:2px 0 14px}
+.gblock{margin:26px 0 0}
+.gblock h3{margin:0 0 6px;font-size:17px}
+.gblock h3 a{color:var(--ink)}
+.gtable{font-size:15px}
+.gtable td:first-child{width:31%;font-family:var(--mono);font-size:14px;color:var(--accent)}
+.gtable td:nth-child(2){width:22%;font-weight:600}
+.gempty{color:var(--muted);padding:14px 0}
+@media (max-width:900px){
+  #pop{position:fixed;left:12px;right:12px;bottom:12px;top:auto;max-width:none}
+  .gtable td:first-child{width:38%}
+}
+
+.plain{margin:14px 0 2px;padding:13px 16px;border:1px solid var(--line);border-radius:12px;background:var(--bg2)}
+.plain .plab{display:block;font-size:11.5px;letter-spacing:.14em;font-weight:700;color:var(--muted);margin-bottom:4px}
+.plain p{margin:0;font-size:16px;line-height:1.85}
+.plain b{color:var(--accent)}
+.gtable .katex{font-size:.98em}
+#pop .katex{font-size:1em}
+</style>
+</head>
+<body>
+<div class="topbar">
+  <div class="topbar-in">
+    <div class="brand">工程數學 · 手寫講義精讀<small>23 頁全解 · 每個例題都有思路</small></div>
+    <div class="spacer"></div>
+    <button class="tbtn" id="menuBtn" style="display:none">目錄</button>
+    <button class="tbtn" id="themeBtn">夜間</button>
+  </div>
+  <div id="progress"></div>
+</div>
+
+<div class="shell">
+<nav class="toc" id="toc">
+  <h4>學習路線</h4>
+  <ol>
+    <li><a href="#c1"><span class="n">01</span>複數與四則運算</a><span class="pg">原稿 p.1</span></li>
+    <li><a href="#c2"><span class="n">02</span>極式與歐拉公式</a><span class="pg">原稿 p.2</span></li>
+    <li><a href="#c3"><span class="n">03</span>極式乘除 · 棣美弗 · 方根</a><span class="pg">原稿 p.3</span></li>
+    <li><a href="#c4"><span class="n">04</span>複變函數</a><span class="pg">原稿 p.4</span></li>
+    <li><a href="#c5"><span class="n">05</span>向量的運算</a><span class="pg">原稿 p.4–6</span></li>
+    <li><a href="#c6"><span class="n">06</span>梯度與方向導數</a><span class="pg">原稿 p.7</span></li>
+    <li><a href="#c7"><span class="n">07</span>散度 · 旋度 · Laplacian</a><span class="pg">原稿 p.8–9</span></li>
+    <li><a href="#c8"><span class="n">08</span>線積分</a><span class="pg">原稿 p.10–11</span></li>
+    <li><a href="#c9"><span class="n">09</span>格林定理</a><span class="pg">原稿 p.11</span></li>
+    <li><a href="#c10"><span class="n">10</span>座標系與表面積分</a><span class="pg">原稿 p.12–13</span></li>
+    <li><a href="#c11"><span class="n">11</span>高斯散度定理</a><span class="pg">原稿 p.14</span></li>
+    <li><a href="#c12"><span class="n">12</span>斯托克斯定理</a><span class="pg">原稿 p.15</span></li>
+    <li><a href="#c13"><span class="n">13</span>矩陣與線性方程組</a><span class="pg">原稿 p.16–19</span></li>
+    <li><a href="#c14"><span class="n">14</span>秩 Rank 與線性獨立</a><span class="pg">原稿 p.20</span></li>
+    <li><a href="#c15"><span class="n">15</span>行列式</a><span class="pg">原稿 p.21</span></li>
+    <li><a href="#c16"><span class="n">16</span>克拉瑪公式</a><span class="pg">原稿 p.22</span></li>
+    <li><a href="#c17"><span class="n">17</span>反矩陣</a><span class="pg">原稿 p.22–23</span></li>
+    <li><a href="#gloss"><span class="n">EN</span>術語中英對照</a><span class="pg">互動查詢</span></li>
+    <li><a href="#c18"><span class="n">＋</span>公式總表 · 考前速記</a><span class="pg">附錄</span></li>
+  </ol>
+</nav>
+<main>
+<article>
+<section id="home" style="padding-top:34px">
+  <p class="lede" style="margin-top:0">這份網站是把你那份 <b>23 頁手寫工程數學講義</b>（用手機掃成 PDF 的那份）一頁一頁拆開，從「這到底在幹嘛」講到「每一題的每一步」，一個例題都不跳過。</p>
+
+  <h1>工程數學 · 手寫講義精讀</h1>
+  <p class="lede">複數 → 向量 → 向量微積分（梯度／散度／旋度／三大定理）→ 線性代數（矩陣／行列式／反矩陣）。全部 23 頁、30 多個例題，每題都附「思路」。</p>
+
+  <div class="box idea">
+    <span class="lab">先講清楚 · 這份講義的骨架</span>
+    <p style="margin-top:0">整份 23 頁其實只做三件事：</p>
+    <ol style="margin-bottom:0">
+      <li><b>把數字換一種寫法</b>（複數的極式、直角座標換球座標）——換完之後乘法、開根號、積分都變簡單。</li>
+      <li><b>把「變化」變成運算子</b>（梯度 $\nabla f$、散度 $\nabla\!\cdot\!\vec v$、旋度 $\nabla\!\times\!\vec v$）——然後用三大定理（格林、高斯、斯托克斯）把「很難算的積分」換成「很好算的積分」。</li>
+      <li><b>把很多條方程式寫成一個矩陣</b>（$A\vec x=\vec B$）——用列運算、行列式、反矩陣把它解掉。</li>
+    </ol>
+  </div>
+
+  <h3>怎麼用這個網站（建議照這個順序）</h3>
+  <ol>
+    <li>先讀該章的<b>核心觀念</b>（綠框）：那是我用白話重寫的版本，比原稿好入口。</li>
+    <li>再看每個<b>例題卡</b>：<b>題目 → 思路 → 計算 → 答案 → 提醒</b>。思路那一欄最重要，它回答的是「為什麼第一步要這樣做」。</li>
+    <li>把例題<b>自己動筆算一次</b>，再對答案。看懂 ≠ 會算。</li>
+    <li>卡住了就點開下方的<b>原稿對照</b>縮圖（可點擊放大），看老師原本怎麼寫。</li>
+    <li>每章最後有<b>馬上練</b>，答案折在裡面，先寫完再打開。</li>
+    <li>想練英文：各章標題旁與 <b>English</b> 那一列的術語都能<b>點開看中文意思</b>，<a href="#gloss">術語中英對照</a>可以打字搜尋。</li>
+  </ol>
+
+  <h3>章節地圖（17 章 + 附錄）</h3>
+  <div class="grid">
+    <div class="card-mini"><a href="#c1"><b>01–03 複數</b><span>複數的四則運算、共軛、極式、歐拉公式、棣美弗定理、開 n 次方根（圓上等分那張圖）。</span></a></div>
+    <div class="card-mini"><a href="#c4"><b>04 複變函數</b><span>$w=f(z)$ 為什麼最後會拆成 $u(x,y)+iv(x,y)$ 兩條實函數。</span></a></div>
+    <div class="card-mini"><a href="#c5"><b>05 向量</b><span>加減、內積（夾角）、外積（面積與方向）、向量函數與弧長。</span></a></div>
+    <div class="card-mini"><a href="#c6"><b>06 梯度</b><span>梯度是「最陡上升方向」，方向導數是「往指定方向的斜率」，以及梯度為什麼垂直等值面。</span></a></div>
+    <div class="card-mini"><a href="#c7"><b>07 散度 · 旋度</b><span>$\nabla\!\cdot\!$、$\nabla\!\times\!$ 的定義與 3×3 行列式算法，$\nabla^2$（Laplacian）。</span></a></div>
+    <div class="card-mini"><a href="#c8"><b>08 線積分</b><span>沿著曲線積分、參數化、保守場與位勢函數（積分只跟頭尾有關）。</span></a></div>
+    <div class="card-mini"><a href="#c9"><b>09 格林定理</b><span>平面上的「繞一圈」＝「裡面的面積分」，$9\pi$ 那題的兩種算法。</span></a></div>
+    <div class="card-mini"><a href="#c10"><b>10 座標系 · 表面積分</b><span>柱座標、球座標轉換、球面參數式、$\iint\nabla^2 f\,dA=\oint\frac{\partial f}{\partial n}ds$。</span></a></div>
+    <div class="card-mini"><a href="#c11"><b>11 高斯散度定理</b><span>體積分 ↔ 封閉曲面通量，圓柱那題。</span></a></div>
+    <div class="card-mini"><a href="#c12"><b>12 斯托克斯定理</b><span>曲面上的旋度 ↔ 邊界曲線的環流，答案是 $-\pi$ 那題。</span></a></div>
+    <div class="card-mini"><a href="#c13"><b>13 矩陣 · 線性方程組</b><span>矩陣運算、$A\vec x=\vec B$、高斯消去法，含電路那題。</span></a></div>
+    <div class="card-mini"><a href="#c14"><b>14–17 秩 · 行列式 · 克拉瑪 · 反矩陣</b><span>Rank、餘因子展開、用行列式解方程組、$[A|I]\to[I|A^{-1}]$。</span></a></div>
+    <div class="card-mini"><a href="#gloss"><b>EN 術語中英對照</b><span>所有英文術語 ↔ 中文 ↔ 一句話解釋，可即時搜尋；章節標題上的英文也是按鈕，點一下就看中文。</span></a></div>
+  </div>
+
+  <div class="box warn">
+    <span class="lab">讀之前先知道三件事</span>
+    <ul style="margin-bottom:0">
+      <li>原稿是<b>上課邊聽邊寫</b>的筆記，難免有小筆誤（例如 p.7 的 $|\vec a|$、p.18 電路那條方程式）。我在對應例題的「提醒」都會標出來並給正確版本，你照正確的算就好。</li>
+      <li>數學式如果太寬，手機上可以左右滑動（公式區塊本身可橫向滾動）。</li>
+      <li>右上角有「夜間」可以切深色模式，晚自習比較不刺眼。</li>
+    </ul>
+  </div>
+  <hr class="rule">
+</section>
+<section id="c1">
+  <h2><span class="chip">01</span>複數與四則運算<span class="pgbadge">原稿 p.1</span></h2>
+  <p class="lede">這一章只做一件事：把「$\sqrt{-1}$ 這種不存在的東西」變成一套能像普通數字一樣加減乘除的新數系。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="複數" data-note="形如 $z=x+iy$ 的數；$x$ 是實部、$y$ 是虛部。">complex number</button><button class="term" type="button" data-zh="實部" data-note="$\operatorname{Re}(z)=x$，注意它不含 $i$。">real part</button><button class="term" type="button" data-zh="虛部" data-note="$\operatorname{Im}(z)=y$，是一個實數，別寫成 $3i$。">imaginary part</button><button class="term" type="button" data-zh="純虛數" data-note="實部為 0，例如 $4i$。">pure imaginary</button><button class="term" type="button" data-zh="共軛複數" data-note="把虛部的正負號反過來：$\bar z=x-iy$，幾何上是對實軸鏡射。">conjugate</button><button class="term" type="button" data-zh="交換律" data-note="$z_1+z_2=z_2+z_1$，加法的順序不影響結果。">commutative law</button><button class="term" type="button" data-zh="結合律" data-note="$(z_1+z_2)+z_3=z_1+(z_2+z_3)$，括號可以搬。">associative law</button><button class="term" type="button" data-zh="分配律" data-note="$z_1(z_2+z_3)=z_1z_2+z_1z_3$，展開時用。">distributive law</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>複數就是「二維的數字」：橫軸放實數，縱軸放「轉 90° 的方向」。$i$ 這個符號的意思就是「把箭頭轉 90°」，所以 $i^2=-1$ 其實是說「轉 180° 就變成反方向」。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">在實數裡 $x^2+1=0$ 無解，因為任何實數平方都 $\ge 0$。於是我們<b>直接規定</b>有一個數 $i$ 滿足</p>
+    $$i=\sqrt{-1}\quad\Longleftrightarrow\quad i^2=-1$$
+    <p>然後把所有 $x+iy$（$x,y$ 是實數）收集起來，就得到<b>複數系</b>。</p>
+    <ul>
+      <li>$z=x+iy$：$x$ 叫 <b>實部</b> $\operatorname{Re}(z)$，$y$ 叫 <b>虛部</b> $\operatorname{Im}(z)$。<b>注意：$\operatorname{Im}(z)$ 是實數 $y$，不含 $i$。</b></li>
+      <li>若 $x=0$（$z=iy$），叫做<b>純虛數</b>。</li>
+      <li>畫在平面上：$x$ 軸擺實部、$y$ 軸擺虛部，這個平面叫<b>複數平面</b>。$z$ 就是一個點（也是一個從原點出發的箭頭）。</li>
+    </ul>
+  </div>
+
+  <h3>三個運算規則（全部來自 $i^2=-1$）</h3>
+  <div class="tw"><table>
+    <tr><th>運算</th><th>做法</th><th>記憶點</th></tr>
+    <tr><td>加／減</td><td>$(x_1+x_2)+i(y_1+y_2)$</td><td>實部管實部、虛部管虛部</td></tr>
+    <tr><td>乘</td><td>像多項式展開，遇到 $i^2$ 就換成 $-1$</td><td>$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$</td></tr>
+    <tr><td>除</td><td>分子分母同乘分母的<b>共軛</b>，把分母變實數</td><td>$\dfrac{1}{a+bi}=\dfrac{a-bi}{a^2+b^2}$</td></tr>
+  </table></div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 1</b><span>複數的基本操作</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $z_1=8+3i$、$z_2=9-2i$，求 $\operatorname{Re}(z_1)$、$\operatorname{Im}(z_1)$、$z_1+z_2$、$z_1z_2$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>看到「求 Re、Im」不要算，<b>直接讀係數</b>：實部就是 $i$ 前面那個數、虛部是 $i$ 的係數。</li>
+        <li>加法就是兩個 $i$ 前面、兩個 $i$ 後面各自相加。</li>
+        <li>乘法不要背公式，<b>照展開</b>：每一項乘每一項，最後把 $i^2$ 換 $-1$。這樣才不會記錯公式。</li>
+      </ol>
+      <h5>計算</h5>
+      <div class="sol">
+        $$\operatorname{Re}(z_1)=8,\qquad \operatorname{Im}(z_1)=3$$
+        $$z_1+z_2=(8+9)+i(3-2)=17+i$$
+        $$z_1z_2=(8+3i)(9-2i)=72-16i+27i-6i^2$$
+        $$\phantom{z_1z_2}=72+11i-6(-1)=78+11i$$
+      </div>
+      <div class="ans">$\operatorname{Re}(z_1)=8$，$\operatorname{Im}(z_1)=3$，$z_1+z_2=17+i$，$z_1z_2=78+11i$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">$-6i^2$ 是 $-6\times(-1)=+6$。這一步是複數乘法唯一的陷阱，每次都要停下來把 $i^2$ 變 $-1$。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 2</b><span>除法：有理化</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $z_1=8+3i$、$z_2=9-2i$，求 $\dfrac{z_1}{z_2}$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>國中做 $\dfrac{1}{\sqrt2}$ 時，我們「分子分母同乘 $\sqrt2$」把根號趕到分子——<b>這裡一模一樣</b>，只是把 $\sqrt2$ 換成「分母的共軛」。</li>
+        <li>分母是 $9-2i$，它的共軛是 $9+2i$。<b>為什麼乘共軛有效？</b>因為 $(a-bi)(a+bi)=a^2+b^2$ 是實數，$i$ 被消掉了。</li>
+        <li>所以：分子分母同乘 $9+2i$，分母變成 $9^2+2^2=85$（實數），再把分子展開整理。</li>
+      </ol>
+      <h5>計算</h5>
+      <div class="sol">
+        $$\frac{8+3i}{9-2i}=\frac{(8+3i)(9+2i)}{(9-2i)(9+2i)}=\frac{72-6+16i+27i}{81+4}=\frac{66+43i}{85}=\frac{66}{85}+\frac{43}{85}i$$
+      </div>
+      <div class="ans">$\dfrac{z_1}{z_2}=\dfrac{66}{85}+\dfrac{43}{85}i$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">分母的共軛是 $9\mathbf{+}2i$（只改中間的號）。很多人會誤乘成 $9-2i$ 或 $-9+2i$，那就白算了。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>共軛複數（<button class="term" type="button" data-zh="共軛複數" data-note="把虛部的正負號反過來：$\bar z=x-iy$，幾何上是對實軸鏡射。">conjugate</button>）</h3>
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">$z=x+iy$ 的共軛，就是把 $y$ 的號反過來：</p>
+    $$\bar z=x-iy$$
+    <p>幾何上就是<b>對實軸（$x$ 軸）鏡射</b>。<br>它最大的用處是「把複數的實部／虛部榨出來」：</p>
+    $$\operatorname{Re}(z)=\frac{z+\bar z}{2},\qquad \operatorname{Im}(z)=\frac{z-\bar z}{2i}$$
+    <p>（原稿寫成 $\operatorname{Im}(z)=\frac{1}{2i}(z-\bar z)$，同樣的意思。）</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 3</b><span>用共軛反推虛部</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $z_1=4+3i$，用 $\operatorname{Im}(z_1)=\dfrac{1}{2i}(z_1-\bar z_1)$ 驗證 $\operatorname{Im}(z_1)$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先寫共軛：$\bar z_1=4-3i$（實部不動、虛部變號）。</li>
+        <li>做 $z_1-\bar z_1$：實部被扣掉（$4-4=0$），只留下虛部——<b>這就是為什麼這個式子能「萃取」虛部</b>。</li>
+        <li>剩下 $6i$，再除以 $2i$：$i$ 會互相消掉，得到實數 $3$。</li>
+      </ol>
+      <h5>計算</h5>
+      <div class="sol">
+        $$z_1-\bar z_1=(4+3i)-(4-3i)=6i$$
+        $$\operatorname{Im}(z_1)=\frac{6i}{2i}=3$$
+      </div>
+      <div class="ans">$\operatorname{Im}(z_1)=3$（與直接讀係數的答案一致 ✓）</div>
+    </div>
+  </div>
+
+  <h3>共軛的運算性質（原稿右框、含 H.W.）</h3>
+  <p>「$\,\overline{\ \ }\,$」可以自由進出加減乘除，只要記得除法是「分子共軛除以分母共軛」：</p>
+  $$\overline{(z_1+z_2)}=\bar z_1+\bar z_2,\qquad \overline{(z_1-z_2)}=\bar z_1-\bar z_2$$
+  $$\overline{z_1z_2}=\bar z_1\,\bar z_2,\qquad \overline{\left(\frac{z_1}{z_2}\right)}=\frac{\bar z_1}{\bar z_2}$$
+  <div class="box warn">
+    <span class="lab">小提醒</span>
+    <p style="margin:0">反過來要小心：$\overline{z_1z_2}$ 可以拆開，但「取絕對值」$|z_1z_2|$ 也能拆成 $|z_1||z_2|$（第 3 章會用到）；<b>而 $\operatorname{Re}(z_1z_2)\ne \operatorname{Re}(z_1)\operatorname{Re}(z_2)$、$\operatorname{Im}$ 也一樣不能拆</b>。</p>
+  </div>
+  <p>原稿最上方的三個運算律（複數也適用）：<b>交換律</b>（commutative）：$z_1+z_2=z_2+z_1$；<b>結合律</b>（associative）：$(z_1+z_2)+z_3=z_1+(z_2+z_3)$；<b>分配律</b>（distributive）：$z_1(z_2+z_3)=z_1z_2+z_1z_3$。</p>
+
+  <figure class="scan small"><img src="pages/p01.jpg" alt="原稿第 1 頁：複數、四則運算、共軛" loading="lazy"><figcaption>原稿 p.1 — 複數定義、四則運算、除法有理化、共軛複數（點圖放大）</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. 設 $z=5-2i$，求 $\operatorname{Re}(z)$、$\operatorname{Im}(z)$、$\bar z$、$z\bar z$。</summary><p class="a">$\operatorname{Re}(z)=5$、$\operatorname{Im}(z)=-2$（是 $-2$，不是 $2$）、$\bar z=5+2i$、$z\bar z=5^2+(-2)^2=29$。</p></details>
+  <details class="sc"><summary>2. 求 $\dfrac{1+i}{1-i}$。</summary><p class="a">分子分母同乘 $1+i$：$\dfrac{(1+i)^2}{(1-i)(1+i)}=\dfrac{1+2i+i^2}{1+1}=\dfrac{2i}{2}=i$。</p></details>
+  <details class="sc"><summary>3. 判斷：$\operatorname{Im}(2+3i)=3i$ 對嗎？</summary><p class="a">錯。$\operatorname{Im}$ 只取 $i$ 前面的實數係數，所以 $\operatorname{Im}(2+3i)=3$。</p></details>
+  <hr class="rule">
+</section>
+
+<section id="c2">
+  <h2><span class="chip">02</span>極式與歐拉公式<span class="pgbadge">原稿 p.2</span></h2>
+  <p class="lede">同樣一個複數，除了用「往右走 $x$、往上走 $y$」描述，也可以用「朝 $\theta$ 方向、走 $r$ 那麼遠」描述。後者讓乘法變成「長度相乘、角度相加」。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="極式" data-note="$z=r(\cos\theta+i\sin\theta)$，用長度與角度描述同一個點。">polar form</button><button class="term" type="button" data-zh="模（絕對值）" data-note="$|z|=r=\sqrt{x^2+y^2}$，就是箭頭的長度。">modulus</button><button class="term" type="button" data-zh="輻角" data-note="$\operatorname{Arg}z$ ＝所有合格的角度，彼此差 $2n\pi$。">argument</button><button class="term" type="button" data-zh="主值" data-note="只取 $-\pi&lt;\theta\le\pi$ 的那一個，寫成 $\arg z$。">principal value</button><button class="term" type="button" data-zh="歐拉公式" data-note="$e^{i\theta}=\cos\theta+i\sin\theta$，把指數與三角函數接起來。">Euler's formula</button><button class="term" type="button" data-zh="象限" data-note="看 $x$、$y$ 的正負決定角度落在第幾象限。">quadrant</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>同一支箭有兩種講法：往右 3、往上 4（座標）；或「朝 53° 方向走 5 步」（極式）。極式最大的好處是<b>乘法變成「長度相乘、角度相加」</b>——工程上幾乎都用這個講法。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">把 $z=x+iy$ 看成複數平面上的一點，連到原點。設箭頭長度 $r$、與正實軸夾角 $\theta$：</p>
+    $$x=r\cos\theta,\qquad y=r\sin\theta$$
+    $$z=x+iy=r(\cos\theta+i\sin\theta)$$
+    <p>這叫 $z$ 的<b>極式（polar form）</b>。三個關鍵量：</p>
+    <ul>
+      <li><b>模（絕對值）</b>：$|z|=r=\sqrt{x^2+y^2}=\sqrt{z\cdot\bar z}$。</li>
+      <li><b>輻角</b> $\operatorname{Arg}z$：所有滿足上式的 $\theta$（無限多個，差 $2n\pi$）。</li>
+      <li><b>主值</b> $\arg z$：只取落在 $-\pi<\theta\le\pi$（原稿用的範圍）的那一個，寫成 $\operatorname{Arg}z$ 表示<b>集合</b>、$\arg z$ 表示<b>單一代表值</b>。</li>
+    </ul>
+  </div>
+
+  <div class="box" style="background:var(--blue-soft);border-color:color-mix(in srgb,var(--blue) 25%,var(--line))">
+    <span class="lab" style="color:var(--blue)">歐拉公式 · 原稿右上框</span>
+    $$e^{i\theta}=\cos\theta+i\sin\theta\ \Longrightarrow\ z=re^{i\theta}$$
+    <p style="margin-bottom:0">這是整份講義最重要的一行。它把「三角函數」跟「指數」接起來，所以極式的乘法才會有「角度相加」的漂亮性質。</p>
+  </div>
+
+  <h3>怎麼算反應最快的 $\theta$</h3>
+  <ol>
+    <li>先算 $r=\sqrt{x^2+y^2}$（一定是正數）。</li>
+    <li>用 $\tan\theta=\dfrac{y}{x}$ 找出「參考角」，再<b>看點在哪個象限</b>決定 $\theta$ 要加多少。</li>
+    <li>四個軸上的點直接背，不要算：$1=1e^{i0}$、$i=1e^{i\pi/2}$、$-1=1e^{i\pi}$、$-i=1e^{i3\pi/2}$（原稿畫的那個十字就是這個）。</li>
+  </ol>
+  <div class="box warn">
+    <span class="lab">提醒</span>
+    <p style="margin:0">$z\ne0$ 時，$\operatorname{Arg}z=\arg z+2n\pi$，$n$ 為整數。原稿寫的 $\arg z=\frac{\pi}{4}+2n\pi$ 就是這個意思——<b>只要題目問「arg」而非「Arg」，答案就要把 $+2n\pi$ 寫出來</b>，因為「同一方向的點」有無限多個角度。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 4</b><span>把 $1+i$ 換成極式</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $z=1+i$，求 $r=|z|$、$\operatorname{Arg}z$（主值）、$\arg z$，並寫出極式與歐拉形式。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>$x=1,\ y=1$，都在正的方向，所以這個點在第一象限（原稿把它畫成半徑 $\sqrt2$、$45^\circ$ 的箭頭）。</li>
+        <li>長度：$r=\sqrt{1^2+1^2}=\sqrt2$。</li>
+        <li>角度：$\tan\theta=\frac11=1$，且在第一象限，所以主值 $\theta=\frac{\pi}{4}$。若問 $\arg$，就寫 $\frac{\pi}{4}+2n\pi$。</li>
+        <li>最後把 $r$ 提出來：$\sqrt2\left(\frac{1}{\sqrt2}+\frac{1}{\sqrt2}i\right)=\sqrt2(\cos\frac{\pi}{4}+i\sin\frac{\pi}{4})=\sqrt2\,e^{i\pi/4}$。</li>
+      </ol>
+      <div class="sol">
+        $$|z|=\sqrt2,\qquad \arg z=\frac{\pi}{4},\qquad \operatorname{Arg}z=\frac{\pi}{4}+2n\pi$$
+        $$z=\sqrt2\left(\cos\frac{\pi}{4}+i\sin\frac{\pi}{4}\right)=\sqrt2\,e^{i\pi/4}$$
+      </div>
+      <div class="ans">$r=\sqrt2$，主值輻角 $\dfrac{\pi}{4}$，$z=\sqrt2\,e^{i\pi/4}$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">「提出 $r$」那一步最容易漏：$1+i$ 不是 $\cos\frac\pi4+i\sin\frac\pi4$（那是 $|z|=1$），必須乘上 $\sqrt2$。檢查方法：把答案還原回直角座標，看是不是 $1+i$。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p02.jpg" alt="原稿第 2 頁：極式、歐拉公式、Arg/arg" loading="lazy"><figcaption>原稿 p.2 — 極式（以極座標 $r,\theta$ 表示）、歐拉公式、主值與一般角</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. 寫出 $z=-1+\sqrt3\,i$ 的 $|z|$ 與主值輻角。</summary><p class="a">$r=\sqrt{1+3}=2$；點在第二象限，$\tan$ 參考角 $=\frac{\pi}{3}$，故 $\arg z=\pi-\frac{\pi}{3}=\frac{2\pi}{3}$。所以 $z=2e^{i2\pi/3}$。</p></details>
+  <details class="sc"><summary>2. $z=i$ 的極式？</summary><p class="a">$r=1$、角度 $\frac\pi2$，所以 $i=e^{i\pi/2}$。（原稿十字圖上那四點就是這個。）</p></details>
+  <hr class="rule">
+</section>
+
+<section id="c3">
+  <h2><span class="chip">03</span>極式的乘除 · <button class="term" type="button" data-zh="棣美弗定理" data-note="$z^n=r^n[\cos(n\theta)+i\sin(n\theta)]$：次方＝角度乘 $n$。">De Moivre's theorem</button> · 方根<span class="pgbadge">原稿 p.3</span></h2>
+  <p class="lede">換成極式之後，「乘法變角度相加」，於是「$n$ 次方變角度乘 $n$」，而「開 $n$ 次方」就是在圓上把角度等分 $n$ 份——這是這一章的主線。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="棣美弗定理" data-note="$z^n=r^n[\cos(n\theta)+i\sin(n\theta)]$：次方＝角度乘 $n$。">De Moivre's theorem</button><button class="term" type="button" data-zh="$n$ 次方根" data-note="開 $n$ 次方有 $n$ 個解，全落在半徑 $\sqrt[n]{R}$ 的圓上。">nth root</button><button class="term" type="button" data-zh="單位根" data-note="$\sqrt[n]{1}$ 的 $n$ 個解，把單位圓等分成 $n$ 份。">roots of unity</button><button class="term" type="button" data-zh="等角分布" data-note="相鄰兩個解的角度差固定是 $2\pi/n$。">equally spaced</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>次方是「把角度放大 $n$ 倍」，開 $n$ 次方就是「把角度縮小 $n$ 倍」。但繞圈也要算進去，所以才會生出 $n$ 個答案，而且它們在圓上等分——這就是原稿那張圓圖。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念（三個定理一次收）</span>
+    $$z_1z_2=r_1r_2\big[\cos(\theta_1+\theta_2)+i\sin(\theta_1+\theta_2)\big]=r_1r_2\,e^{i(\theta_1+\theta_2)}$$
+    $$\frac{z_1}{z_2}=\frac{r_1}{r_2}\big[\cos(\theta_1-\theta_2)+i\sin(\theta_1-\theta_2)\big]$$
+    <p><b>棣美弗定理（De Moivre）</b>：令 $z_1=z_2=\dots=z$ 就得到</p>
+    $$z^n=r^n\big[\cos(n\theta)+i\sin(n\theta)\big]=r^n e^{in\theta}$$
+    <p style="margin-bottom:0">而模也跟著相乘：$|z_1z_2|=|z_1||z_2|$。</p>
+  </div>
+
+  <p><b>為什麼？</b> 原稿把那串乘法展開給你看：$r_1r_2$ 提出來之後，剩下的是 $\cos\theta_1\cos\theta_2$ 那一坨。用高中的和角公式就能收成 $\cos(\theta_1+\theta_2)$、$\sin(\theta_1+\theta_2)$。所以<b>「極式乘法＝長度相乘、角度相加」不是巧合，是和角公式。</b></p>
+
+  <h3>方根（Root）：$n$ 個答案，不是一個</h3>
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">設 $z^{n}=w$。寫 $z=r(\cos\theta+i\sin\theta)$、$w=R(\cos\phi+i\sin\phi)$。由棣美弗：</p>
+    $$r^n=R\ \Rightarrow\ r=\sqrt[n]{R},\qquad n\theta=\phi+2k\pi\ \Rightarrow\ \theta=\frac{\phi}{n}+\frac{2k\pi}{n}$$
+    $$\boxed{\ \sqrt[n]{w}=\sqrt[n]{R}\left[\cos\frac{\phi+2k\pi}{n}+i\sin\frac{\phi+2k\pi}{n}\right],\qquad k=0,1,\dots,n-1\ }$$
+    <ul style="margin-bottom:0">
+      <li>因為角度是「差 $2\pi$ 都一樣」，所以<b>只有 $n$ 個相異解</b>（$k$ 到 $n-1$ 就循環了）。</li>
+      <li>幾何意義（原稿那張圓）：$n$ 個解全部落在<b>半徑 $\sqrt[n]{R}$ 的圓上</b>，彼此角度差 $2\pi/n$，把它們連起來就是<b>正 $n$ 邊形</b>。</li>
+      <li>原稿另外寫「令一個 $w$ 得一個 $z$；令一個 $z$ 得 $n$ 個 $w$」——就是說 $z^n$ 是單向的、開根號是多值的。</li>
+    </ul>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 5</b><span>$1$ 的三次方根 $\sqrt[3]{1}$（原稿的圓圖）</span></div>
+    <div class="eg-body">
+      <div class="eg-q">求 $\sqrt[3]{1}$ 的全部解，並說明它們在複數平面上的位置。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>把 $1$ 寫成極式：$1=1\cdot(\cos 0+i\sin 0)$，所以 $R=1,\phi=0$。</li>
+        <li>代公式：$r=\sqrt[3]{1}=1$，角度 $=\dfrac{0+2k\pi}{3}$，$k=0,1,2$。</li>
+        <li>$k=0$：角度 $0$ → $1$；$k=1$：角度 $\frac{2\pi}{3}=120^\circ$；$k=2$：角度 $\frac{4\pi}{3}=240^\circ$。</li>
+        <li>這三個點在單位圓上剛好把圓<b>三等分</b>，連起來是正三角形。</li>
+      </ol>
+      <div class="sol">
+        $$\sqrt[3]{1}=1,\qquad -\frac12+\frac{\sqrt3}{2}i,\qquad -\frac12-\frac{\sqrt3}{2}i$$
+      </div>
+      <div class="ans">三個解都在半徑 $1$ 的圓上，角度 $0^\circ,120^\circ,240^\circ$（正三角形頂點）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">「$1$ 的立方根只有 $1$」是國中答案；在複數裡有 <b>3 個</b>。同理 $\sqrt{4}$ 在複數系有 2 個解（$\pm2$）、$\sqrt[4]{1}$ 有 4 個解。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 6</b><span>$\sqrt{i}$ 與 $\sqrt[5]{1}$</span></div>
+    <div class="eg-body">
+      <div class="eg-q">(a) 求 $\sqrt{i}$ 的所有值。(b) 寫出 $\sqrt[5]{1}$ 的一般式。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>(a) 先把 $i$ 寫成極式：$i=1\cdot e^{i\pi/2}$（長度 1、角度 $90^\circ$）。</li>
+        <li>開平方＝長度開平方、角度<b>除以 2 但要考慮繞圈</b>：$\theta=\dfrac{\pi/2+2k\pi}{2}=\dfrac{\pi}{4}+k\pi$，$k=0,1$。<br>（也就是原稿寫的 $i^{1/2}$：$k=0$ 得 $45^\circ$、$k=1$ 得 $225^\circ$——兩個方向剛好相反。）</li>
+        <li>所以答案是 $\cos\frac{\pi}{4}+i\sin\frac{\pi}{4}=\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i$，以及它的相反數 $-\frac{\sqrt2}{2}-\frac{\sqrt2}{2}i$。</li>
+        <li>(b) 一樣的代公式，只是 $n=5$、$\phi=0$：角度 $\frac{2k\pi}{5}$，$k=0,1,2,3,4$（五個點把圓五等分）。</li>
+      </ol>
+      <div class="sol">
+        $$\sqrt{i}=\pm\left(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i\right)=\pm e^{i\pi/4}\qquad(\text{即 }45^\circ,225^\circ)$$
+        $$\sqrt[5]{1}=\cos\frac{2k\pi}{5}+i\sin\frac{2k\pi}{5},\qquad k=0,1,2,3,4$$
+      </div>
+      <div class="ans">(a) $\pm\big(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i\big)$；(b) 五個解為 $e^{i2k\pi/5}$，$k=0\sim4$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">開 $n$ 次方的角度要用 $\dfrac{\theta+2k\pi}{n}$，<b>不是</b> $\dfrac{\theta}{n}+2k\pi$。前者才會生出 $n$ 個落在正確位置上的解。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p03.jpg" alt="原稿第 3 頁：極式乘除、棣美弗、方根" loading="lazy"><figcaption>原稿 p.3 — 極式乘法推導、棣美弗定理、方根公式與圓上等分圖</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. 用極式算 $(1+i)^8$。</summary><p class="a">$1+i=\sqrt2 e^{i\pi/4}$ ⇒ $(1+i)^8=(\sqrt2)^8e^{i2\pi}=16\cdot1=16$。（直接硬乘會很痛苦。）</p></details>
+  <details class="sc"><summary>2. $\sqrt[4]{1}$ 的四個解是什麼？</summary><p class="a">角度 $0,\frac\pi2,\pi,\frac{3\pi}{2}$ ⇒ $1,\ i,\ -1,\ -i$（單位圓上四個軸點，正四邊形）。</p></details>
+  <details class="sc"><summary>3. 判斷：$|z_1+z_2|=|z_1|+|z_2|$ 嗎？</summary><p class="a">一般不對（會變成三角形兩邊之和 $=$ 第三邊）。只有同方向時等號成立；但 <b>$|z_1z_2|=|z_1||z_2|$ 永遠成立</b>——差別在乘法和加法。</p></details>
+  <hr class="rule">
+</section>
+<section id="c4">
+  <h2><span class="chip">04</span>複變函數 $w=f(z)$<span class="pgbadge">原稿 p.4 上半</span></h2>
+  <p class="lede">把上一章的複數當成「輸入」，餵進一個規則，吐出來的也是複數。這一節只是把這件事寫清楚，並示範怎麼把它拆成「兩條實函數」。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="複變數" data-note="輸入的變數 $z$ 本身就是複數。">complex variable</button><button class="term" type="button" data-zh="複變函數" data-note="$w=f(z)$：一個 $z$ 對到一個 $w$。">complex function</button><button class="term" type="button" data-zh="實部與虛部函數" data-note="$w=u+iv$，$u$、$v$ 各是 $x$、$y$ 的實函數。">real / imaginary parts</button><button class="term" type="button" data-zh="定義域／值域" data-note="定義域是允許的 $z$，值域是跑出來的 $w$。">domain / range</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>複變函數把兩張平面疊在一起：輸入平面的每一點 $z$，被規則搬到輸出平面的 $w$。拆成 $u$、$v$ 只是說「橫向座標與縱向座標各自怎麼被搬」。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">複變函數 $w=f(z)$：定義域在複數上，<b>每個 $z$ 對到一個 $w$</b>。其中</p>
+    <ul>
+      <li>$z$ 叫 <b>complex variable（複變數）</b>；</li>
+      <li>$w$ 是 $z$ 的函數值，寫成 $w=u+iv$；</li>
+      <li>因為 $z=x+iy$，所以 $u$、$v$ 都只跟 $x,y$ 有關：</li>
+    </ul>
+    $$w=u+iv,\qquad u=u(x,y),\qquad v=v(x,y)$$
+    <p style="margin-bottom:0"><b>白話版：一個複變函數 = 兩個實變函數（實部、虛部）綁在一起。</b>這個「拆成 $u,v$」的動作，後面判別可微分（柯西—黎曼方程）全靠它。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 7</b><span>把 $w=z^2+3z$ 拆成 $u,v$ 並求值</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $w=f(z)=z^2+3z$，求 $u$ 與 $v$，並求 $z=1+3i$ 時的 $f(z)$。</div>
+      <h5>思路</h5>
+      <p style="margin:.2em 0 0">這題有兩條路，原稿兩條都走了，考試時挑快的用：</p>
+      <ol class="think">
+        <li><b>路 A（先拆 $u,v$）</b>：把 $z=x+iy$ 代進去展開，實部的部分收集成 $u$、虛部的部分收集成 $v$。題目若問「$u,v$ 分別是什麼」就得走這條。</li>
+        <li><b>路 B（直接代值）</b>：只要求 $f(1+3i)$ 的話，直接把 $z=1+3i$ 丟進去算複數乘法更快。</li>
+        <li>展開時記得：$(x+iy)^2=x^2+2xy\,i+i^2y^2=x^2-y^2+2xy\,i$，那個 $-y^2$ 是 $i^2$ 換來的，最容易漏。</li>
+      </ol>
+      <h5>計算</h5>
+      <div class="sol">
+        $$w=(x+iy)^2+3(x+iy)=\big(x^2-y^2+2xy\,i\big)+(3x+3y\,i)$$
+        $$u=x^2-y^2+3x,\qquad v=2xy+3y$$
+        <p style="margin:.6em 0 .2em">路 B：</p>
+        $$f(1+3i)=(1+3i)^2+3(1+3i)=(-8+6i)+(3+9i)=-5+15i$$
+      </div>
+      <div class="ans">$u=x^2-y^2+3x$，$v=2xy+3y$，$f(1+3i)=-5+15i$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒（原稿筆誤）</span>
+        <p style="margin:0">原稿在這個例題把 $(1+3i)^2$ 的實部算成 $1-9+9$，得到 $1+15i$。<b>正確是 $1-9+3=-5$</b>。驗證：把 $(x,y)=(1,3)$ 代回上面剛求出的 $u=x^2-y^2+3x$ ⇒ $1-9+3=-5$ ✓、$v=2(1)(3)+3(3)=15$ ✓。兩條路對得起來，所以答案 $-5+15i$ 才對。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p04.jpg" alt="原稿第 4 頁：複變函數與向量" loading="lazy"><figcaption>原稿 p.4 — 上半是複變函數，下半開始是向量</figcaption></figure>
+  <hr class="rule">
+</section>
+
+<section id="c5">
+  <h2><span class="chip">05</span>向量的運算<span class="pgbadge">原稿 p.4 下半 – p.6</span></h2>
+  <p class="lede">向量＝有方向、有大小的一支箭。這一章的三個主角：加減法、內積（問「夾角／投影」）、外積（問「垂直方向／面積」）。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="向量" data-note="有大小有方向的量，記成 $[a_1,a_2,a_3]$。">vector</button><button class="term" type="button" data-zh="大小（模）" data-note="$|\vec a|=\sqrt{a_1^2+a_2^2+a_3^2}$。">magnitude / norm</button><button class="term" type="button" data-zh="單位向量" data-note="$\hat a=\vec a/|\vec a|$，長度 1、方向與 $\vec a$ 相同。">unit vector</button><button class="term" type="button" data-zh="內積" data-note="$\vec a\cdot\vec b=|\vec a||\vec b|\cos\theta$，算出來是一個數。">dot product</button><button class="term" type="button" data-zh="正交（垂直）" data-note="$\vec a\cdot\vec b=0$ 就是互相垂直。">orthogonal</button><button class="term" type="button" data-zh="外積" data-note="$\vec a\times\vec b$ 用 $3\times3$ 行列式算，結果垂直於兩者。">cross product</button><button class="term" type="button" data-zh="右手定則" data-note="食指指 $\vec a$、中指指 $\vec b$，拇指方向就是 $\vec a\times\vec b$。">right-hand rule</button><button class="term" type="button" data-zh="平行四邊形" data-note="$|\vec a\times\vec b|$ 等於兩向量張出的平行四邊形面積。">parallelogram</button><button class="term" type="button" data-zh="位置向量" data-note="$\vec r(t)=[x(t),y(t),z(t)]$，把曲線寫成向量。">position vector</button><button class="term" type="button" data-zh="切向量" data-note="$\vec r'(t)$，指向曲線前進的方向。">tangent vector</button><button class="term" type="button" data-zh="弧長" data-note="$L=\int_a^b|\vec r'(t)|\,dt$，把速率對時間積分。">arc length</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>內積問「兩支箭有多像」：同向是正、垂直是 0、反向是負。外積問「兩支箭張出多大的面積、往哪邊垂直」——右手指頭一比就知道方向。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <ul style="margin:0">
+      <li>向量寫成 $\vec a=[a_1,a_2,a_3]=a_1\hat i+a_2\hat j+a_3\hat k$；$\hat i,\hat j,\hat k$ 是三個座標軸的<b>單位向量</b>（長度 1、互相垂直）。</li>
+      <li>「大小為 1、方向為 $\vec p$ 方向」的向量寫成 $\hat p=\dfrac{1}{|\vec p|}\vec p$（後面求法向量、方向導數都靠它）。</li>
+      <li>零向量的長度是 0，<b>沒有方向</b>。</li>
+      <li>兩向量「相同」＝ 每個分量都相同（$\vec a=\vec b\iff a_1=b_1,\ a_2=b_2,\ a_3=b_3$）。</li>
+      <li>向量加法服從交換律：$\vec a+\vec b=\vec b+\vec a$。</li>
+    </ul>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 8</b><span>由兩點求向量與長度</span></div>
+    <div class="eg-body">
+      <div class="eg-q">已知 $P(4,0,2)$、$Q(6,-1,2)$，求 $\overrightarrow{PQ}$ 與 $|\overrightarrow{PQ}|$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>「從 $P$ 指向 $Q$ 的向量」＝ <b>終點減起點</b>：$\overrightarrow{PQ}=Q-P$。順序反了答案就整條變號（變 $\overrightarrow{QP}$）。</li>
+        <li>減法是逐分量減：$(6-4,\,-1-0,\,2-2)$。</li>
+        <li>長度＝三軸平方和再開根號（三維的畢氏定理）。</li>
+      </ol>
+      <div class="sol">
+        $$\overrightarrow{PQ}=(6-4,\ -1-0,\ 2-2)=(2,-1,0)$$
+        $$|\overrightarrow{PQ}|=\sqrt{2^2+(-1)^2+0^2}=\sqrt5$$
+      </div>
+      <div class="ans">$\overrightarrow{PQ}=(2,-1,0)$，長度 $\sqrt5$</div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 9 · 10</b><span>向量加法（分量式與 $\hat i\hat j\hat k$ 式）</span></div>
+    <div class="eg-body">
+      <div class="eg-q">(a) $\vec a=[4,0,1]$、$\vec b=[2,5,\tfrac13]$，求 $\vec a+\vec b$。<br>(b) $\vec a=4\hat i+\hat j+\hat k$、$\vec b=2\hat i-5\hat j+\tfrac13\hat k$，求 $\vec a+\vec b$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>兩種寫法其實是同一件事：$[a_1,a_2,a_3]$ 只是把 $\hat i\hat j\hat k$ 的係數排成一列。所以<b>對應位置相加就好</b>。</li>
+        <li>(a) 第三分量 $1+\frac13=\frac43$。</li>
+        <li>(b) 第二分量 $1+(-5)=-4$，第三分量 $1+\frac13=\frac43$。（原稿把第二分量寫成 $-5$，是手算漏加。）</li>
+      </ol>
+      <div class="sol">
+        $$\text{(a)}\quad\vec a+\vec b=[4+2,\ 0+5,\ 1+\tfrac13]=[6,5,\tfrac43]$$
+        $$\text{(b)}\quad\vec a+\vec b=(4+2)\hat i+(1-5)\hat j+(1+\tfrac13)\hat k=6\hat i-4\hat j+\tfrac43\hat k=[6,-4,\tfrac43]$$
+      </div>
+      <div class="ans">(a) $[6,5,\frac43]$　(b) $[6,-4,\frac43]$</div>
+    </div>
+  </div>
+
+  <h3>內積（<button class="term" type="button" data-zh="內積" data-note="$\vec a\cdot\vec b=|\vec a||\vec b|\cos\theta$，算出來是一個數。">dot product</button>）：拿來問「夾角」與「投影」</h3>
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    $$\vec a\cdot\vec b=|\vec a||\vec b|\cos\theta=a_1b_1+a_2b_2+a_3b_3$$
+    <ul style="margin-bottom:0">
+      <li>結果是<b>一個數（純量）</b>，不是向量。</li>
+      <li>反推夾角：$\cos\theta=\dfrac{\vec a\cdot\vec b}{|\vec a||\vec b|}$。</li>
+      <li><b>$\vec a\cdot\vec b=0\iff$ 兩向量垂直（正交）</b>——這是內積最常考的一句話。</li>
+      <li>幾何意義：$\vec a\cdot\vec b=|\vec a|\times\big(\vec b$ 在 $\vec a$ 方向上的投影長$\big)$。</li>
+    </ul>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 11</b><span>算內積、模、夾角</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $\vec a=[1,2,0]$、$\vec b=[3,-2,1]$，求 $\vec a\cdot\vec b$、$|\vec a|$、$|\vec b|$，並求夾角 $\theta$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>內積：對應分量相乘再相加。</li>
+        <li>模：各自平方和開根號。</li>
+        <li>夾角：套 $\cos\theta=\dfrac{\vec a\cdot\vec b}{|\vec a||\vec b|}$，最後用計算機取 $\cos^{-1}$。若題目只問「是否垂直」，只要看內積是不是 0。</li>
+      </ol>
+      <div class="sol">
+        $$\vec a\cdot\vec b=(1)(3)+(2)(-2)+(0)(1)=3-4+0=-1$$
+        $$|\vec a|=\sqrt{1+4+0}=\sqrt5,\qquad |\vec b|=\sqrt{9+4+1}=\sqrt{14}$$
+        $$\cos\theta=\frac{-1}{\sqrt5\sqrt{14}}=\frac{-1}{\sqrt{70}}\approx-0.1195\ \Longrightarrow\ \theta\approx96.9^\circ$$
+      </div>
+      <div class="ans">$\vec a\cdot\vec b=-1$，$|\vec a|=\sqrt5$，$|\vec b|=\sqrt{14}$，$\theta\approx96.9^\circ$（大於 $90^\circ$，因為內積是負的）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">內積算出來是<b>負的</b>時不要慌：負的代表夾角鈍角（$>90^\circ$）。<b>內積的正負就是夾角的「感覺」</b>——正：銳角；0：垂直；負：鈍角。原稿右下角「內積為 $0$ ⇒ 正交（垂直）」就是這個。</p>
+      </div>
+    </div>
+  </div>
+
+  <h3>外積（<button class="term" type="button" data-zh="外積" data-note="$\vec a\times\vec b$ 用 $3\times3$ 行列式算，結果垂直於兩者。">cross product</button>）：拿來問「垂直方向」與「面積」</h3>
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">兩個不平行向量可以張出一個平面，<b>外積給出垂直那個平面的向量</b>：</p>
+    $$\vec v=\vec a\times\vec b=\begin{vmatrix}\hat i&\hat j&\hat k\\ a_1&a_2&a_3\\ b_1&b_2&b_3\end{vmatrix}
+    =\hat i\begin{vmatrix}a_2&a_3\\ b_2&b_3\end{vmatrix}-\hat j\begin{vmatrix}a_1&a_3\\ b_1&b_3\end{vmatrix}+\hat k\begin{vmatrix}a_1&a_2\\ b_1&b_2\end{vmatrix}$$
+    $$|\vec v|=|\vec a||\vec b|\sin\theta\quad(\text{＝兩向量張出的平行四邊形面積})$$
+    <ul style="margin-bottom:0">
+      <li><b>只有三維</b>才有外積。</li>
+      <li>$\vec a\times\vec b$ 垂直於 $\vec a$ 也垂直於 $\vec b$（「兩者皆垂」的英文就是垂直的判準）。</li>
+      <li><b>方向性</b>：$\vec a\times\vec b=-(\vec b\times\vec a)$，方向用右手定則（食指 $\vec a$、中指 $\vec b$、拇指就是 $\vec a\times\vec b$）。特別注意 $\hat i\times\hat j=\hat k$，順序反了變 $-\hat k$。</li>
+      <li>$\vec a\times\vec a=0$（自己跟自己不行）。</li>
+    </ul>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 12</b><span>用行列式算外積</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $\vec a=[1,1,0]$、$\vec b=[3,0,0]$，求 $\vec v=\vec a\times\vec b$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>照定義排成 3×3 行列式：<b>第一列是 $\hat i\hat j\hat k$</b>，第二列放 $\vec a$、第三列放 $\vec b$。</li>
+        <li>用餘因子展開：$\hat i\times(1\cdot0-0\cdot0)-\hat j\times(1\cdot0-0\cdot3)+\hat k\times(1\cdot0-1\cdot3)$。注意中間 $\hat j$ 前面是<b>減號</b>。</li>
+        <li>算完每一項都是 $0$ 或 $0$，只有 $\hat k$ 那項是 $-3$。</li>
+        <li>檢查：$\vec v=(0,0,-3)$ 是否同時垂直 $\vec a$ 與 $\vec b$？$\vec v\cdot\vec a=0$ ✓、$\vec v\cdot\vec b=0$ ✓。合格。</li>
+      </ol>
+      <div class="sol">
+        $$\vec v=\begin{vmatrix}\hat i&\hat j&\hat k\\ 1&1&0\\ 3&0&0\end{vmatrix}
+        =\hat i(1\cdot0-0\cdot0)-\hat j(1\cdot0-0\cdot3)+\hat k(1\cdot0-1\cdot3)=0\hat i+0\hat j-3\hat k$$
+        $$\vec v=[0,0,-3],\qquad |\vec v|=3$$
+      </div>
+      <div class="ans">$\vec a\times\vec b=(0,0,-3)=-3\hat k$，面積 $=3$</div>
+    </div>
+  </div>
+
+  <h3>向量函數、極限、導數（原稿 p.6）</h3>
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">向量函數就是「每個分量各自是一個（純量）函數」：</p>
+    $$\vec v=\vec v(p)=[\,v_1(p),\ v_2(p),\ v_3(p)\,]$$
+    <p><b>所有操作都可以「逐分量」做</b>：</p>
+    <ul>
+      <li><b>極限</b>：$\displaystyle\lim_{p\to p_0}\vec v(p)=\vec L\iff\lim_{p\to p_0}|\vec v(p)-\vec L|=0$（長度趨近 0 就是整支向量趨近 0）。</li>
+      <li><b>連續</b>：$\displaystyle\lim_{p\to p_0}\vec v(p)=\vec v(p_0)$。</li>
+      <li><b>微分</b>：$\dfrac{d\vec v}{dt}=\displaystyle\lim_{\Delta t\to0}\dfrac{\vec v(t+\Delta t)-\vec v(t)}{\Delta t}$，寫成分量就是</li>
+    </ul>
+    $$\frac{\partial\vec v}{\partial u}=\frac{\partial v_1}{\partial u}\hat i+\frac{\partial v_2}{\partial u}\hat j+\frac{\partial v_3}{\partial u}\hat k$$
+  </div>
+
+  <div class="box" style="background:var(--blue-soft);border-color:color-mix(in srgb,var(--blue) 25%,var(--line))">
+    <span class="lab" style="color:var(--blue)">位置向量與弧長（原稿 p.6 下半）</span>
+    <p style="margin-top:0">把曲線上的點寫成位置向量 $\vec r(t)=[x(t),y(t),z(t)]$，則<b>導數 $\vec r'(t)$ 就是切向量</b>（方向＝曲線前進方向、大小＝速率）。把速率對時間積分，就是走過的長度：</p>
+    $$L=\int_a^b\sqrt{\vec r'\cdot\vec r'}\ dt=\int_a^b|\vec r'(t)|\,dt$$
+    <p style="margin-bottom:0"><b>為什麼是 $\sqrt{\vec r'\cdot\vec r'}$？</b> 因為 $\vec r'\cdot\vec r'=|\vec r'|^2$，寫成根號只是讓你自己記得「取大小」。小段長度 $ds=|\vec r'|dt$，全部加起來就是弧長。</p>
+  </div>
+
+  <div class="box">
+    <span class="lab">補充示範 · 弧長怎麼用（原稿只有公式）</span>
+    <p style="margin-top:0">曲線 $\vec r(t)=[t,t,t]$，$0\le t\le2$（就是例題 16 那條走道），求弧長。</p>
+    <p>思路：先微分 $\vec r'=[1,1,1]$，再取大小 $|\vec r'|=\sqrt3$（常數，所以積分很簡單），最後 $\int_0^2\sqrt3\,dt=2\sqrt3$。</p>
+    <p style="margin-bottom:0">結果 $L=2\sqrt3\approx3.46$。這條線從 $(0,0,0)$ 走到 $(2,2,2)$，走直線的距離正是 $\sqrt{2^2+2^2+2^2}=2\sqrt3$ ✓。</p>
+  </div>
+
+  <figure class="scan small"><img src="pages/p05.jpg" alt="原稿第 5 頁：內積與外積" loading="lazy"><figcaption>原稿 p.5 — 內積（含正交條件）、外積的行列式與方向性</figcaption></figure>
+  <figure class="scan small"><img src="pages/p06.jpg" alt="原稿第 6 頁：向量函數、極限、導數、弧長" loading="lazy"><figcaption>原稿 p.6 — 向量函數、數列極限、連續、微分、位置向量與弧長</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. $\vec a=[1,2,3]$、$\vec b=[2,-1,0]$ 是否垂直？</summary><p class="a">$\vec a\cdot\vec b=2-2+0=0$ ⇒ 垂直 ✓</p></details>
+  <details class="sc"><summary>2. 用外積求 $\vec a=[1,0,0]$、$\vec b=[0,1,0]$ 的面積。</summary><p class="a">$\vec a\times\vec b=\hat k$，$|\vec a\times\vec b|=1$ ⇒ 面積 1（單位正方形）✓</p></details>
+  <details class="sc"><summary>3. $\vec r(t)=[\cos t,\sin t,0]$（單位圓），$0\le t\le2\pi$，弧長？</summary><p class="a">$\vec r'=[-\sin t,\cos t,0]$，$|\vec r'|=\sqrt{\sin^2t+\cos^2t}=1$，所以 $L=\int_0^{2\pi}1\,dt=2\pi$ ✓（周長 $2\pi r$）。</p></details>
+  <hr class="rule">
+</section>
+<section id="c6">
+  <h2><span class="chip">06</span>梯度與方向導數<span class="pgbadge">原稿 p.7</span></h2>
+  <p class="lede">前面在講「一支箭（向量）」。從這裡開始我們的函數有三個輸入 $f(x,y,z)$（叫<b>純量場</b>，例如房間裡每一點的温度）。這一章要問：<b>「往哪個方向走，温度上升最快？」</b></p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="純量場" data-note="每一點對應一個數，例如房間裡的溫度 $f(x,y,z)$。">scalar field</button><button class="term" type="button" data-zh="向量場" data-note="每一點對應一支箭，例如水流速度。">vector field</button><button class="term" type="button" data-zh="梯度" data-note="$\nabla f=[f_x,f_y,f_z]$，指向最陡上升方向。">gradient</button><button class="term" type="button" data-zh="$\nabla$ 算子" data-note="$\nabla=\frac{\partial}{\partial x}\hat i+\frac{\partial}{\partial y}\hat j+\frac{\partial}{\partial z}\hat k$，等著被餵函數。">del operator</button><button class="term" type="button" data-zh="方向導數" data-note="$D_{\vec a}f=\hat a\cdot\nabla f$，往指定方向的變化率。">directional derivative</button><button class="term" type="button" data-zh="法向量" data-note="垂直於曲面的向量；$\nabla f$ 就是它。">normal vector</button><button class="term" type="button" data-zh="等值面" data-note="$f(x,y,z)=c$ 的曲面，$\nabla f$ 與它垂直。">level surface</button><button class="term" type="button" data-zh="連鎖律" data-note="$\frac{d}{dt}f(\vec r(t))=\nabla f\cdot\vec r'$，是法向量定理的關鍵。">chain rule</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>把函數想成一座山的高度 $f$：梯度告訴你<b>「往哪走最陡、坡度多少」</b>；方向導數則是「你硬往某個方向走，坡度是多少」。山壁上等高線的垂直方向，就是梯度的方向。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 梯度</span>
+    $$\operatorname{grad}f=\nabla f=\left[\frac{\partial f}{\partial x},\ \frac{\partial f}{\partial y},\ \frac{\partial f}{\partial z}\right]=\frac{\partial f}{\partial x}\hat i+\frac{\partial f}{\partial y}\hat j+\frac{\partial f}{\partial z}\hat k$$
+    <p>其中 $\nabla=\dfrac{\partial}{\partial x}\hat i+\dfrac{\partial}{\partial y}\hat j+\dfrac{\partial}{\partial z}\hat k$ 叫做 <b>del 算子（運算子）</b>，它只是一個「等著被餵函數的動作」。</p>
+    <ul style="margin-bottom:0">
+      <li>梯度是<b>向量</b>（純量場丟進去，出來一支箭）。</li>
+      <li>它指向<b>上升最快的方向</b>，而它的長度＝那個最大上升率。</li>
+      <li>$\nabla f$ 沒有 $f$ 的下標會算錯：<b>三個分量各自是「只對一個變數微分、其他當常數」</b>。</li>
+    </ul>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · 方向導數</span>
+    <p style="margin-top:0">$\nabla f$ 告訴你「最快上升的方向」，但如果你只想沿著某個指定的方向 $\vec a$ 走呢？那就是<b>方向導數</b>：</p>
+    $$D_{\vec a}f=\frac{df}{ds}=\lim_{s\to0}\frac{f(Q)-f(P)}{s}=\hat a\cdot\nabla f=\frac{\vec a}{|\vec a|}\cdot\nabla f$$
+    <p><b>為什麼要除以 $|\vec a|$？</b> 因為方向導數定義成「每走 1 單位長度，$f$ 改變多少」。所以代表方向的 $\vec a$ 必須先壓成長度 1 的單位向量 $\hat a$，不然「走一步」的長度不定，變化率就沒意義。</p>
+    <p style="margin-bottom:0"><b>順帶得到的結論</b>：$D_{\vec a}f=\hat a\cdot\nabla f=|\nabla f|\cos\phi$，其中 $\phi$ 是 $\vec a$ 與 $\nabla f$ 的夾角。當 $\phi=0$（朝梯度方向走）時最大 ⇒ 再次證明「梯度是最大上升方向」。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 13</b><span>求梯度與指定方向的方向導數</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $f(x,y,z)=2x^2+3y^2+z^2$，在點 $P(2,1,3)$、方向 $\vec a=[1,1,-2]$，求 $\nabla f(P)$ 與 $D_{\vec a}f$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li><b>第一步一定是算梯度</b>（不能先算方向導數）。逐項偏微：$2x^2\to4x$、$3y^2\to6y$、$z^2\to2z$。對 $x$ 微分時，$3y^2$ 和 $z^2$ 都當常數，導數 0。</li>
+        <li>把 $P(2,1,3)$ 代進去得到該點的梯度向量 $(8,6,6)$。</li>
+        <li>把方向 $\vec a$ 化成單位向量：先算 $|\vec a|=\sqrt{1^2+1^2+(-2)^2}=\sqrt{6}$，所以 $\hat a=\frac{1}{\sqrt6}[1,1,-2]$。</li>
+        <li>做內積：$\hat a\cdot\nabla f(P)=\frac{1}{\sqrt6}(1\cdot8+1\cdot6+(-2)\cdot6)=\frac{1}{\sqrt6}(8+6-12)=\frac{2}{\sqrt6}$。</li>
+        <li>$\frac{2}{\sqrt6}$ 化簡（分子分母同乘 $\sqrt6$）＝ $\frac{2\sqrt6}{6}=\frac{\sqrt6}{3}\approx0.816$。既然是「率」，單位是「$f$ 的單位／長度」。</li>
+      </ol>
+      <div class="sol">
+        $$\nabla f=[4x,\ 6y,\ 2z],\qquad \nabla f(P)=(8,6,6),\qquad |\vec a|=\sqrt6$$
+        $$D_{\vec a}f=\frac{[1,1,-2]}{\sqrt6}\cdot[8,6,6]=\frac{1}{\sqrt6}(8+6-12)=\frac{2}{\sqrt6}\approx0.816$$
+      </div>
+      <div class="ans">$\nabla f(P)=(8,6,6)$，$D_{\vec a}f=\dfrac{2}{\sqrt6}=\dfrac{\sqrt6}{3}\approx0.816$（沿 $\vec a$ 走 $f$ 在變大）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒（原稿筆誤）</span>
+        <p style="margin:0">原稿這裡寫 $|\vec a|=\sqrt5$，但 $\vec a=(1,1,-2)$ 的長度是 $\sqrt{1+1+4}=\sqrt6$，所以答案是 $\frac{2}{\sqrt6}$ 而不是 $\frac2{\sqrt5}$。<b>考試時 $\vec a$ 的長度一定要重新算一遍</b>，這是最常見的失分點。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ③ · 梯度是曲面的法向量（原稿的定理框）</span>
+    <p style="margin-top:0">設 $f$ 可微，$f(x,y,z)=c$ 是一個<b>等值面</b> $S$（$c$ 常數）。則在 $S$ 上任一點 $P$，<b>只要 $\nabla f\ne\vec0$，它就垂直於 $S$</b>。</p>
+    <p><b>為什麼？</b>（這個理由要會講）在曲面 $S$ 上任意取一條曲線 $\vec r(t)$，因為整條曲線都在 $f=c$ 上，所以 $f(\vec r(t))=c$ 對所有 $t$ 都成立。兩邊對 $t$ 微分，用連鎖律：</p>
+    $$\frac{d}{dt}f(\vec r(t))=\nabla f\cdot\vec r'(t)=0$$
+    <p style="margin-bottom:0">$\vec r'(t)$ 是曲線的切向量（躺在曲面上）。上式說 $\nabla f$ 與<b>每一條</b>曲面上的切向量都垂直 ⇒ $\nabla f$ 就是該點的<b>法向量</b>。所以「求曲面 $f=c$ 的單位法向量」的標準流程是：<b>算 $\nabla f$ → 代點 → 除以長度 →（別忘了 $\pm$）</b>。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 14</b><span>求錐面的單位法向量</span></div>
+    <div class="eg-body">
+      <div class="eg-q">曲面 $z^2=4(x^2+y^2)$（一個圓錐面），在點 $P(1,0,2)$ 求單位法向量 $\hat n$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先用定理：把方程式整理成 $f(x,y,z)=$ 常數。移項得 $f=4(x^2+y^2)-z^2=0$。</li>
+        <li>算梯度：$\nabla f=[8x,\ 8y,\ -2z]$。（對 $x$ 微分：$4x^2\to8x$；$y$ 同理；$-z^2\to-2z$，那個負號非常容易漏。）</li>
+        <li>代 $P(1,0,2)$：$\nabla f(P)=[8,0,-4]$。</li>
+        <li>取單位向量：$|\nabla f(P)|=\sqrt{64+0+16}=\sqrt{80}=4\sqrt5$，所以 $\hat n=\pm\frac{[8,0,-4]}{4\sqrt5}=\pm\left[\frac{2}{\sqrt5},\ 0,\ -\frac{1}{\sqrt5}\right]$。</li>
+        <li><b>為什麼有 $\pm$？</b> 因為法向量有兩個方向（指進錐面／指出錐面），除非題目說「向外」或「向上」，兩個都要寫。</li>
+      </ol>
+      <div class="sol">
+        $$f=4(x^2+y^2)-z^2,\qquad \nabla f=[8x,8y,-2z]$$
+        $$\nabla f(P)=[8,0,-4],\qquad |\nabla f(P)|=4\sqrt5$$
+        $$\hat n=\pm\frac{[8,0,-4]}{4\sqrt5}=\pm\left[\frac{2}{\sqrt5},\,0,\,-\frac{1}{\sqrt5}\right]$$
+      </div>
+      <div class="ans">$\hat n=\pm\left[\dfrac{2}{\sqrt5},\,0,\,-\dfrac{1}{\sqrt5}\right]$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">「$z^2=4(x^2+y^2)$」也可以寫成 $z=\pm2\sqrt{x^2+y^2}$，但<b>不要</b>用這個形式硬微（根號很難微）；把全部搬到一邊做成 $f=c$ 再取梯度，永遠比較快。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p07.jpg" alt="原稿第 7 頁：梯度、方向導數、曲面法向量" loading="lazy"><figcaption>原稿 p.7 — 梯度定義、方向導數 $D_{\vec a}f=\hat a\cdot\nabla f$、法向量定理與兩個例題</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. $f=x^2y+yz^3$，求 $\nabla f$。</summary><p class="a">$\nabla f=[2xy,\ x^2+z^3,\ 3yz^2]$。注意第一分量對 $y$ 寫成 $2xy$（$x^2y$ 對 $x$ 微）、第二分量 $x^2+z^3$（對 $y$ 微）、第三個 $3yz^2$（對 $z$ 微）。</p></details>
+  <details class="sc"><summary>2. 承上，$f$ 在 $P(1,1,1)$ 往 $(1,0,0)$ 方向的方向導數？</summary><p class="a">$\nabla f(P)=[2,2,3]$，單位方向 $=[1,0,0]$ ⇒ $D=2$。（往 $x$ 方向走，其實就是偏導數 $f_x$，對吧？）</p></details>
+  <details class="sc"><summary>3. 球面 $x^2+y^2+z^2=a^2$ 在 $P(1,1,1)$ 的法向量方向？</summary><p class="a">$f=x^2+y^2+z^2$，$\nabla f=[2x,2y,2z]$ ⇒ 在 $P$ 是 $[2,2,2]\parallel[1,1,1]$，正是從球心指向 $P$ 的方向 ✓（球面的法向量就是半徑方向）。</p></details>
+  <hr class="rule">
+</section>
+
+<section id="c7">
+  <h2><span class="chip">07</span>散度 · 旋度 · <button class="term" type="button" data-zh="拉普拉斯算子" data-note="$\nabla^2=\operatorname{div}(\operatorname{grad})$，二階偏導數的和。">Laplacian</button><span class="pgbadge">原稿 p.8–9</span></h2>
+  <p class="lede">三種「$\nabla$ 與場的作用」：$\nabla\cdot$（散度，量「有沒有冒出來」）、$\nabla\times$（旋度，量「有沒有打轉」）、$\nabla^2$（Laplacian，量「跟鄰居的平均差多少」）。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="散度" data-note="$\nabla\cdot\vec v$：每點「往外冒」多少，結果是純量。">divergence</button><button class="term" type="button" data-zh="旋度" data-note="$\nabla\times\vec v$：每點「打轉」多少，結果是向量。">curl</button><button class="term" type="button" data-zh="拉普拉斯算子" data-note="$\nabla^2=\operatorname{div}(\operatorname{grad})$，二階偏導數的和。">Laplacian</button><button class="term" type="button" data-zh="不可壓縮" data-note="$\nabla\cdot\vec v=0$，代表既沒有源也沒有匯。">incompressible</button><button class="term" type="button" data-zh="源／匯" data-note="散度為正是源（水龍頭），為負是匯（排水孔）。">source / sink</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>在空間中某一點放一個小水龍頭，散度就告訴你「這裡是水源還是排水孔」；放一個小風車，旋度就告訴你「這裡的流會不會把它轉起來」。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 向量場</span>
+    $$\vec v(x,y,z)=[\,v_1(x,y,z),\ v_2(x,y,z),\ v_3(x,y,z)\,]=v_1\hat i+v_2\hat j+v_3\hat k$$
+    <p style="margin-bottom:0"><b>向量場</b>＝空間中每一點都插一支箭（例如流速、電場、磁場）。純量場是一個數、向量場是一支箭。</p>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · 散度（divergence）</span>
+    $$\operatorname{div}\vec v=\nabla\cdot\vec v=\frac{\partial v_1}{\partial x}+\frac{\partial v_2}{\partial y}+\frac{\partial v_3}{\partial z}$$
+    <ul style="margin-bottom:0">
+      <li>「$\nabla\cdot\vec v$」＝算子跟向量做<b>內積</b>，所以結果是<b>純量</b>（一個數）。</li>
+      <li>白話：把這一點想像成一個小方塊，<b>流出去的比流進來的多多少</b>。$\nabla\cdot\vec v>0$＝這裡是<b>源</b>（水龍頭）；$<0$＝這裡是<b>匯</b>（排水孔）；$=0$＝不可壓縮（incompressible）。</li>
+      <li><b>每個分量只對自己的變數微分</b>：$v_1$ 對 $x$、$v_2$ 對 $y$、$v_3$ 對 $z$。這是最容易搞錯的地方。</li>
+    </ul>
+  </div>
+
+  <div class="box" style="background:var(--blue-soft);border-color:color-mix(in srgb,var(--blue) 25%,var(--line))">
+    <span class="lab" style="color:var(--blue)">核心觀念 ③ · Laplacian 與 $\nabla^2$</span>
+    $$\nabla^2=\frac{\partial^2}{\partial x^2}+\frac{\partial^2}{\partial y^2}+\frac{\partial^2}{\partial z^2}\qquad(\text{Laplacian operator，拉普拉斯算子})$$
+    <p>把梯度再取一次散度，就得到 Laplacian：</p>
+    $$\operatorname{div}(\operatorname{grad}f)=\nabla\cdot(\nabla f)=\left(\frac{\partial}{\partial x}\hat i+\frac{\partial}{\partial y}\hat j+\frac{\partial}{\partial z}\hat k\right)\cdot\left(\frac{\partial f}{\partial x}\hat i+\frac{\partial f}{\partial y}\hat j+\frac{\partial f}{\partial z}\hat k\right)=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}+\frac{\partial^2f}{\partial z^2}=\nabla^2f$$
+    <p style="margin-bottom:0"><b>原稿那句英文要背下來：</b><i>the divergence of the gradient is the Laplacian</i>（梯度的散度就是 Laplacian）。注意內積時 $\hat i\cdot\hat i=1$、$\hat i\cdot\hat j=0$，所以只剩三個自己乘自己的項——這就是為什麼只有三項。</p>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ④ · 旋度（curl）</span>
+    <p style="margin-top:0">旋度是 $\nabla$ 跟向量做<b>外積</b>，結果是<b>向量</b>：</p>
+    $$\operatorname{curl}\vec v=\nabla\times\vec v=\begin{vmatrix}\hat i&\hat j&\hat k\\[2pt] \dfrac{\partial}{\partial x}&\dfrac{\partial}{\partial y}&\dfrac{\partial}{\partial z}\\[6pt] v_1&v_2&v_3\end{vmatrix}
+    =\left(\frac{\partial v_3}{\partial y}-\frac{\partial v_2}{\partial z}\right)\hat i-\left(\frac{\partial v_1}{\partial z}-\frac{\partial v_3}{\partial x}\right)\hat j+\left(\frac{\partial v_2}{\partial x}-\frac{\partial v_1}{\partial y}\right)\hat k$$
+    <p style="margin-bottom:0"><b>怎麼記？</b> 原稿把三個 2×2 小行列式圈起來，就是「展開時每個 $\hat i,\hat j,\hat k$ 對應一個 2×2 行列式」。實用記法：<b>輪轉</b>——每個分量都是「下一個變數對上一個變數」的差（$y\to z\to x\to y$），中間那項前面加負號。旋度描述場<b>在該點附近是否在打轉</b>（把一個小風車放進去會不會轉）。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 15</b><span>用行列式算旋度</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設向量場 $\vec v=yz\,\hat i+3zx\,\hat j+z\,\hat k$，求 $\operatorname{curl}\vec v$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先認出三個分量：$v_1=yz$、$v_2=3zx$、$v_3=z$。（$3zx$ 就是 $3xz$，順序不影響。）</li>
+        <li>排行列式：第一列 $\hat i\hat j\hat k$、第二列是三個偏導算子、第三列是 $v_1v_2v_3$。</li>
+        <li>展開第 $\hat i$ 個分量：$\dfrac{\partial v_3}{\partial y}-\dfrac{\partial v_2}{\partial z}$。$v_3=z$ 對 $y$ 微分＝0；$v_2=3zx$ 對 $z$ 微分＝$3x$。所以是 $0-3x=-3x$。</li>
+        <li>展開第 $\hat j$ 個分量：<b>前面一定有一個減號</b>。行列式展開是 $-\left(\dfrac{\partial v_3}{\partial x}-\dfrac{\partial v_1}{\partial z}\right)$（就是把 $j$ 那一行／列拿掉後，剩下的 2×2 行列式）。所以 $-(0-y)=+y$。<br>如果你想背另一種寫法（比較常見的教科書版）也可以：$\operatorname{curl}_y\vec v=\dfrac{\partial v_1}{\partial z}-\dfrac{\partial v_3}{\partial x}=y-0=y$——<b>兩種寫法答案一樣</b>，因為 $-(a-b)=b-a$。</li>
+        <li>展開第 $\hat k$ 個分量：$\dfrac{\partial v_2}{\partial x}-\dfrac{\partial v_1}{\partial y}=3z-z=2z$。這項<b>沒有</b>負號。</li>
+        <li>最後檢查：算出來的旋度要同時垂直「場的變化方向」——這裡不方便目視檢查，但可以確認每一項都用了正確的偏導數。</li>
+      </ol>
+      <div class="sol">
+        $$\operatorname{curl}\vec v=\begin{vmatrix}\hat i&\hat j&\hat k\\[2pt] \dfrac{\partial}{\partial x}&\dfrac{\partial}{\partial y}&\dfrac{\partial}{\partial z}\\[6pt] yz&3zx&z\end{vmatrix}
+        =\big(0-3x\big)\hat i-\big(0-y\big)\hat j+\big(3z-z\big)\hat k$$
+        $$=-3x\,\hat i+y\,\hat j+2z\,\hat k=[-3x,\ y,\ 2z]$$
+      </div>
+      <div class="ans">$\operatorname{curl}\vec v=[-3x,\ y,\ 2z]$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">旋度只有三個分量，但<b>有兩個地方要小心：$\hat j$ 那項的減號、以及每個分量「誰對誰微分」的順序</b>。最保險的做法：考試時先把三個分量的公式寫在紙邊——$(\partial_yv_3-\partial_zv_2,\ \ \partial_zv_1-\partial_xv_3,\ \ \partial_xv_2-\partial_yv_1)$——再一格一格填，填錯的機會就大幅下降。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">定理 · 梯度場沒有旋度（原稿 p.9 黃字）</span>
+    $$\operatorname{curl}(\operatorname{grad}f)=\nabla\times(\nabla f)=\vec 0$$
+    <p style="margin-bottom:0"><b>一句話：</b>「如果一個連續可微的向量場是某個純量函數的梯度，那它的旋度必為 0」。</p>
+    <p><b>證明思路（一行就好）</b>：把行列式寫開，每個分量都是 $f$ 的<b>混合偏導數相減</b>，例如第一分量 $\dfrac{\partial}{\partial y}\dfrac{\partial f}{\partial z}-\dfrac{\partial}{\partial z}\dfrac{\partial f}{\partial y}=f_{zy}-f_{yz}=0$（$f$ 夠光滑時混合偏導數相等，與順序無關）。三個分量都成對抵消 ⇒ 零向量。</p>
+    <p style="margin-bottom:0">這條定理的用途：<b>快速判斷「這個場可不可能是保守場」</b>，第 8 章算線積分時會用到。</p>
+  </div>
+
+  <figure class="scan small"><img src="pages/p08.jpg" alt="原稿第 8 頁：散度、Laplacian、旋度" loading="lazy"><figcaption>原稿 p.8 — 散度、$\nabla^2$（Laplacian）、$\operatorname{div}(\nabla f)=\nabla^2f$、旋度的行列式形式</figcaption></figure>
+  <figure class="scan small"><img src="pages/p09.jpg" alt="原稿第 9 頁：旋度例題與 curl(grad f)=0" loading="lazy"><figcaption>原稿 p.9 — 旋度例題與 $\operatorname{curl}(\operatorname{grad}f)=\vec0$ 定理</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. $\vec v=[x^2,\ xy,\ xz]$，求 $\nabla\cdot\vec v$。</summary><p class="a">$2x+x+x=4x$。（$v_1$ 對 $x$、$v_2$ 對 $y$、$v_3$ 對 $z$，各自只微一次。）</p></details>
+  <details class="sc"><summary>2. $f=x^2y+z^3$，求 $\nabla^2f$。</summary><p class="a">$f_{xx}=2y$、$f_{yy}=0$、$f_{zz}=6z$ ⇒ $\nabla^2f=2y+6z$。</p></details>
+  <details class="sc"><summary>3. 判斷：$\vec v=[y,z,x]$ 的旋度是？它會是某個 $f$ 的梯度嗎？</summary><p class="a">$\nabla\times\vec v=(-1,-1,-1)\ne\vec0$（這題在 p.15 用過），所以<b>不是</b>梯度場、不可能寫成 $\nabla f$。</p></details>
+  <hr class="rule">
+</section>
+<section id="c8">
+  <h2><span class="chip">08</span>線積分 <button class="term" type="button" data-zh="線積分" data-note="沿曲線把 $\vec F\cdot d\vec r$ 一小段一小段加起來。">line integral</button><span class="pgbadge">原稿 p.10 – p.11 上半</span></h2>
+  <p class="lede">以前積分是「沿著 $x$ 軸一小段一小段加起來」。現在把它推廣成<b>沿著一條彎曲的路徑</b>一小段一小段加起來。原稿一開始那三行黃字，就是這一章的作戰手冊。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="線積分" data-note="沿曲線把 $\vec F\cdot d\vec r$ 一小段一小段加起來。">line integral</button><button class="term" type="button" data-zh="參數化" data-note="把路徑寫成 $\vec r(t)$，並決定 $t$ 的範圍。">parametrization</button><button class="term" type="button" data-zh="保守場" data-note="可以寫成某個 $\nabla f$ 的向量場。">conservative field</button><button class="term" type="button" data-zh="位勢函數" data-note="那個 $f$；線積分只要算頭尾位勢差。">potential function</button><button class="term" type="button" data-zh="路徑無關" data-note="走哪條路都一樣，只看起點與終點。">path independence</button><button class="term" type="button" data-zh="環流" data-note="沿封閉曲線繞一圈的線積分 $\oint_C\vec F\cdot d\vec r$。">circulation</button><button class="term" type="button" data-zh="功" data-note="物理上線積分就是力沿路徑所做的功。">work</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>沿著一條路走，把每一步的「力 · 位移」加起來，就是總共做的功。如果這個力場是某個位能的梯度（保守場），那做功只看<b>起點與終點的高度差</b>，中途怎麼繞都一樣。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 從 ∫f(x)dx 推廣過來（原稿 p.10 左上三點）</span>
+    <p style="margin-top:0">原稿寫：</p>
+    <ol style="margin-bottom:0">
+      <li>若 $\vec F=\nabla f$（也就是場是某個函數的梯度）⇒ 呼作<b>保守場</b>，積分<b>只跟頭尾有關</b>。</li>
+      <li>若 $C$ 是一封閉曲線（起點＝終點）⇒ 寫成 $\oint_C$，並且<b>「$\vec F$ 是保守場 $\iff\oint_C\vec F\cdot d\vec r=0$」</b>。</li>
+      <li>若 $\vec F$ 是向量場，繞一圈的環流 $\oint\vec F\cdot d\vec r$ 就代表<b>沿這條路「做了多少功」</b>（物理裡的 work）。</li>
+    </ol>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · 怎麼算：參數化</span>
+    <p style="margin-top:0">路徑 $C$ 用 $\vec r(t)$ 表示，$a\le t\le b$。走一小段的位移是 $d\vec r=\vec r'(t)\,dt$，所以</p>
+    $$\int_C\vec F\cdot d\vec r=\int_a^b \vec F\big(\vec r(t)\big)\cdot \vec r'(t)\,dt=\int_a^b\big(F_1x'(t)+F_2y'(t)+F_3z'(t)\big)dt$$
+    <p><b>固定流程（背這四步就好）：</b></p>
+    <ol style="margin-bottom:0">
+      <li>把曲線參數化：寫出 $x(t),y(t),z(t)$ 與範圍。</li>
+      <li>把 $\vec F$ 裡的 $x,y,z$ <b>全部換成 $t$</b> ⇒ 得到 $\vec F(\vec r(t))$。</li>
+      <li>微分出 $\vec r'(t)$，做內積。</li>
+      <li>對 $t$ 做一般定積分。</li>
+    </ol>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ③ · 路徑無關（path independence）</span>
+    <p style="margin-top:0">原稿的定理：<b>在 $C$ 上的積分若只在乎起點與終點，則不管走哪條路，值都相同。</b>而這件事成立的條件就是 $\vec F=\nabla f$（保守場）；此時</p>
+    $$\int_C\vec F\cdot d\vec r=\int_C\nabla f\cdot d\vec r=f(\text{終點})-f(\text{起點})$$
+    <p style="margin-bottom:0">$f$ 叫做<b>位勢函數（potential function）</b>——它就是物理裡的位能。<b>怎麼從 $\vec F$ 找回 $f$？</b> 把三個分量分別對 $x,y,z$ 積分，再把三次的結果拼起來（共用項只算一次）。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 16</b><span>保守場：兩種算法互相驗證</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $\vec F=[2x,2y,4z]$、$f=x^2+y^2+2z^2$，取 $A(1,1,1)$、$B(0,0,0)$，路徑 $C:\vec r(t)=[t,t,t]$，$0\le t\le2$。求 $\displaystyle\int_C\vec F\cdot d\vec r$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先確認「$\vec F$ 是不是某個 $f$ 的梯度」：題目已經給了 $f$，驗算 $\nabla f=[2x,2y,4z]=\vec F$ ✓。<b>所以這是保守場，積分只跟頭尾有關。</b></li>
+        <li><b>路 A（照定義硬算）</b>：把 $x=t,y=t,z=t$ 代進 $\vec F$ 得 $\vec F(\vec r(t))=[2t,2t,4t]$；再算 $\vec r'(t)=[1,1,1]$。</li>
+        <li>內積：$2t\cdot1+2t\cdot1+4t\cdot1=8t$（這一步最好寫出來，才不會漏項）。</li>
+        <li>積分：$\int_0^2 8t\,dt=4t^2\Big|_0^2=16$。</li>
+        <li><b>路 B（用位勢函數，10 秒鐘）</b>：$\vec r(t)=[t,t,t]$ 在 $t=0$ 時是 $(0,0,0)$、$t=2$ 時是 $(2,2,2)$。所以
+        $$\int_C\vec F\cdot d\vec r=f(2,2,2)-f(0,0,0)=(4+4+8)-0=16\ \checkmark$$</li>
+      </ol>
+      <div class="sol">
+        $$\vec F(\vec r(t))=[2t,2t,4t],\qquad \vec r'(t)=[1,1,1],\qquad \vec F\cdot\vec r'=8t$$
+        $$\int_C\vec F\cdot d\vec r=\int_0^2 8t\,dt=4t^2\Big|_0^2=16$$
+        $$\text{檢查：}\ f(2,2,2)-f(0,0,0)=16\ \checkmark$$
+      </div>
+      <div class="ans">$\displaystyle\int_C\vec F\cdot d\vec r=16$（兩條路都得到 16，因為 $\vec F$ 保守）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒（原稿這裡有陷阱）</span>
+        <p style="margin:0">原稿寫「$f(A)-f(B)=16$」，但 $A(1,1,1)$ 代入 $f$ 只有 $1+1+2=4$，跟 16 對不起來。<b>原因</b>：$A、B$ 只是圖上標的兩個點，真正走的路徑是從 $(0,0,0)$ 到 $(2,2,2)$，所以位勢差要用<b>路徑的兩個端點</b>去算。這正好是這題要你體會的：<b>算保守場的線積分，看的是「你從哪走到哪」，不是圖上隨手標的點。</b></p>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 17</b><span>非保守場：只能老實參數化</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $\vec F=[-y,\,-xy]$，路徑 $C$ 取單位圓的第一象限圓弧：$x(t)=\cos t$、$y(t)=\sin t$，$0\le t\le\frac{\pi}{2}$。求 $\displaystyle\int_C\vec F\cdot d\vec r$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>這條路徑<b>不是封閉曲線</b>（從 $(1,0)$ 走到 $(0,1)$），所以不能直接說「等於 0」。先檢查是不是保守場：$\operatorname{curl}\vec F=\partial_x(-xy)-\partial_y(-y)=-y-(-1)=1-y\ne0$ ⇒ <b>非保守</b>，沒有位勢函數可用。</li>
+        <li>所以只好照四步走：<b>先寫出 $\vec F(\vec r(t))$</b>。分量一 $-y\to-\sin t$；分量二 $-xy\to-\cos t\sin t$。所以 $\vec F(\vec r(t))=[-\sin t,\ -\cos t\sin t]$。</li>
+        <li>再算 $d\vec r$：$x'(t)=-\sin t$、$y'(t)=\cos t$。</li>
+        <li>內積：$(-\sin t)(-\sin t)+(-\cos t\sin t)(\cos t)=\sin^2t-\cos^2t\sin t$。</li>
+        <li>積分拆兩塊：$\int_0^{\pi/2}\!\sin^2t\,dt=\dfrac{\pi}{4}$（半角公式），$\int_0^{\pi/2}\!\cos^2t\sin t\,dt=\left[-\dfrac{\cos^3t}{3}\right]_0^{\pi/2}=0+\dfrac13=\dfrac13$。</li>
+        <li>相減：$\dfrac{\pi}{4}-\dfrac13\approx0.7854-0.3333=0.4521$。</li>
+      </ol>
+      <div class="sol">
+        $$\vec F(\vec r(t))=[-\sin t,-\cos t\sin t],\qquad \vec r'(t)=[-\sin t,\ \cos t]$$
+        $$\int_C\vec F\cdot d\vec r=\int_0^{\pi/2}\big(\sin^2t-\cos^2t\sin t\big)dt=\frac{\pi}{4}-\frac13\approx0.4521$$
+      </div>
+      <div class="ans">$\dfrac{\pi}{4}-\dfrac13\approx0.4521$（正數，表示沿路徑「順著場」走）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">兩個積分技巧一定要熟：<b>① $\int\sin^2$ 或 $\int\cos^2$ 用半角公式</b>（$\sin^2t=\frac{1-\cos2t}{2}$）；<b>② $\int\cos^2t\sin t\,dt$ 用代換 $u=\cos t$</b>。看到「一個是另一個的導數」就代換，這是微積分裡最可靠的直覺。</p>
+      </div>
+    </div>
+  </div>
+
+  <p>原稿接著寫了兩條「積分是線性的」性質，很直觀但常考：</p>
+  $$\int_C(\vec F+\vec G)\cdot d\vec r=\int_C\vec F\cdot d\vec r+\int_C\vec G\cdot d\vec r,\qquad
+  \int_{C_1+C_2}\vec F\cdot d\vec r=\int_{C_1}\vec F\cdot d\vec r+\int_{C_2}\vec F\cdot d\vec r$$
+  <p><b>白話：</b>把一條長路徑拆成幾段，總功等於各段功相加；兩個場疊加，功也相加。</p>
+
+  <figure class="scan small"><img src="pages/p10.jpg" alt="原稿第 10 頁：線積分" loading="lazy"><figcaption>原稿 p.10 — 線積分定義、路徑積分 $\int\vec F\cdot d\vec r$、兩個例題開頭</figcaption></figure>
+  <figure class="scan small"><img src="pages/p11.jpg" alt="原稿第 11 頁：線積分續與格林定理" loading="lazy"><figcaption>原稿 p.11 — 上半是圓弧例題的收尾與線積分性質，下半是格林定理</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. $\vec F=[y,x]$ 是否保守？若是，求位勢函數 $f$。</summary><p class="a">$\operatorname{curl}\vec F=\partial_x(x)-\partial_y(y)=1-1=0$ ⇒ 保守。由 $f_x=y$ 得 $f=xy+g(y)$；再由 $f_y=x+g'(y)=x$ ⇒ $g'=0$，所以 $f=xy+C$。（這題的積分只跟端點有關：$\int_{(0,0)}^{(2,3)}\vec F\cdot d\vec r=xy\big|^{3}_{2}=6$。）</p></details>
+  <details class="sc"><summary>2. 承上，沿著單位圓一整圈 $\oint\vec F\cdot d\vec r=?$</summary><p class="a">$0$。因為是保守場、路徑封閉 ⇒ 起點＝終點 ⇒ 位勢差不為 0 才奇怪。</p></details>
+  <hr class="rule">
+</section>
+
+<section id="c9">
+  <h2><span class="chip">09</span>格林定理（<button class="term" type="button" data-zh="格林定理" data-note="$\oint_C(F_1dx+F_2dy)=\iint_R(\partial_xF_2-\partial_yF_1)dA$。">Green's theorem</button>）<span class="pgbadge">原稿 p.11 下半</span></h2>
+  <p class="lede">平面版的「繞一圈」＝「把裡面切碎加起來」。它的價值是：<b>把一條很難參數化的邊界線積分，換成一片很好算的面積分。</b></p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="格林定理" data-note="$\oint_C(F_1dx+F_2dy)=\iint_R\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dA$。">Green's theorem</button><button class="term" type="button" data-zh="簡單封閉曲線" data-note="不自我交叉、頭尾相接的曲線。">simple closed curve</button><button class="term" type="button" data-zh="逆時針（正向）" data-note="格林定理要求的邊界方向；反向要變號。">counterclockwise</button><button class="term" type="button" data-zh="雙重積分" data-note="對平面區域做兩次積分。">double integral</button><button class="term" type="button" data-zh="邊界" data-note="區域 $R$ 的邊界曲線 $C$。">boundary</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>繞著一片區域的邊界走一圈量到的東西，等於把區域裡面每一小塊的「小旋轉」全部加起來——就像繞操場走一圈感受到的風，正好是操場上所有小旋風的總和。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    <p style="margin-top:0">設 $C$ 是平面上封閉的簡單曲線（逆時針為正向），$R$ 是它圍出的區域，$\vec F=[F_1,F_2]$。則</p>
+    $$\oint_C\big(F_1\,dx+F_2\,dy\big)=\iint_R\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dx\,dy$$
+    <p><b>左邊</b>：沿邊界走一圈的線積分（環流）。<b>右邊</b>：把界內每一小塊的「旋轉量」（其實就是 $(\nabla\times\vec F)_z$）加起來。</p>
+    <p style="margin-bottom:0"><b>怎麼記右邊是誰減誰？</b> 記「<b>後者對前者、前者對後者</b>」容易亂，最保險是記成 $(\nabla\times\vec F)$ 的 $z$ 分量：$\dfrac{\partial F_2}{\partial x}-\dfrac{\partial F_1}{\partial y}$——和旋度第三分量 $\partial_xv_2-\partial_yv_1$ 一模一樣。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 18</b><span>同一題算兩次：格林 vs 直接參數化</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $F_1=y^2-7y$、$F_2=2xy+2x$，$C$ 為單位圓 $x^2+y^2=1$（逆時針）。求 $\displaystyle\oint_C(F_1\,dx+F_2\,dy)$。</div>
+
+      <h5>思路（方法一：格林定理）</h5>
+      <ol class="think">
+        <li>先算被積函數：$\dfrac{\partial F_2}{\partial x}=2y+2$（$F_2$ 只有第一項含 $x$，$2xy\to2y$；$2x\to2$）。</li>
+        <li>$\dfrac{\partial F_1}{\partial y}=2y-7$（$y^2\to2y$，$-7y\to-7$）。</li>
+        <li>相減：$(2y+2)-(2y-7)=9$。<b>$y$ 項全部抵消</b>——這是出題老師的善意，剩下一個常數。</li>
+        <li>常數可以直接提出積分號：$9\iint_R dx\,dy=9\times(\text{圓面積})=9\pi$。</li>
+      </ol>
+      <div class="sol">
+        $$\iint_R\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dxdy=\iint_R\big[(2y+2)-(2y-7)\big]dxdy=9\iint_R dxdy=9\pi$$
+      </div>
+
+      <h5>思路（方法二：直接參數化驗證）</h5>
+      <ol class="think">
+        <li>圓的參數式：$x=\cos t$、$y=\sin t$，$t:0\to2\pi$；所以 $x'=-\sin t$、$y'=\cos t$。</li>
+        <li>把 $F_1,F_2$ 換成 $t$：$F_1=\sin^2t-7\sin t$、$F_2=2\cos t\sin t+2\cos t$。</li>
+        <li>線積分 $\oint(F_1x'+F_2y')dt$ 展開成四項：$-\sin^3t$、$+7\sin^2t$、$+2\cos^2t\sin t$、$+2\cos^2t$。</li>
+        <li>逐項積分一圈（$0\to2\pi$）：奇函數項（$\sin^3t$、$\cos^2t\sin t$）在整週期上為 <b>0</b>；$7\int_0^{2\pi}\sin^2t\,dt=7\pi$；$2\int_0^{2\pi}\cos^2t\,dt=2\pi$。</li>
+        <li>合計 $0+7\pi+0+2\pi=9\pi$ ✓ 與方法一相同。</li>
+      </ol>
+      <div class="sol">
+        $$\oint_C(F_1x'+F_2y')dt=\int_0^{2\pi}\big[(\sin^2t-7\sin t)(-\sin t)+(2\cos t\sin t+2\cos t)(\cos t)\big]dt=7\pi+2\pi=9\pi$$
+      </div>
+      <div class="ans">$\displaystyle\oint_C(F_1dx+F_2dy)=9\pi$（兩種算法一致）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">① 原稿第一行把 $F_1$ 寫成 $y^2-9y$，但同頁後面的計算與答案是按 $-7y$ 走的（$2y+2-(2y-7)=9$ 才對得上 $9\pi$），<b>以 $-7y$ 為準</b>。<br>② 用格林定理時<b>先看「$y$ 項會不會抵消」</b>：會抵消就幾乎是送分題。<br>③ 方向一定要逆時針（正向）；若題目給順時針，答案要變號。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p11.jpg" alt="原稿第 11 頁下半：格林定理例題" loading="lazy"><figcaption>原稿 p.11 下半 — 格林定理的兩種算法（$9\pi$）</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. 用格林定理算 $\oint_C(x\,dy)$，$C$ 為單位圓。</summary><p class="a">$F_1=0$、$F_2=x$ ⇒ 積分 $=\iint_R(1-0)dA=\pi$（＝圓面積）。順便得到一個有用的結論：$\oint x\,dy$ 就是面積。</p></details>
+  <details class="sc"><summary>2. $\vec F=[-y,x]$，$C$ 為半徑 $2$ 的圓，求環流。</summary><p class="a">$\partial_x F_2-\partial_y F_1=1-(-1)=2$ ⇒ 環流 $=2\times$ 面積 $=2\times4\pi=8\pi$。（這種場是「純旋轉場」，繞一圈永遠不為 0。）</p></details>
+  <hr class="rule">
+</section>
+<section id="c10">
+  <h2><span class="chip">10</span>座標系與表面積分<span class="pgbadge">原稿 p.12–13</span></h2>
+  <p class="lede">圓、球、圓柱用直角座標寫會有一堆根號。這一章教你換座標：<b>換完之後，曲面變成一個「方形區域」，積分立刻變簡單。</b></p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="柱（圓柱）座標" data-note="$(\rho,\varphi,z)$，體積元素 $dV=\rho\,d\rho\,d\varphi\,dz$。">cylindrical coordinates</button><button class="term" type="button" data-zh="球座標" data-note="$(r,\theta,\varphi)$，體積元素 $dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$。">spherical coordinates</button><button class="term" type="button" data-zh="表面積分" data-note="在曲面上積分，需要面積元素 $dA$。">surface integral</button><button class="term" type="button" data-zh="面積元素" data-note="曲面上的一小塊面積，例如 $\sqrt{1+g_x^2+g_y^2}\,dxdy$。">area element</button><button class="term" type="button" data-zh="體積元素" data-note="換座標後出現的比例因子乘積。">volume element</button><button class="term" type="button" data-zh="比例因子" data-note="球座標多了 $r^2\sin\theta$、柱座標多了 $\rho$ 的那個因子。">scaling factor</button><button class="term" type="button" data-zh="法向導數" data-note="$\frac{\partial f}{\partial n}=\nabla f\cdot\hat n$，沿外法線方向的變化率。">normal derivative</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>同一道積分，換一副「量尺」就可能從難算變成好算：球用球座標、管子用柱座標。唯一要小心的是<b>量尺換了，面積／體積元素也要跟著換</b>（多出 $\rho$ 或 $r^2\sin\theta$）。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 三種座標</span>
+    <div class="tw"><table>
+      <tr><th>座標系</th><th>座標變數</th><th>用途（什麼形狀最好用）</th><th>體積元素</th></tr>
+      <tr><td>直角／卡氏</td><td>$(x,y,z)$</td><td>方盒、平面</td><td>$dx\,dy\,dz$</td></tr>
+      <tr><td>圓柱（柱）座標</td><td>$(\rho,\varphi,z)$</td><td>圓柱、圓盤、管子</td><td>$\rho\,d\rho\,d\varphi\,dz$</td></tr>
+      <tr><td>球座標</td><td>$(r,\theta,\varphi)$</td><td>球、球殼、圓錐</td><td>$r^2\sin\theta\,dr\,d\theta\,d\varphi$</td></tr>
+    </table></div>
+    <p style="margin-bottom:0"><b>換座標的公式（原稿右邊那組矩陣）：</b></p>
+    $$\begin{bmatrix}a_x\\a_y\\a_z\end{bmatrix}=\begin{bmatrix}\cos\varphi&-\sin\varphi&0\\ \sin\varphi&\cos\varphi&0\\ 0&0&1\end{bmatrix}\begin{bmatrix}a_\rho\\a_\varphi\\a_z\end{bmatrix}
+    \ \Longleftrightarrow\ \begin{cases}a_x=a_\rho\cos\varphi-a_\varphi\sin\varphi\\ a_y=a_\rho\sin\varphi+a_\varphi\cos\varphi\\ a_z=a_z\end{cases}$$
+    <p style="margin-bottom:0">那是一個<b>旋轉矩陣</b>：把「徑向、切向」的分量轉回「$x$ 向、$y$ 向」。<b>為什麼體積元素會多出 $\rho$（球座標多出 $r^2\sin\theta$）？</b> 因為越往外圍，同樣的角度張開的實際距離越長——那個多出來的就是「比例因子」。</p>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · 曲面用參數式表示</span>
+    <p style="margin-top:0">曲面可以只用<b>兩個參數</b> $u,v$ 描述（因為曲面是二維的）：</p>
+    $$\vec F(u,v)=x(u,v)\hat i+y(u,v)\hat j+z(u,v)\hat k$$
+    <ul style="margin-bottom:0">
+      <li><b>圓</b>（半徑 $a$）：$\vec F(u)=[a\cos u,\ a\sin u]$</li>
+      <li><b>球面</b>（半徑 $a$）：$\vec F(u,v)=a\cos v\cos u\ \hat i+a\cos v\sin u\ \hat j+a\sin v\ \hat k$，其中 $0\le u\le2\pi$、$-\frac\pi2\le v\le\frac\pi2$。</li>
+    </ul>
+    <p style="margin-bottom:0">看這個式子怎麼讀：$u$ 是「繞一圈的方位角」、$v$ 是「上下爬的高度角」（所以 $v$ 只走半圈 $\pm90^\circ$ 就從南極到北極）。把 $v=\frac\pi2$ 代入 ⇒ $\vec F=(0,0,a)$ 正好是北極 ✓；把 $v=0$ 代入 ⇒ $x^2+y^2=a^2$ 正好是赤道 ✓。<b>用這兩個特例檢查自己的參數式，是很好的習慣。</b></p>
+  </div>
+
+  <div class="box" style="background:var(--blue-soft);border-color:color-mix(in srgb,var(--blue) 25%,var(--line))">
+    <span class="lab" style="color:var(--blue)">原稿 p.13 左上 · 這個 $r$ 是哪裡來的</span>
+    <p style="margin-top:0">原稿把球面上位置向量的長度算了一遍：</p>
+    $$|\vec F|=\sqrt{r^2\cos^2\theta\cos^2\varphi+r^2\cos^2\theta\sin^2\varphi+r^2\sin^2\theta}
+    =\sqrt{r^2\cos^2\theta(\cos^2\varphi+\sin^2\varphi)+r^2\sin^2\theta}=r$$
+    <p style="margin-bottom:0">關鍵只有一步：$\cos^2\varphi+\sin^2\varphi=1$（把 $\varphi$ 收掉），接著 $\cos^2\theta+\sin^2\theta=1$（把 $\theta$ 也收掉），最後只剩 $r$。<b>這個 $r$ 就是比例因子</b>：球面上角度走一小步，實際走的距離是 $r\times$角度。所以球座標的體積元素才會帶 $r^2$。</p>
+  </div>
+
+  <h3>表面積分（<button class="term" type="button" data-zh="表面積分" data-note="在曲面上積分，需要面積元素 $dA$。">surface integral</button>）</h3>
+  <div class="box idea">
+    <span class="lab">核心觀念 ③</span>
+    <p style="margin-top:0">曲面 $S$ 上的積分，需要一個「面積元素」$dA$。如果曲面是 $z=g(x,y)$，把曲面投影到 $xy$ 平面，可以證明</p>
+    $$dA=\sqrt{1+g_x^2+g_y^2}\ dx\,dy$$
+    <p style="margin-bottom:0">那個根號就是「曲面傾斜造成的放大率」：平面（$g_x=g_y=0$）時根號 $=1$，$dA=dxdy$ ✓。原稿用球面 $z=\sqrt{a^2-x^2-y^2}$ 為例，先把它改寫成 $z^2+x^2+y^2=a^2$（球面方程式，比較好看），就是這個用途。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 19</b><span>把「Laplacian 的面積分」變成「法向導數的線積分」</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $f$ 有二階連續偏導，$C$ 是區域 $R$ 的邊界。證明
+      $$\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$$
+      其中 $\dfrac{\partial f}{\partial n}$ 是 $f$ 沿邊界<b>外法線方向</b>的導數。</div>
+      <h5>思路（這題的價值是「教你怎麼選 $F_1,F_2$」）</h5>
+      <ol class="think">
+        <li>目標：用格林定理（第 9 章）把面積分換成線積分。格林定理右邊的被積函數必須長成 $\dfrac{\partial F_2}{\partial x}-\dfrac{\partial F_1}{\partial y}$。</li>
+        <li>我們希望它變成 $\nabla^2f=f_{xx}+f_{yy}$。那就反推：讓 $\dfrac{\partial F_2}{\partial x}=f_{xx}\Rightarrow F_2=f_x$；讓 $-\dfrac{\partial F_1}{\partial y}=f_{yy}\Rightarrow F_1=-f_y$。</li>
+        <li>代進格林定理：
+        $$\iint_R\nabla^2f\,dA=\oint_C\big(F_1\,dx+F_2\,dy\big)=\oint_C\big(-f_y\,dx+f_x\,dy\big)$$</li>
+        <li>把 $dx,dy$ 寫成「沿弧長參數 $s$」的形式：$dx=\dfrac{dx}{ds}ds$、$dy=\dfrac{dy}{ds}ds$，於是
+        $$\oint_C\left(-f_y\frac{dx}{ds}+f_x\frac{dy}{ds}\right)ds$$</li>
+        <li>注意 $(\frac{dx}{ds},\frac{dy}{ds})$ 是單位切向量，把它的尾巴轉 $90^\circ$ 就得到<b>外法向量</b> $\hat n=(\frac{dy}{ds},-\frac{dx}{ds})$。所以括號裡那串正是
+        $$f_x\hat n_x+f_y\hat n_y=\nabla f\cdot\hat n=\frac{\partial f}{\partial n}$$</li>
+        <li>收工：$\displaystyle\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$。</li>
+      </ol>
+      <div class="sol">
+        $$F_1=-f_y,\quad F_2=f_x\ \Longrightarrow\ \frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}=f_{xx}+f_{yy}=\nabla^2f$$
+        $$\oint_C(-f_y\,dx+f_x\,dy)=\oint_C\Big(-f_y\frac{dx}{ds}+f_x\frac{dy}{ds}\Big)ds=\oint_C\nabla f\cdot\hat n\,ds=\oint_C\frac{\partial f}{\partial n}\,ds$$
+      </div>
+      <div class="ans">$\displaystyle\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$ ✓</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">原稿在 $F_1,F_2$ 的正負號上好幾處跳來跳去（這頁在課堂上是邊推邊改）。<b>你自己做這類題目的口訣：</b>「<b>要 $f_{xx}$ 就把 $f_x$ 放在 $F_2$；要 $f_{yy}$ 就把 $f_y$ 放進 $F_1$ 再取負號</b>」。這樣永遠不會記錯。<br>這個公式的物理名字是<b>格林第一／第二恆等式</b>的平面版，看起來很抽象，但它是熱傳導（$\nabla^2T=0$ 的邊界條件）的基礎。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p12.jpg" alt="原稿第 12 頁：座標系" loading="lazy"><figcaption>原稿 p.12 — 柱座標／球座標轉換、圓與球面的參數式、偏導數</figcaption></figure>
+  <figure class="scan small"><img src="pages/p13.jpg" alt="原稿第 13 頁：比例因子、表面積分" loading="lazy"><figcaption>原稿 p.13 — $|\vec F|=r$ 的推導、表面積分定義、$\iint\nabla^2f=\oint\partial f/\partial n$ 的推導</figcaption></figure>
+  <hr class="rule">
+</section>
+
+<section id="c11">
+  <h2><span class="chip">11</span>高斯散度定理（<button class="term" type="button" data-zh="散度定理" data-note="$\iint_S\vec F\cdot\hat n\,dA=\iiint_T\nabla\cdot\vec F\,dV$，也叫高斯定理。">divergence theorem</button>）<span class="pgbadge">原稿 p.14</span></h2>
+  <p class="lede">格林定理是「平面版」；高斯散度定理是它的「立體版」：<b>一個體積裡所有小方塊的「冒出量」加起來，等於從整個表面流出來的總量。</b></p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="散度定理" data-note="$\iint_S\vec F\cdot\hat n\,dA=\iiint_T\nabla\cdot\vec F\,dV$，也叫高斯定理。">divergence theorem</button><button class="term" type="button" data-zh="通量" data-note="穿過表面的總流量。">flux</button><button class="term" type="button" data-zh="封閉曲面" data-note="像球面、圓柱面這種密閉的曲面。">closed surface</button><button class="term" type="button" data-zh="三重積分" data-note="對體積做三次積分。">triple integral</button><button class="term" type="button" data-zh="外法向量" data-note="朝曲面外面的單位法向量 $\hat n$。">outward normal</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>想知道氣球裡有多少空氣在往外跑？不用鑽進去，只要在<b>表面</b>量「往外流的總量」就好——這就是散度定理：內部的冒出量＝表面看到的通量。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    $$\iiint_T(\nabla\cdot\vec F)\,dV=\iint_S\vec F\cdot\hat n\,dA$$
+    <ul style="margin-bottom:0">
+      <li>$T$：空間中的一塊體積；$S$：包住它的<b>封閉曲面</b>（要「密閉」，才叫 Gauss）。</li>
+      <li>$\hat n=[\cos\alpha,\cos\beta,\cos\gamma]$ 是<b>朝外</b>的單位法向量（$\alpha,\beta,\gamma$ 是它跟三軸的夾角）。</li>
+      <li>右邊 $\iint\vec F\cdot\hat n\,dA$ 叫 <b>通量（flux）</b>：單位時間穿過表面的流量。</li>
+      <li>原稿把它寫成座標形式：$\iint_S\big(F_1\,dy\,dz+F_2\,dz\,dx+F_3\,dx\,dy\big)$——因為 $\hat n\,dA$ 的三個分量就是三個投影面的面積元素。</li>
+    </ul>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 20</b><span>圓柱上的散度定理（原稿寫到一半）</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $\vec F=[x^3,\ x^2y,\ x^2z]$，$T$ 是半徑 $a$、高 $h$ 的圓柱。用散度定理求通量 $\displaystyle\iint_S\vec F\cdot\hat n\,dA$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>「算曲面通量」這種題目，只要曲面封閉，<b>第一步先算散度</b>——通常比直接積三個面（頂、底、側面）快十倍。</li>
+        <li>算散度：$x^3\to3x^2$；$x^2y$ 對 $y$ 微分 → $x^2$；$x^2z$ 對 $z$ 微分 → $x^2$。合計 $\nabla\cdot\vec F=5x^2$。</li>
+        <li>看到 $x^2$ 而且形狀是圓柱 ⇒ <b>換圓柱座標</b>：$x=\rho\cos\varphi$，所以 $5x^2=5\rho^2\cos^2\varphi$。</li>
+        <li>體積元素 $dV=\rho\,d\rho\,d\varphi\,dz$，積分範圍：$\rho:0\to a$、$\varphi:0\to2\pi$、$z:0\to h$。</li>
+        <li>三個變數可以分開積（因為沒有任何一項同時含兩個變數）：
+        $$\iiint 5\rho^2\cos^2\varphi\cdot\rho\,d\rho\,d\varphi\,dz=5\Big(\int_0^h\!dz\Big)\Big(\int_0^{2\pi}\!\cos^2\varphi\,d\varphi\Big)\Big(\int_0^a\!\rho^3\,d\rho\Big)$$</li>
+        <li>三個積分分別是 $h$、$\pi$（半角公式）、$\frac{a^4}{4}$。相乘得 $\dfrac{5\pi a^4h}{4}$。</li>
+      </ol>
+      <div class="sol">
+        $$\nabla\cdot\vec F=3x^2+x^2+x^2=5x^2$$
+        $$\iint_S\vec F\cdot\hat n\,dA=\iiint_T5x^2\,dV=5\int_0^h\!dz\int_0^{2\pi}\!\cos^2\varphi\,d\varphi\int_0^a\!\rho^3\,d\rho=\frac{5\pi a^4h}{4}$$
+      </div>
+      <div class="ans">通量 $=\dfrac{5\pi a^4h}{4}$（原稿只寫到「$=5x^2$，換成圓柱座標」就下課了，這是幫你補完的完整版）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">① 散度只有三個項，<b>而且每個分量只對「自己的」變數微</b>——這裡 $x^2y$ 是對 $y$ 微不是對 $x$ 微。<br>② 換座標時<b>不要忘記 $dV$ 的比例因子 $\rho$</b>（球座標是 $r^2\sin\theta$）。忘掉它是最常見的錯。<br>③ 若題目問的是「不封閉」的曲面通量，就不能用散度定理，得老實算面積分（或自己補一個蓋子湊成封閉）。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p14.jpg" alt="原稿第 14 頁：高斯散度定理" loading="lazy"><figcaption>原稿 p.14 — 散度定理、通量的座標形式、圓柱例題（未完成）</figcaption></figure>
+  <hr class="rule">
+</section>
+
+<section id="c12">
+  <h2><span class="chip">12</span>斯托克斯定理（<button class="term" type="button" data-zh="斯托克斯定理" data-note="$\oint_C\vec F\cdot d\vec r=\iint_S(\nabla\times\vec F)\cdot\hat n\,dA$。">Stokes' theorem</button>）<span class="pgbadge">原稿 p.15</span></h2>
+  <p class="lede">又一個「把難的換成簡單的」：<b>曲面上的旋度通量 ＝ 沿著曲面邊界走一圈的環流。</b>它跟格林定理的關係是：格林就是斯托克斯在平面上的特例。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="斯托克斯定理" data-note="$\oint_C\vec F\cdot d\vec r=\iint_S(\nabla\times\vec F)\cdot\hat n\,dA$。">Stokes' theorem</button><button class="term" type="button" data-zh="旋度通量" data-note="曲面上的旋度通量，就是右邊那個面積分。">curl flux</button><button class="term" type="button" data-zh="方向（定向）" data-note="曲面法向量與邊界繞向要符合右手定則。">orientation</button><button class="term" type="button" data-zh="邊界曲線" data-note="曲面 $S$ 的邊界 $C$。">boundary curve</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>想知道一片帆布上有多少小旋轉？不必整片檢查，只要<b>沿著帆布的邊緣走一圈</b>就知道了。這就是斯托克斯定理。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念</span>
+    $$\iint_S(\nabla\times\vec F)\cdot\hat n\,dA=\oint_C\vec F\cdot\vec r'(s)\,ds=\oint_C\vec F\cdot d\vec r$$
+    <ul style="margin-bottom:0">
+      <li>左邊：把曲面 $S$ 上每一點的「旋轉量」加起來（旋度通量）。</li>
+      <li>右邊：只沿著 $S$ 的<b>邊界曲線</b> $C$ 走一圈（環流）。</li>
+      <li>格林定理其實就是「$S$ 躺在平面上、$\hat n=\hat k$」的斯托克斯定理（因為此時 $(\nabla\times\vec F)\cdot\hat k=\partial_xF_2-\partial_yF_1$）。</li>
+    </ul>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 21</b><span>同一題算兩次，兩邊都是 $-\pi$</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設曲面 $S$ 是 $z=f(x,y)=1-(x^2+y^2)$ 且 $z\ge0$ 的部分（一個碗形蓋子），$\vec F=[y,\ z,\ x]$。驗證斯托克斯定理：
+      $$\iint_S(\nabla\times\vec F)\cdot\hat n\,dA=\oint_C\vec F\cdot d\vec r$$</div>
+
+      <h5>思路（左邊：參數化邊界算線積分）</h5>
+      <ol class="think">
+        <li>先找邊界 $C$：$z=0$ 時 $0=1-(x^2+y^2)$ ⇒ $x^2+y^2=1$，所以 $C$ 是<b>$xy$ 平面上的單位圓</b>。</li>
+        <li>參數化：$x=\cos s$、$y=\sin s$、$z=0$，$s:0\to2\pi$。切向量 $\vec r'(s)=[-\sin s,\ \cos s,\ 0]$。</li>
+        <li>把參數式代進 $\vec F=[y,z,x]$：得 $\vec F(\vec r(s))=[\sin s,\ 0,\ \cos s]$。（$z=0$ 所以第二分量是 0。）</li>
+        <li>內積：$\sin s\cdot(-\sin s)+0\cdot\cos s+\cos s\cdot0=-\sin^2s$。</li>
+        <li>積一圈：$\int_0^{2\pi}-\sin^2s\,ds=-\pi$（因為 $\int_0^{2\pi}\sin^2=\pi$，前面有負號）。</li>
+      </ol>
+      <div class="sol">
+        $$\oint_C\vec F\cdot d\vec r=\int_0^{2\pi}\big[\sin s\cdot(-\sin s)+0+0\big]ds=-\int_0^{2\pi}\sin^2s\,ds=-\pi$$
+      </div>
+
+      <h5>思路（右邊：用旋度＋曲面法向量算面積分）</h5>
+      <ol class="think">
+        <li>算旋度：$\vec F=[y,z,x]$ ⇒ $\nabla\times\vec F=(-1,-1,-1)$（三個分量都是「自己對下一個變數的導數 0」減「上一個的導數 1」，例如第一分量 $\partial_yx-\partial_zz=0-1=-1$）。</li>
+        <li>曲面的法向量用第 6 章的技巧：把曲面寫成 $\phi=z-f(x,y)=z-1+x^2+y^2=0$，則 $\nabla\phi=[2x,\ 2y,\ 1]$ 就是（未歸一化的）法向量。</li>
+        <li>於是 $(\nabla\times\vec F)\cdot\nabla\phi=(-1)(2x)+(-1)(2y)+(-1)(1)=-2x-2y-1$。（這裡不必把 $\nabla\phi$ 單位化，因為面積元素已經跟著換算成 $dxdy$——原稿寫的 $\hat n\,dA=\nabla\phi\,dxdy$ 就是這件事。）</li>
+        <li>剩下一個乾淨的雙重積分：$\iint_R(-2x-2y-1)dxdy$，$R$ 是單位圓盤。</li>
+        <li><b>關鍵一步（要會講）：</b>$\iint_R2x\,dA=0$、$\iint_R2y\,dA=0$，因為圓盤對原點對稱，正負互相抵消（奇函數對稱區域積分為 0）。所以只剩 $-\iint_R1\,dA=-(\text{圓盤面積})=-\pi$。</li>
+      </ol>
+      <div class="sol">
+        $$\nabla\times\vec F=(-1,-1,-1),\qquad\nabla\phi=[2x,2y,1]$$
+        $$\iint_S(\nabla\times\vec F)\cdot\hat n\,dA=\iint_R(-2x-2y-1)dxdy=-\iint_R dxdy=-\pi$$
+      </div>
+      <div class="ans">兩邊都是 $-\pi$ ✓ 斯托克斯定理成立</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">① 看到「$\iint 2x\,dA$」要立刻想到<b>對稱性</b>，不要真的去積分——這是省時間的關鍵。<br>② 方向要一致：邊界 $C$ 的走向必須與 $\hat n$ 符合右手定則（這裡 $\hat n$ 大致朝上、$C$ 逆時針 ✓）。方向反了，兩邊會同時變號（答案變 $+\pi$）。<br>③ 如果曲面很複雜、但邊界很簡單（例如這題的碗 vs 單位圓），<b>用斯托克斯把曲面的積分換成邊界的線積分</b>永遠是首選。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p15.jpg" alt="原稿第 15 頁：斯托克斯定理" loading="lazy"><figcaption>原稿 p.15 — 斯托克斯定理公式與例題的左右兩邊計算（$-\pi$）</figcaption></figure>
+
+  <div class="box idea">
+    <span class="lab">三大定理速記（第 9–12 章的總整理）</span>
+    <div class="tw"><table>
+      <tr><th>定理</th><th>公式</th><th>一句話</th></tr>
+      <tr><td>格林</td><td>$\oint_C(F_1dx+F_2dy)=\iint_R(\partial_xF_2-\partial_yF_1)dA$</td><td>平面：繞邊界 ＝ 界內旋轉量總和</td></tr>
+      <tr><td>高斯（散度）</td><td>$\iiint_T\nabla\!\cdot\!\vec F\,dV=\iint_S\vec F\!\cdot\!\hat n\,dA$</td><td>立體：內部冒出量 ＝ 表面總通量</td></tr>
+      <tr><td>斯托克斯</td><td>$\iint_S(\nabla\!\times\!\vec F)\!\cdot\!\hat n\,dA=\oint_C\vec F\!\cdot\!d\vec r$</td><td>曲面：旋度通量 ＝ 邊界環流</td></tr>
+    </table></div>
+    <p style="margin-bottom:0">三者都是<b>「微分的東西在裡面加起來 = 原來的東西在邊界上看」</b>。格林是斯托克斯的平面特例；高斯處理「體積 vs 封閉面」，斯托克斯處理「曲面 vs 邊界線」。</p>
+  </div>
+  <hr class="rule">
+</section>
+<section id="c13">
+  <h2><span class="chip">13</span>矩陣與線性方程組<span class="pgbadge">原稿 p.16–19</span></h2>
+  <p class="lede">「Ch.9 矩陣、行列式」開始進入線性代數。整個動機只有一句：<b>把一大串方程式（例如電路的三條 KVL）塞進一個方括號裡，然後用機械化的步驟解掉它。</b></p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="矩陣" data-note="把數字排成長方形再加括號。">matrix</button><button class="term" type="button" data-zh="元素" data-note="$a_{jk}$：第 $j$ 列第 $k$ 行的數字。">entry / element</button><button class="term" type="button" data-zh="列／行" data-note="列是橫的（row）、行是直的（column）。">row / column</button><button class="term" type="button" data-zh="係數矩陣" data-note="$A$，把所有未知數的係數排起來。">coefficient matrix</button><button class="term" type="button" data-zh="增廣矩陣" data-note="$[A\mid B]$，把常數項也併進同一張表。">augmented matrix</button><button class="term" type="button" data-zh="轉置" data-note="$A^{T}$：列變行、行變列。">transpose</button><button class="term" type="button" data-zh="對稱矩陣" data-note="$A^{T}=A$，沿對角線對折會重合。">symmetric matrix</button><button class="term" type="button" data-zh="對角矩陣" data-note="非對角線元素全是 0。">diagonal matrix</button><button class="term" type="button" data-zh="單位矩陣" data-note="$I$：對角線是 1、其餘是 0，矩陣界的 1。">identity matrix</button><button class="term" type="button" data-zh="列運算" data-note="互換、乘非零常數、加另一列的倍數，都不改變解。">row operation</button><button class="term" type="button" data-zh="高斯消去法" data-note="用列運算把方程組化到階梯型再回代。">Gaussian elimination</button><button class="term" type="button" data-zh="不一致（無解）" data-note="消去後出現 $0=$ 非零的矛盾列。">inconsistent</button><button class="term" type="button" data-zh="純量乘法" data-note="$cA$：每個元素都乘 $c$。">scalar multiplication</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>矩陣就是「把一疊方程式排整齊變表格」。列運算＝用加減消去法打掃這張表格，打掃成階梯狀之後，答案可以直接由上往下讀出來。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 矩陣是什麼</span>
+    <p style="margin-top:0">A matrix is a rectangular array of numbers or functions, enclosed in brackets.<br>矩陣＝把數字（或函數）排成<b>長方形</b>，外面加個方括號。</p>
+    $$A=\begin{bmatrix}0&1&-5\\0&-2&16\end{bmatrix}\quad\text{這是一個 }2\times3\text{ 矩陣（2 列 3 行）}$$
+    <ul style="margin-bottom:0">
+      <li>元素記號 $a_{jk}$：<b>$j$ 是第幾列（row）、$k$ 是第幾行（column）</b>。原稿寫 $A=[a_{jk}]$ 就是這個意思。</li>
+      <li>只有一列的叫 <b>row vector（列向量）</b>，只有一行的叫 <b>column vector（行向量）</b>。</li>
+      <li><b>矩陣相等</b>：大小一樣、而且每一個位置的元素都一樣，才叫相等。</li>
+    </ul>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · 為什麼要寫成 $A\vec x=\vec B$</span>
+    <p style="margin-top:0">看這個聯立方程組：</p>
+    $$\begin{cases}4x_1+6x_2+9x_3=6\\ 6x_1-2x_3=20\\ 5x_1-8x_2+x_3=10\end{cases}$$
+    <p>把<b>係數</b>、<b>未知數</b>、<b>常數</b>分開，就可以寫成矩陣：</p>
+    $$A=\begin{bmatrix}4&6&9\\6&0&-2\\5&-8&1\end{bmatrix},\qquad \vec x=\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix},\qquad \vec B=\begin{bmatrix}6\\20\\10\end{bmatrix},\qquad A\vec x=\vec B$$
+    <ul style="margin-bottom:0">
+      <li><b>第二列那個「$6x_1-2x_3=20$」沒有 $x_2$ 項，係數補 0</b>——這是初學者最常忘記的地方（$A$ 的第二列是 $[6,0,-2]$）。</li>
+      <li>矩陣形式的好處：三個未知數、三個方程式，用列運算（見下面例題 25）就有系統的解法，不必再用加減消去法猜來猜去。</li>
+    </ul>
+  </div>
+
+  <h3>矩陣的運算</h3>
+  <div class="tw"><table>
+    <tr><th>運算</th><th>條件</th><th>做法</th></tr>
+    <tr><td>相加 $A+B$</td><td>兩者 <b>size 必須相同</b></td><td>同位置的元素相加</td></tr>
+    <tr><td>乘純量 $cA$</td><td>無條件</td><td>每個元素都乘 $c$</td></tr>
+    <tr><td>相乘 $AB$</td><td><b>$A$ 的行數 ＝ $B$ 的列數</b></td><td>「$A$ 的第 $j$ 列」乘「$B$ 的第 $k$ 行」（對應相乘再相加）</td></tr>
+    <tr><td>轉置 $A^T$</td><td>無條件</td><td>把矩陣翻過來（列變行、行變列）</td></tr>
+  </table></div>
+
+  <div class="box warn">
+    <span class="lab">尺寸怎麼看（原稿寫的 $[m\ n][n\ p]=[m\ p]$）</span>
+    <p style="margin:0">$A$ 是 $m\times n$、$B$ 是 $n\times p$，乘起來就會是 $m\times p$。<b>中間那兩個 $n$ 一定要一樣才能相乘，而且乘完就會消失。</b>反過來寫 $BA$ 的話，要 $p=m$ 才有定義——所以「$AB$ 可以乘」不代表「$BA$ 可以乘」，這在原稿特別註明。還有：<b>$AB\ne BA$（乘法不交換）</b>，即使兩個都能乘、大小也相同，結果通常不一樣。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 22</b><span>把聯立方程式寫成矩陣（原稿右上的 $A\vec x=\vec B$）</span></div>
+    <div class="eg-body">
+      <div class="eg-q">把上面的方程組寫成 $A\vec x=\vec B$，並回答這是幾個未知數、幾個方程式。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先數：未知數 $x_1,x_2,x_3$ 共 3 個；方程式 3 條（未知數個數 ＝ 方程式條數 ⇒ 有機會是「唯一解」）。</li>
+        <li>逐列填係數：第 1 列讀第 1 條方程式（$4,6,9$）；第 2 列讀第 2 條（$6,0,-2$，缺的補 0）；第 3 列讀第 3 條（$5,-8,1$）。</li>
+        <li>等號右邊的數字放進 $\vec B$，未知數放進 $\vec x$。</li>
+      </ol>
+      <div class="sol">
+        $$\begin{bmatrix}4&6&9\\6&0&-2\\5&-8&1\end{bmatrix}\begin{bmatrix}x_1\\x_2\\x_3\end{bmatrix}=\begin{bmatrix}6\\20\\10\end{bmatrix}$$
+      </div>
+      <div class="ans">$A$ 是 $3\times3$、$\vec x$ 是 $3\times1$、$\vec B$ 是 $3\times1$；三個未知數、三條方程式</div>
+      <div class="box" style="margin-bottom:0">
+        <span class="lab">補充 · 這題的解答（原稿沒寫）</span>
+        <p style="margin:0">用後面第 16、17 章的克拉瑪公式或反矩陣可以解出 $\vec x=\left[3,\ \tfrac12,\ -1\right]^T$。自己驗算：$4(3)+6(\frac12)+9(-1)=12+3-9=6$ ✓、$6(3)-2(-1)=20$ ✓、$5(3)-8(\frac12)+(-1)=15-4-1=10$ ✓。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 23</b><span>矩陣乘法：$3\times3$ 乘 $3\times4$</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設
+      $$A=\begin{bmatrix}3&5&-1\\4&0&2\\-6&-3&2\end{bmatrix},\qquad B=\begin{bmatrix}2&-2&3&1\\5&0&7&8\\9&-4&1&1\end{bmatrix}$$
+      求 $AB$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先確認尺寸：$A$ 是 $3\times3$、$B$ 是 $3\times4$ ⇒ 中間的 3 對上了，結果會是 $3\times4$。<b>先寫好答案的格子（3 列 4 行），再一格一格填</b>，這樣才不會東漏西漏。</li>
+        <li>填 $C_{11}$（第 1 列 × 第 1 行）：$A$ 第 1 列是 $(3,5,-1)$、$B$ 第 1 行是 $(2,5,9)$ ⇒ $3(2)+5(5)+(-1)(9)=6+25-9=22$。</li>
+        <li>填 $C_{12}$：$A$ 第 1 列 × $B$ 第 2 行 $(−2,0,−4)$ ⇒ $3(-2)+5(0)+(-1)(-4)=-6+0+4=-2$。</li>
+        <li>依此類推。原稿做的就是這件事，只是用「橫的乘直的」的手勢在紙上比。</li>
+      </ol>
+      <div class="sol">
+        $$AB=\begin{bmatrix}
+        3(2)+5(5)-1(9) & 3(-2)+5(0)-1(-4) & 3(3)+5(7)-1(1) & 3(1)+5(8)-1(1)\\
+        4(2)+0+2(9) & 4(-2)+0+2(-4) & 4(3)+0+2(1) & 4(1)+0+2(1)\\
+        -6(2)-3(5)+2(9) & -6(-2)-3(0)+2(-4) & -6(3)-3(7)+2(1) & -6(1)-3(8)+2(1)
+        \end{bmatrix}$$
+        $$=\begin{bmatrix}22&-2&43&42\\26&-16&14&6\\-9&4&-37&-28\end{bmatrix}$$
+      </div>
+      <div class="ans">$AB$ 是 $3\times4$ 矩陣 $\begin{bmatrix}22&-2&43&42\\26&-16&14&6\\-9&4&-37&-28\end{bmatrix}$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">① 原稿最後一行有兩個數字（43 寫成 41、−37 寫成 −17、−28 寫成 −18）是上課手算時的快寫誤差，<b>請以上面自己乘出來的為準</b>。做矩陣乘法時，<b>每一格都獨立算一次</b>，不要「沿著上一格改」，這樣才不會一路錯下去。<br>② 請順手驗一件事：$AB\ne BA$（$B$ 是 $3\times4$，$BA$ 根本無法乘）——這就是原稿寫「$AB\ne BA$」的原因。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 24</b><span>轉置</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $A=\begin{bmatrix}5&-8\\4&0\end{bmatrix}$，求 $A^T$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>轉置就是「沿著左上→右下那條對角線翻過去」：第 1 列變成第 1 <b>行</b>。</li>
+        <li>所以 $(5,-8)$ 那一列會變成第一行 $(5,4)^T$…等等，要一格一格看：$a_{12}=-8$ 會搬到 $a_{21}$ 的位置。</li>
+        <li>結果就是原矩陣的「鏡射」：$2\times2$ 的情況，兩邊斜對角的元素互換、對角線上的兩個不動。</li>
+      </ol>
+      <div class="sol">
+        $$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$$
+      </div>
+      <div class="ans">$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$</div>
+      <p style="margin-bottom:0"><b>轉置的四條規則（原稿右側，全部要背）：</b></p>
+      $$(A^T)^T=A,\qquad (A+B)^T=A^T+B^T,\qquad (cA)^T=cA^T,\qquad \boxed{(AB)^T=B^TA^T}$$
+      <p style="margin-bottom:0"><b>最後一條最容易寫錯</b>：順序要反過來（先 $B^T$ 再 $A^T$）！這跟反矩陣的規則 $(AB)^{-1}=B^{-1}A^{-1}$ 是同一個道理（見第 17 章）。</p>
+    </div>
+  </div>
+
+  <h3>幾個「有名字的」矩陣（原稿右下）</h3>
+  <div class="tw"><table>
+    <tr><th>名稱</th><th>條件</th><th>例子</th></tr>
+    <tr><td>對稱矩陣（symmetric）</td><td>$A^T=A$</td><td>$\begin{bmatrix}1&2&3\\2&0&4\\3&4&0\end{bmatrix}$</td></tr>
+    <tr><td>對角矩陣（diagonal）</td><td>非對角線元素全為 0</td><td>$\begin{bmatrix}a_{11}&0&0\\0&a_{22}&0\\0&0&a_{33}\end{bmatrix}$</td></tr>
+    <tr><td>上三角／下三角</td><td>對角線<b>以下</b>全為 0（上三角）</td><td>$\begin{bmatrix}1&2&3\\0&4&5\\0&0&6\end{bmatrix}$</td></tr>
+    <tr><td>純量矩陣（scalar）</td><td>對角線元素全部相同</td><td>$\begin{bmatrix}3&0\\0&3\end{bmatrix}=3I$</td></tr>
+    <tr><td>單位矩陣（unit／identity）</td><td>對角線全是 1、其餘 0</td><td>$I=\begin{bmatrix}1&0\\0&1\end{bmatrix}$</td></tr>
+  </table></div>
+  <p><b>單位矩陣的角色</b>：矩陣世界的「1」。$IA=A$、$AI=A$。它在第 17 章求反矩陣時是主角（就是我們要把 $A$ 變成的那個目標）。</p>
+
+  <h3>高斯消去法：用列運算解方程組</h3>
+  <div class="box idea">
+    <span class="lab">核心觀念 ③ · 增廣矩陣（augmented matrix）</span>
+    <p style="margin-top:0">把係數矩陣 $A$ 和常數項 $\vec B$ 併在一起，中間畫一條線：</p>
+    $$[\,A\mid\vec B\,]=\begin{bmatrix}2&5&\vline&2\\-4&3&\vline&-30\end{bmatrix}$$
+    <p style="margin-bottom:0">為什麼要併在一起？因為解方程組時，我們對係數和常數<b>做一模一樣的運算</b>，併起來才不會漏掉常數那一欄。下面三種「列運算」不會改變解：<b>① 兩列互換 ② 某列乘非零常數 ③ 某列加另一列的倍數</b>。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 25</b><span>兩個未知數：把增廣矩陣化到最簡</span></div>
+    <div class="eg-body">
+      <div class="eg-q">解 $\begin{cases}2x_1+5x_2=2\\-4x_1+3x_2=-30\end{cases}$</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>寫增廣矩陣：第一列讀第一式、第二列讀第二式。</li>
+        <li>目標是讓左下角變成 0（變成上三角），這樣最後一列只含一個未知數。</li>
+        <li>觀察：$2\times2=4$，而第二列的第一個元素是 $-4$。所以做 $\text{R}_2+2\text{R}_1$ 正好把 $-4$ 消掉。</li>
+        <li>新的第二列是 $[0,\ 3+10\ \vline\ -30+4]=[0,13\vline-26]$。</li>
+        <li>回推：$13x_2=-26\Rightarrow x_2=-2$；代回第一式 $2x_1+5(-2)=2\Rightarrow 2x_1=12\Rightarrow x_1=6$。</li>
+      </ol>
+      <div class="sol">
+        $$\begin{bmatrix}2&5&\vline&2\\-4&3&\vline&-30\end{bmatrix}
+        \xrightarrow{\text{R}_2+2\text{R}_1}\begin{bmatrix}2&5&\vline&2\\0&13&\vline&-26\end{bmatrix}$$
+        $$13x_2=-26\ \Rightarrow\ x_2=-2;\qquad 2x_1+5(-2)=2\ \Rightarrow\ x_1=6$$
+      </div>
+      <div class="ans">$x_1=6,\ x_2=-2$（檢查：$2(6)+5(-2)=2$ ✓，$-4(6)+3(-2)=-30$ ✓）</div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 26</b><span>電路的三條方程式（原稿 p.18 下半）</span></div>
+    <div class="eg-body">
+      <div class="eg-q">原稿用一個雙迴路電路（80V／90V 電壓源、10Ω、15Ω、20Ω、25Ω 電阻）示範：把迴路電流 $i_1,i_2,i_3$（課堂上改叫 $x_1,x_2,x_3$）寫成方程組並求解。整理後的方程組是
+      $$\begin{cases}x_1-x_2+x_3=0\\ 20x_1+10x_2=80\\ 10x_2+25x_3=90\end{cases}$$</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li><b>為什麼會有三條方程式？</b> 兩個獨立迴路（左、右）各寫一條 KVL（沿迴路走一圈，電壓升＝電壓降），再加上一條「$i_1-i_2+i_3=0$」這種把電流互相關聯起來的關係式（節點／迴路關係）。</li>
+        <li>全部寫成增廣矩陣。原稿把第一條（0 常數列）也寫進去，所以是 4 列：$x_1-x_2+x_3=0$ 有兩條（互為負號，是多餘的），列運算後會自然變成 0 列。</li>
+        <li>列運算：$\text{R}_2+2\text{R}_1$ 消掉第一行；$\text{R}_3-20\text{R}_1$ 消掉第一行；接著把第 2、3 列搭配消去第二行。</li>
+        <li>化到最簡後出現 $[0,0,-95\ \vline\ -190]$ ⇒ $-95x_3=-190\Rightarrow x_3=2$。</li>
+        <li>往上回代：$10x_2+25(2)=90\Rightarrow10x_2=40\Rightarrow x_2=4$；再由 $x_1-x_2+x_3=0\Rightarrow x_1=4-2=2$。</li>
+      </ol>
+      <div class="sol">
+        $$\begin{bmatrix}1&-1&1&\vline&0\\-1&1&-1&\vline&0\\20&10&0&\vline&80\\0&10&25&\vline&90\end{bmatrix}
+        \longrightarrow\begin{bmatrix}1&-1&1&\vline&0\\0&30&-20&\vline&80\\0&10&25&\vline&90\\0&0&0&\vline&0\end{bmatrix}
+        \longrightarrow\begin{bmatrix}1&-1&1&\vline&0\\0&0&-95&\vline&-190\\0&10&25&\vline&90\\0&0&0&\vline&0\end{bmatrix}$$
+        $$x_3=2,\qquad 10x_2+25(2)=90\Rightarrow x_2=4,\qquad x_1-4+2=0\Rightarrow x_1=2$$
+      </div>
+      <div class="ans">$x_1=2,\ x_2=4,\ x_3=2$（三個都代回原式檢查：$20(2)+10(4)=80$ ✓、$10(4)+25(2)=90$ ✓、$2-4+2=0$ ✓）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒（原稿筆誤）</span>
+        <p style="margin:0">原稿把第二條寫成「$20x_1+10x_3=80$」，但<b>矩陣的列是 $[20,10,0\mid80]$，代表 $20x_1+10x_2=80$</b>，而且只有這樣代入 $(2,4,2)$ 才會等於 80。這是抄式子時看錯行的典型失誤——<b>寫完方程組一定要回代檢查</b>，一秒就能發現。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 27 · 28</b><span>「無限多組解」與「無解」長什麼樣</span></div>
+    <div class="eg-body">
+      <div class="eg-q">(a) 消去後出現一整列 0 ⇒ <b>無限多組解</b>。(b) 消去後出現 $0=$ 非零 ⇒ <b>無解</b>。各看一個例子。</div>
+      <h5>(a) 無限多組解的例子（原稿左側，含小數係數）</h5>
+      <ol class="think">
+        <li>原稿的系統（4 個未知數、3 條方程式）：<br>
+        $$3x_1+2x_2+2x_3-5x_4=8$$
+        $$0.6x_1+1.5x_2+1.5x_3-5.4x_4=2.7$$
+        $$1.2x_1-0.3x_2-0.3x_3+2.4x_4=2.1$$</li>
+        <li>列運算：$\text{R}_2-0.2\text{R}_1$（為什麼是 0.2？因為 $0.6/3=0.2$）、$\text{R}_3-0.4\text{R}_1$。</li>
+        <li>得到第二列 $[0,\ 1.1,\ 1.1,\ -4.4\mid1.1]$、第三列 $[0,\ -1.1,\ -1.1,\ 4.4\mid-1.1]$。</li>
+        <li>把第三列加到第二列 ⇒ <b>整列變成 0</b>（$1.1-1.1=0$、$-4.4+4.4=0$、$1.1-1.1=0$）。</li>
+        <li>「$0=0$」是一句廢話 ⇒ 這條方程式<b>沒有提供新資訊</b>。4 個未知數只有 2 個獨立條件 ⇒ 有無限多組解（可以自由選 2 個變數當參數）。</li>
+      </ol>
+      <div class="sol">
+        $$\begin{bmatrix}3&2&2&-5&\vline&8\\0.6&1.5&1.5&-5.4&\vline&2.7\\1.2&-0.3&-0.3&2.4&\vline&2.1\end{bmatrix}
+        \longrightarrow\begin{bmatrix}3&2&2&-5&\vline&8\\0&1.1&1.1&-4.4&\vline&1.1\\0&0&0&0&\vline&0\end{bmatrix}\ \Rightarrow\ \textbf{無限多組解}$$
+      </div>
+
+      <h5>(b) 無解的例子</h5>
+      <ol class="think">
+        <li>系統：
+        $$2x_1+x_2+x_3=6,\qquad 6x_1+2x_2+4x_3=6,\qquad 3x_1+x_2+2x_3=-3$$</li>
+        <li>看下面一眼就知道會出事：<b>第三式的左邊剛好是第二式左邊的一半</b>（$3,1,2$ 是 $6,2,4$ 的一半），但右邊 $-3$ 卻不是 $6$ 的一半（應該要是 3）。</li>
+        <li>列運算：先互換讓第一列是 $[6,2,4\mid6]$，再做 $\text{R}_2-\frac13\text{R}_1$、$\text{R}_3-\frac12\text{R}_1$。</li>
+        <li>第三列變成 $[0,\ 0,\ 0\ \vline\ -3-3]=[0,0,0\mid-6]$ ⇒ 也就是「$0=-6$」。<b>這是矛盾的算式</b>，代表沒有任何 $(x_1,x_2,x_3)$ 能同時滿足三條 ⇒ 無解（方程組不一致 inconsistent）。</li>
+      </ol>
+      <div class="sol">
+        $$\begin{bmatrix}2&1&1&\vline&6\\6&2&4&\vline&6\\3&1&2&\vline&-3\end{bmatrix}
+        \xrightarrow{\ \text{互換}\ }\begin{bmatrix}6&2&4&\vline&6\\2&1&1&\vline&6\\3&1&2&\vline&-3\end{bmatrix}
+        \longrightarrow\begin{bmatrix}6&2&4&\vline&6\\0&\frac13&-\frac13&\vline&4\\0&0&0&\vline&-6\end{bmatrix}\ \Rightarrow\ 0=-6\ \textbf{無解}$$
+      </div>
+
+      <div class="box idea" style="margin-bottom:0">
+        <span class="lab">判別準則（原稿 p.19 左下那張圖與右邊三行）</span>
+        <p style="margin-top:0">設有 $n$ 個未知數、$m$ 條方程式，化簡後有 $p$ 個非零列（＝係數矩陣的秩，第 14 章會正式定義）：</p>
+        <ul style="margin-bottom:0">
+          <li><b>若 $p<m$（即出現 $0=$ 非零的列）⇒ 無解</b>（inconsistent）。</li>
+          <li><b>若 $p=m=n$（正方形且滿秩）⇒ 恰有一組解</b>（唯一解），此時 $\det A\ne0$。</li>
+          <li><b>若 $p<n$（未知數比獨立的條件多）⇒ 無限多組解</b>（把多出來的未知數當自由參數）。</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p16.jpg" alt="原稿第 16 頁：矩陣與線性系統" loading="lazy"><figcaption>原稿 p.16 — 矩陣、$A\vec x=\vec B$、加減乘、運算律</figcaption></figure>
+  <figure class="scan small"><img src="pages/p17.jpg" alt="原稿第 17 頁：矩陣乘法、轉置" loading="lazy"><figcaption>原稿 p.17 — 矩陣乘法例題、$AB\ne BA$、轉置規則、特殊矩陣</figcaption></figure>
+  <figure class="scan small"><img src="pages/p18.jpg" alt="原稿第 18 頁：高斯消去、電路例題" loading="lazy"><figcaption>原稿 p.18 — 增廣矩陣、$2\times2$ 例題、電路的三條方程式與求解</figcaption></figure>
+  <figure class="scan small"><img src="pages/p19.jpg" alt="原稿第 19 頁：無限多解與無解" loading="lazy"><figcaption>原稿 p.19 — 無限多組解、無解的例子與判別準則</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. $A=\begin{bmatrix}1&2\\3&4\end{bmatrix}$、$B=\begin{bmatrix}0&1\\1&0\end{bmatrix}$，求 $AB$ 與 $BA$。</summary><p class="a">$AB=\begin{bmatrix}2&1\\4&3\end{bmatrix}$、$BA=\begin{bmatrix}3&4\\1&2\end{bmatrix}$。<b>兩者不同 ⇒ 再用一個例子確認「矩陣乘法不能交換」。</b></p></details>
+  <details class="sc"><summary>2. 用列運算解 $\begin{cases}x+y+z=6\\2x-y+z=3\\x+2y-z=2\end{cases}$</summary><p class="a">增廣矩陣：$\begin{bmatrix}1&1&1&\vline&6\\2&-1&1&\vline&3\\1&2&-1&\vline&2\end{bmatrix}$。做 $\text{R}_2-2\text{R}_1$、$\text{R}_3-\text{R}_1$ 得 $\begin{bmatrix}1&1&1&\vline&6\\0&-3&-1&\vline&-9\\0&1&-2&\vline&-4\end{bmatrix}$，再 $\text{R}_3+\frac13\text{R}_2$ 得 $\begin{bmatrix}1&1&1&\vline&6\\0&-3&-1&\vline&-9\\0&0&-\frac73&\vline&-7\end{bmatrix}$ ⇒ $z=3$、$-3y-3=-9\Rightarrow y=2$、$x+2+3=6\Rightarrow x=1$。<br>回代三式：$1+2+3=6$ ✓、$2(1)-2+3=3$ ✓、$1+2(2)-3=2$ ✓ <b>三條都對</b>。所以 $x=1,\ y=2,\ z=3$。</p></details>
+  <hr class="rule">
+</section>
+<section id="c14">
+  <h2><span class="chip">14</span>線性獨立與秩 <button class="term" type="button" data-zh="秩" data-note="線性獨立列（或行）的最大個數。">rank</button><span class="pgbadge">原稿 p.20</span></h2>
+  <p class="lede">「秩」是在問：<b>這個矩陣裡，有幾列（或幾行）是真正「獨立」的資訊？</b>重複的、可以組合出來的都不算。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="線性獨立" data-note="只有係數全為 0 才能組出零向量。">linear independence</button><button class="term" type="button" data-zh="線性相關" data-note="有不全為 0 的係數也能組出零向量。">linear dependence</button><button class="term" type="button" data-zh="秩" data-note="線性獨立列（或行）的最大個數。">rank</button><button class="term" type="button" data-zh="列階梯形" data-note="左上往右下排成階梯狀，方便數秩。">row echelon form</button><button class="term" type="button" data-zh="樞元（主元）" data-note="階梯型中每一列的第一個非零元素。">pivot</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>秩＝「這個矩陣裡有幾條<b>真正獨立</b>的資訊」。其他列都只是別人的組合，刪掉也不會少任何訊息——所以 $3\times3$ 的矩陣，秩可能只有 2。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 線性獨立／線性相關</span>
+    <p style="margin-top:0">考慮一組向量 $\vec a_1,\vec a_2,\dots,\vec a_n$，把它們配係數相加：</p>
+    $$c_1\vec a_1+c_2\vec a_2+\cdots+c_n\vec a_n=\vec 0$$
+    <ul>
+      <li>若<b>只有</b> $c_1=c_2=\cdots=c_n=0$ 才能讓它成立 ⇒ 這組向量<b>線性獨立（linearly independent）</b>。</li>
+      <li>若<b>有不全為零</b>的係數也能讓它成立 ⇒ <b>線性相關（linearly dependent）</b>，也就是「其中至少有一個向量是多餘的，可以別人的組合做出來」。</li>
+    </ul>
+    <p style="margin-bottom:0"><b>白話：</b>獨立＝每支箭都提供了新方向；相關＝有一支箭只是別人的合成，拿掉也不損失資訊。</p>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · Rank（秩）</span>
+    <p style="margin-top:0"><b>定義：矩陣的 Rank ＝ 它裡面「線性獨立的列向量」的最大個數</b>，記作 $\operatorname{Rank}A$。因為可以證明「獨立列的個數」跟「獨立行的個數」永遠相等，所以：</p>
+    $$\operatorname{Rank}A=\operatorname{Rank}A^T\qquad(\text{原稿右下角的 } \operatorname{Rank}A^T=\operatorname{Rank}A)$$
+    <ul style="margin-bottom:0">
+      <li>若 $A=0$（全零矩陣）則 $\operatorname{Rank}A=0$；否則 $\operatorname{Rank}A\ge1$。</li>
+      <li>$\operatorname{Rank}A\le\min(m,n)$（$m\times n$ 矩陣最多就只能有 $\min(m,n)$ 個獨立方向）。</li>
+      <li><b>實用算法</b>：做列運算化成「階梯型」，數一數<b>留下幾個非零列</b>就是秩（列運算不會改變秩）。</li>
+    </ul>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 29</b><span>求矩陣的秩</span></div>
+    <div class="eg-body">
+      <div class="eg-q">求 $A=\begin{bmatrix}3&0&2\\-6&42&24\\21&-21&0\end{bmatrix}$ 的秩（原稿同時把右邊的常數行一起列運算）。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>目標：用列運算把第一行（除第一列外）全部消成 0，這樣就能一眼看出哪些列是多餘的。</li>
+        <li>$\text{R}_2+2\text{R}_1$（因為 $-6+2\times3=0$）：得 $[0,\ 42,\ 28\mid58]$。</li>
+        <li>$\text{R}_3-7\text{R}_1$（因為 $21-7\times3=0$）：得 $[0,\ -21,\ -14\mid1]$。</li>
+        <li>觀察剩下的兩列：$[0,42,28]$ 與 $[0,-21,-14]$，後者＝前者乘 $(-\frac12)$ ⇒ <b>它們是同一條資訊</b>，只有一個是獨立的。</li>
+        <li>加上第一列，共有 2 個獨立列 ⇒ $\operatorname{Rank}A=2$（雖然 $A$ 是 $3\times3$，但「有效資訊」只有 2 維）。</li>
+      </ol>
+      <div class="sol">
+        $$\begin{bmatrix}3&0&2&\vline&2\\-6&42&24&\vline&54\\21&-21&0&\vline&15\end{bmatrix}
+        \longrightarrow\begin{bmatrix}3&0&2&\vline&2\\0&42&28&\vline&58\\0&-21&-14&\vline&1\end{bmatrix}\ \Rightarrow\ \operatorname{Rank}A=2$$
+      </div>
+      <div class="ans">$\operatorname{Rank}A=2$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">順手多學一件事</span>
+        <p style="margin:0">注意係數那兩列成比例（$42:28$ vs $-21:-14$），但<b>常數那一欄不成比例</b>（$58$ vs $1$，比例的結果應該是 $-29$）。這代表<b>方程組本身是矛盾的 ⇒ 無解</b>。這就是「用秩判斷解的存在性」：<b>$\operatorname{Rank}A<\operatorname{Rank}[A\mid\vec B]$ ⇒ 無解</b>。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>H.W.</b><span>原稿右下紅框的作業</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $A=\begin{bmatrix}1&2&3\\2&4&6\\0&1&1\end{bmatrix}$，求 $\operatorname{Rank}A$ 與 $\operatorname{Rank}A^T$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先看有沒有「一看就成比例」的列：第 2 列 $[2,4,6]$ 正好是第 1 列 $[1,2,3]$ 的 2 倍 ⇒ 第 2 列是多餘的。</li>
+        <li>第 3 列 $[0,1,1]$ 跟第 1 列不成比例（$0:1:1$ vs $1:2:3$） ⇒ 它提供新資訊。</li>
+        <li>所以獨立列有 2 個 ⇒ $\operatorname{Rank}A=2$。</li>
+        <li>因為「獨立行個數 ＝ 獨立列個數」，所以轉置後仍舊是 2：$\operatorname{Rank}A^T=2$。<br>（驗證一下行：$A$ 的三行是 $(1,2,0),(2,4,1),(3,6,1)$，第三行＝第一行＋第二行？$(1+2,2+4,0+1)=(3,6,1)$ ✓ 所以獨立行也正好是 2 個。）</li>
+      </ol>
+      <div class="ans">$\operatorname{Rank}A=2$，$\operatorname{Rank}A^T=2$</div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p20.jpg" alt="原稿第 20 頁：線性獨立與 Rank" loading="lazy"><figcaption>原稿 p.20 — 線性獨立／相關、Rank 的定義與例題、$A$ 與 $A^T$ 秩相同</figcaption></figure>
+  <hr class="rule">
+</section>
+
+<section id="c15">
+  <h2><span class="chip">15</span>行列式（<button class="term" type="button" data-zh="行列式" data-note="把方陣壓縮成的一個數，記作 $\det A$。">determinant</button>）<span class="pgbadge">原稿 p.21</span></h2>
+  <p class="lede">行列式是<b>把一個方陣壓縮成一個數字</b>。這個數字的功能：判斷方程組有沒有唯一解（$\det A\ne0$）、算面積／體積、算反矩陣與克拉瑪公式。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="行列式" data-note="把方陣壓縮成的一個數，記作 $\det A$。">determinant</button><button class="term" type="button" data-zh="子行列式" data-note="刪掉某列某行後剩下的行列式 $M_{jk}$。">minor</button><button class="term" type="button" data-zh="餘因子" data-note="$C_{jk}=(-1)^{j+k}M_{jk}$，就是加了正負號的 minor。">cofactor</button><button class="term" type="button" data-zh="餘因子展開" data-note="沿一列（或一行）展開來算高階行列式。">cofactor expansion</button><button class="term" type="button" data-zh="符號棋盤" data-note="$+$、$-$ 交替的記號表，左上角永遠是 $+$。">sign pattern</button><button class="term" type="button" data-zh="奇異" data-note="$\det A=0$，沒有反矩陣。">singular</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>行列式把一個方陣壓成<b>一個數字</b>，這個數字回答一個問題：「這個系統被壓扁了嗎？」等於 0 就是被壓扁（沒有唯一解）；不等於 0 就還有救。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 定義與低階公式</span>
+    <p style="margin-top:0">只有<b>方陣（$n\times n$）</b>才有行列式，記作 $\det A$ 或 $D$。</p>
+    $$n=1:\ D=\det A=a_{11}\qquad\qquad n=2:\ D=\begin{vmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{vmatrix}=a_{11}a_{22}-a_{12}a_{21}$$
+    <p style="margin-bottom:0">$2\times2$ 的口訣：<b>「主對角相乘 減 副對角相乘」</b>。</p>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · 高階：餘因子展開（cofactor expansion）</span>
+    <p style="margin-top:0">先把兩個名詞分清楚：</p>
+    <ul>
+      <li><b>Minor $M_{jk}$（子行列式）</b>：把第 $j$ 列、第 $k$ 行<b>整條刪掉</b>，剩下的 $(n-1)\times(n-1)$ 行列式。</li>
+      <li><b>Cofactor $C_{jk}$（餘因子）</b>：把 minor 加上正負號，$C_{jk}=(-1)^{j+k}M_{jk}$。</li>
+    </ul>
+    <p>然後任選一列（或一行）展開：</p>
+    $$D=\sum_{k=1}^{n}(-1)^{j+k}a_{jk}M_{jk}=\sum_{k=1}^{n}a_{jk}C_{jk}\qquad(\text{固定第 } j \text{ 列})$$
+    <p><b>正負號怎麼決定？</b> 原稿畫的那個「棋盤」就是答案：</p>
+    $$\begin{array}{ccc}+&-&+\\-&+&-\\+&-&+\end{array}\qquad\text{（左上角永遠是 } +\text{，像西洋棋盤一樣交替）}$$
+    <p style="margin-bottom:0"><b>選哪一列展開？</b> 選<b>0 最多的那一列（或行）</b>——因為乘 0 的項可以直接不理它。這一個小技巧能省掉一半計算。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 30</b><span>3×3 行列式：沿第一列展開</span></div>
+    <div class="eg-body">
+      <div class="eg-q">求 $D=\begin{vmatrix}1&3&0\\2&6&4\\-1&0&2\end{vmatrix}$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先掃一眼哪一列／行最多 0：<b>第一列有 0、第一行也有 0</b>。這裡照原稿選第一列。</li>
+        <li>展開三項，每項都是「元素 × 對應的 2×2 子行列式 × 正負號」。第一列的正負號是 $+,-,+$。</li>
+        <li>第一項：$1\times\begin{vmatrix}6&4\\0&2\end{vmatrix}$（刪掉第 1 列第 1 行後剩下 $6,4$ 與 $0,2$）$=1\times(12-0)=12$。</li>
+        <li>第二項：$-3\times\begin{vmatrix}2&4\\-1&2\end{vmatrix}$（刪掉第 1 列第 2 行）$=-3\times(4+4)=-3\times8=-24$。</li>
+        <li>第三項：$+0\times(\dots)=0$——<b>遇到 0 就直接跳過，不要白算</b>。</li>
+        <li>合計 $12-24+0=-12$。</li>
+      </ol>
+      <div class="sol">
+        $$D=1\cdot\begin{vmatrix}6&4\\0&2\end{vmatrix}-3\cdot\begin{vmatrix}2&4\\-1&2\end{vmatrix}+0\cdot\begin{vmatrix}2&6\\-1&0\end{vmatrix}=1(12-0)-3(4+4)+0=12-24=-12$$
+      </div>
+      <div class="ans">$D=-12$（$\ne0$ ⇒ 這個矩陣是 nonsingular，方程組有唯一解）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">① 第二項的減號是「棋盤」給的，<b>不是</b>因為 $-3$ 而來的，抄式子時很容易漏。② 展開時可以用<b>另一列或另一行</b>試試看，答案一定一樣（這是最好的自我檢查）。③ $2\times2$ 的行列式算的是<b>平行四邊形面積</b>、$3\times3$ 算的是<b>平行六面體體積</b>——行列式為 0 就代表「壓扁了」（向量線性相關），這就是為什麼 $\det A=0$ 時方程組沒有唯一解。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">定理 · 解的數量（原稿左上那段）</span>
+    <ul style="margin:0">
+      <li>方程組若有<b>兩個以上的解</b>（也就是有解、且不只一組）⇒ <b>必然有無限多組解</b>（不可能「剛好兩組」）。</li>
+      <li>若 $\det A\ne0$ ⇒ 恰有一組解（唯一解）；這也是克拉瑪公式與反矩陣的前提。</li>
+      <li>若 $\det A=0$ ⇒ 沒有唯一解：可能<b>無解</b>、也可能<b>無限多組解</b>（要靠列運算才能確定是哪一種）。</li>
+    </ul>
+  </div>
+
+  <figure class="scan small"><img src="pages/p21.jpg" alt="原稿第 21 頁：行列式" loading="lazy"><figcaption>原稿 p.21 — 行列式定義、minor／cofactor、符號棋盤、3×3 例題（$=-12$）</figcaption></figure>
+  <hr class="rule">
+</section>
+
+<section id="c16">
+  <h2><span class="chip">16</span>克拉瑪公式（<button class="term" type="button" data-zh="克拉瑪公式" data-note="$x_k$＝（把第 $k$ 行換成 $\vec b$ 的行列式）$\div\det A$。">Cramer's rule</button>）<span class="pgbadge">原稿 p.22 上半</span></h2>
+  <p class="lede">只要 $\det A\ne0$，方程組的解可以用「兩個行列式相除」直接寫出來——不必做列運算。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="克拉瑪公式" data-note="$x_k$＝（把第 $k$ 行換成 $\vec b$ 的行列式）$\div\det A$。">Cramer's rule</button><button class="term" type="button" data-zh="唯一解" data-note="$\det A\ne0$ 時恰有一組解。">unique solution</button><button class="term" type="button" data-zh="分子／分母" data-note="分子是換過行的行列式，分母是 $\det A$。">numerator / denominator</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>只需要其中一個未知數時的超快解法：把對應那一行換成常數，算兩個行列式相除。分母都是同一個 $\det A$，只有分子在換行。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 · 2×2 版（先看懂這一個）</span>
+    $$\begin{cases}a_{11}x_1+a_{12}x_2=b_1\\ a_{21}x_1+a_{22}x_2=b_2\end{cases}\qquad A=\begin{bmatrix}a_{11}&a_{12}\\a_{21}&a_{22}\end{bmatrix},\ \det A\ne0$$
+    $$x_1=\frac{\begin{vmatrix}b_1&a_{12}\\b_2&a_{22}\end{vmatrix}}{\det A}=\frac{b_1a_{22}-a_{12}b_2}{\det A},\qquad
+    x_2=\frac{\begin{vmatrix}a_{11}&b_1\\a_{21}&b_2\end{vmatrix}}{\det A}=\frac{a_{11}b_2-b_1a_{21}}{\det A}$$
+    <p><b>規律（一定要抓到）：</b>分母永遠是 $\det A$；求 $x_1$ 時，把 $A$ 的<b>第 1 行</b>換成常數向量 $\vec b$；求 $x_2$ 時換<b>第 2 行</b>。<b>「求哪個未知數，就換那一行」。</b></p>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 · 3×3（原稿中間的定理框）</span>
+    $$\begin{cases}a_{11}x_1+a_{12}x_2+a_{13}x_3=b_1\\ a_{21}x_1+a_{22}x_2+a_{23}x_3=b_2\\ a_{31}x_1+a_{32}x_2+a_{33}x_3=b_3\end{cases}\qquad x_1=\frac{\begin{vmatrix}b_1&a_{12}&a_{13}\\b_2&a_{22}&a_{23}\\b_3&a_{32}&a_{33}\end{vmatrix}}{\det A},\qquad x_2=\frac{\begin{vmatrix}a_{11}&b_1&a_{13}\\a_{21}&b_2&a_{23}\\a_{31}&b_3&a_{33}\end{vmatrix}}{\det A},\ \dots$$
+    <p style="margin-bottom:0">看出規律了嗎？<b>把第 1 行換成 $\vec b$ 就是 $x_1$、換第 2 行就是 $x_2$、換第 3 行就是 $x_3$。</b>原稿在分子第一個行列式上圈了紅圈，就是提醒你「換掉的那一行在哪裡」。</p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 31</b><span>用克拉瑪公式解 2×2 方程組</span></div>
+    <div class="eg-body">
+      <div class="eg-q">解 $\begin{cases}2x_1+5x_2=2\\-4x_1+3x_2=-30\end{cases}$（就是例題 25 那題，這次用克拉瑪）。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先寫 $A$、$\vec b$，並算 $\det A=2(3)-5(-4)=6+20=26$。<b>$\det A\ne0$ ⇒ 可以放心用克拉瑪。</b></li>
+        <li>求 $x_1$：把 $A$ 的第一行換成 $\vec b=(2,-30)$ ⇒ $\begin{vmatrix}2&5\\-30&3\end{vmatrix}=6+150=156$，再除以 26 ⇒ $x_1=6$。</li>
+        <li>求 $x_2$：把第二行換成 $\vec b$ ⇒ $\begin{vmatrix}2&2\\-4&-30\end{vmatrix}=-60+8=-52$，除以 26 ⇒ $x_2=-2$。</li>
+        <li>和例題 25 的列運算結果完全一致 ✓（兩種方法都可以，考試時看哪個快）。</li>
+      </ol>
+      <div class="sol">
+        $$\det A=\begin{vmatrix}2&5\\-4&3\end{vmatrix}=26,\qquad x_1=\frac{\begin{vmatrix}2&5\\-30&3\end{vmatrix}}{26}=\frac{156}{26}=6,\qquad x_2=\frac{\begin{vmatrix}2&2\\-4&-30\end{vmatrix}}{26}=\frac{-52}{26}=-2$$
+      </div>
+      <div class="ans">$x_1=6,\ x_2=-2$</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒</span>
+        <p style="margin:0">克拉瑪公式的<b>限制</b>：① 必須是「方程式條數 ＝ 未知數個數」（方陣）；② 必須 $\det A\ne0$。<br>它的<b>優點</b>：只要一個未知數時超快（不用整組解完）。<b>缺點</b>：$n$ 大時計算量爆炸（每個未知數都要算一個 $n$ 階行列式），實務上會改用列運算或反矩陣。</p>
+      </div>
+    </div>
+  </div>
+
+  <figure class="scan small"><img src="pages/p22.jpg" alt="原稿第 22 頁：克拉瑪公式與反矩陣定義" loading="lazy"><figcaption>原稿 p.22 — 克拉瑪公式（2×2 與 3×3）、解的數量定理、反矩陣的定義與性質</figcaption></figure>
+  <hr class="rule">
+</section>
+
+<section id="c17">
+  <h2><span class="chip">17</span>反矩陣（<button class="term" type="button" data-zh="反矩陣" data-note="$A^{-1}$，滿足 $AA^{-1}=A^{-1}A=I$。">inverse matrix</button>）<span class="pgbadge">原稿 p.22 下半 – p.23</span></h2>
+  <p class="lede">矩陣世界的「倒數」。有了它，方程組 $A\vec x=\vec B$ 就能像國中一樣「兩邊同除以 $A$」：$\vec x=A^{-1}\vec B$。</p>
+  <div class="ekw"><span class="lbl2">English</span><button class="term" type="button" data-zh="反矩陣" data-note="$A^{-1}$，滿足 $AA^{-1}=A^{-1}A=I$。">inverse matrix</button><button class="term" type="button" data-zh="非奇異" data-note="$\det A\ne0$，所以有反矩陣。">nonsingular</button><button class="term" type="button" data-zh="高斯－喬登消去法" data-note="$[A\mid I]\to[I\mid A^{-1}]$ 的列運算流程。">Gauss–Jordan elimination</button><button class="term" type="button" data-zh="唯一的" data-note="反矩陣若存在，只會有一個。">unique</button><button class="term" type="button" data-zh="驗算" data-note="把答案乘回去，確認得到 $I$。">verify</button></div>
+  <div class="plain"><span class="plab">用一句話說</span><p>反矩陣就是矩陣界的「倒數」。$A\vec x=\vec B$ 兩邊同乘 $A^{-1}$ 得到 $\vec x=A^{-1}\vec B$——跟國中解 $3x=6$ 時「兩邊同除以 3」是完全一樣的動作。</p></div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ① · 定義</span>
+    $$A\,A^{-1}=A^{-1}A=I$$
+    <ul style="margin-bottom:0">
+      <li>若這個 $A^{-1}$ 存在，它是<b>唯一</b>的（unique）。</li>
+      <li>若不存在 ⇒ 稱 $A$ 為 <b>singular matrix（奇異矩陣）</b>；存在則叫 nonsingular。判準很簡單：<b>$\det A=0$ ⇔ singular（沒有反矩陣）</b>。</li>
+      <li><b>只有方陣</b>才可能談反矩陣。</li>
+      <li>乘積的反矩陣要<b>反序</b>：若 $A,B$ 都可逆，則 $(AB)^{-1}=B^{-1}A^{-1}$（原稿右下那段）。<b>口訣：脫鞋子先脫襪子</b>——跟 $(AB)^T=B^TA^T$ 一樣要換順序。</li>
+    </ul>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">核心觀念 ② · 怎麼求：Gauss–Jordan 消去法</span>
+    <p style="margin-top:0">在 $A$ 的右邊接上單位矩陣，形成 $[A\mid I]$，然後做列運算，把左半邊變成 $I$：</p>
+    $$[\,A\mid I\,]\ \xrightarrow{\ \text{列運算}\ }\ [\,I\mid A^{-1}\,]$$
+    <p style="margin-bottom:0"><b>為什麼這樣就對？</b> 因為「把 $A$ 變成 $I$ 的那一串列運算」整體效果就等於「左乘 $A^{-1}$」；把同一串運算也套在 $I$ 上，$I$ 就變成 $A^{-1}$。<b>關鍵：右半邊的 $I$ 是拿來「記錄」你做了哪些運算的。</b></p>
+  </div>
+
+  <div class="eg">
+    <div class="eg-head"><b>例題 32</b><span>用 $[A\mid I]$ 求 $3\times3$ 反矩陣</span></div>
+    <div class="eg-body">
+      <div class="eg-q">設 $A=\begin{bmatrix}-1&1&2\\3&-1&1\\-1&3&4\end{bmatrix}$，求 $A^{-1}$。</div>
+      <h5>思路</h5>
+      <ol class="think">
+        <li>先把 $[A\mid I]$ 寫出來：左半是 $A$，右半是 $I=\begin{bmatrix}1&0&0\\0&1&0\\0&0&1\end{bmatrix}$。</li>
+        <li>第一步把左半第一行（除了左上角）清成 0：$\text{R}_2+3\text{R}_1$、$\text{R}_3-\text{R}_1$。得到左半 $\begin{bmatrix}-1&1&2\\0&2&7\\0&2&2\end{bmatrix}$。<br>（檢查：$[3,-1,1]+3[-1,1,2]=[0,2,7]$ ✓）</li>
+        <li>繼續用同樣的手法把左半化簡成單位矩陣——每一步都<b>同時對右半做一樣的事</b>。</li>
+        <li>左半變成 $I$ 時，右半就是答案。原稿算出：</li>
+      </ol>
+      <div class="sol">
+        $$[A\mid I]=\begin{bmatrix}-1&1&2&\vline&1&0&0\\3&-1&1&\vline&0&1&0\\-1&3&4&\vline&0&0&1\end{bmatrix}
+        \longrightarrow\begin{bmatrix}-1&1&2&\vline&1&0&0\\0&2&7&\vline&3&1&0\\0&2&2&\vline&-1&0&1\end{bmatrix}\longrightarrow\cdots\longrightarrow[\,I\mid A^{-1}\,]$$
+        $$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$$
+      </div>
+      <div class="ans">$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$（$\det A=10$）</div>
+      <div class="box warn" style="margin-bottom:0">
+        <span class="lab">提醒 · 必做的最後一步：驗算</span>
+        <p style="margin:0">把答案拿去乘 $A$，看是不是 $I$。例如第一列乘第一行：$(-0.7)(-1)+(0.2)(3)+(0.3)(-1)=0.7+0.6-0.3=1$ ✓；第一列乘第二行：$(-0.7)(1)+(0.2)(-1)+(0.3)(3)=-0.7-0.2+0.9=0$ ✓。<b>只要一個位置的「1」或「0」不對，就是中途算錯了</b>——這個檢查只要一分鐘，卻能救回一整題的分數。<br>另外：原稿過程中有幾處中間數字是自己重算時的暫存值（紅筆畫掉重寫），<b>自己動手時不要試著「抄」中間那幾步</b>，照著「一次清一行的 0」的節奏做就不會亂。</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">反矩陣還能做什麼</span>
+    <ul style="margin-bottom:0">
+      <li><b>解方程組</b>：$A\vec x=\vec B\Rightarrow\vec x=A^{-1}\vec B$（例題 22 那組解 $\vec x=[3,\frac12,-1]^T$ 就可以這樣得到）。</li>
+      <li><b>公式（$2\times2$ 超好用）</b>：$\begin{bmatrix}a&b\\c&d\end{bmatrix}^{-1}=\dfrac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$。<b>記法：主對角交換、副對角變號、除以行列式</b>。</li>
+      <li>用 $2\times2$ 公式檢查上面：若 $A$ 是 $2\times2$ 且 $\det A=0$，公式會除以 0 ⇒ 正好對應「singular 沒有反矩陣」。</li>
+    </ul>
+  </div>
+
+  <figure class="scan small"><img src="pages/p23.jpg" alt="原稿第 23 頁：反矩陣計算" loading="lazy"><figcaption>原稿 p.23 — $[A\mid I]$ 的 Gauss–Jordan 過程與 $A^{-1}$ 的答案</figcaption></figure>
+
+  <h4>馬上練</h4>
+  <details class="sc"><summary>1. 求 $\begin{bmatrix}2&1\\5&3\end{bmatrix}^{-1}$。</summary><p class="a">$\det=2(3)-1(5)=1$，所以 $A^{-1}=\frac11\begin{bmatrix}3&-1\\-5&2\end{bmatrix}=\begin{bmatrix}3&-1\\-5&2\end{bmatrix}$。驗算：$\begin{bmatrix}2&1\\5&3\end{bmatrix}\begin{bmatrix}3&-1\\-5&2\end{bmatrix}=\begin{bmatrix}1&0\\0&1\end{bmatrix}$ ✓</p></details>
+  <details class="sc"><summary>2. $\begin{bmatrix}1&2\\2&4\end{bmatrix}$ 有反矩陣嗎？</summary><p class="a">$\det=4-4=0$ ⇒ <b>singular，沒有反矩陣</b>。（第二列是第一列的 2 倍，資訊重複 ⇒ 無法還原。）</p></details>
+  <hr class="rule">
+</section>
+
+<section id="gloss">
+  <h2><span class="chip">EN</span>術語中英對照<span class="pgbadge">互動查詢</span></h2>
+  <p class="lede">讀原文書、看國外課程影片時會撞到的英文字都在這一頁。上面的章節標題和各章的 <b>English</b> 列也都是按鈕，<b>點一下就會跳出中文意思與一句話解釋</b>。這裡則可以直接打字搜尋（中英都通）。</p>
+  <input id="gsearch" class="gsearch" type="search" placeholder="搜尋英文或中文，例如 curl、散度、matrix、rank…" autocomplete="off">
+  <div class="ghint" id="ghint">共 106 個術語 · 依章節排列</div>
+  <div class="gblock" data-h="複數與四則運算 complex number real part imaginary part pure imaginary conjugate commutative law associative law distributive law"><h3><a href="#c1">複數與四則運算</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">complex number</td><td class="gzh">複數</td><td class="gno">形如 $z=x+iy$ 的數；$x$ 是實部、$y$ 是虛部。</td></tr><tr class="grow"><td class="gen">real part</td><td class="gzh">實部</td><td class="gno">$\operatorname{Re}(z)=x$，注意它不含 $i$。</td></tr><tr class="grow"><td class="gen">imaginary part</td><td class="gzh">虛部</td><td class="gno">$\operatorname{Im}(z)=y$，是一個實數，別寫成 $3i$。</td></tr><tr class="grow"><td class="gen">pure imaginary</td><td class="gzh">純虛數</td><td class="gno">實部為 0，例如 $4i$。</td></tr><tr class="grow"><td class="gen">conjugate</td><td class="gzh">共軛複數</td><td class="gno">把虛部的正負號反過來：$\bar z=x-iy$，幾何上是對實軸鏡射。</td></tr><tr class="grow"><td class="gen">commutative law</td><td class="gzh">交換律</td><td class="gno">$z_1+z_2=z_2+z_1$，加法的順序不影響結果。</td></tr><tr class="grow"><td class="gen">associative law</td><td class="gzh">結合律</td><td class="gno">$(z_1+z_2)+z_3=z_1+(z_2+z_3)$，括號可以搬。</td></tr><tr class="grow"><td class="gen">distributive law</td><td class="gzh">分配律</td><td class="gno">$z_1(z_2+z_3)=z_1z_2+z_1z_3$，展開時用。</td></tr></table></div></div>
+<div class="gblock" data-h="極式與歐拉公式 polar form modulus argument principal value Euler's formula quadrant"><h3><a href="#c2">極式與歐拉公式</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">polar form</td><td class="gzh">極式</td><td class="gno">$z=r(\cos\theta+i\sin\theta)$，用長度與角度描述同一個點。</td></tr><tr class="grow"><td class="gen">modulus</td><td class="gzh">模（絕對值）</td><td class="gno">$|z|=r=\sqrt{x^2+y^2}$，就是箭頭的長度。</td></tr><tr class="grow"><td class="gen">argument</td><td class="gzh">輻角</td><td class="gno">$\operatorname{Arg}z$ ＝所有合格的角度，彼此差 $2n\pi$。</td></tr><tr class="grow"><td class="gen">principal value</td><td class="gzh">主值</td><td class="gno">只取 $-\pi<\theta\le\pi$ 的那一個，寫成 $\arg z$。</td></tr><tr class="grow"><td class="gen">Euler's formula</td><td class="gzh">歐拉公式</td><td class="gno">$e^{i\theta}=\cos\theta+i\sin\theta$，把指數與三角函數接起來。</td></tr><tr class="grow"><td class="gen">quadrant</td><td class="gzh">象限</td><td class="gno">看 $x$、$y$ 的正負決定角度落在第幾象限。</td></tr></table></div></div>
+<div class="gblock" data-h="極式的乘除 · 棣美弗 · 方根 De Moivre's theorem nth root roots of unity equally spaced"><h3><a href="#c3">極式的乘除 · 棣美弗 · 方根</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">De Moivre's theorem</td><td class="gzh">棣美弗定理</td><td class="gno">$z^n=r^n[\cos(n\theta)+i\sin(n\theta)]$：次方＝角度乘 $n$。</td></tr><tr class="grow"><td class="gen">nth root</td><td class="gzh">$n$ 次方根</td><td class="gno">開 $n$ 次方有 $n$ 個解，全落在半徑 $\sqrt[n]{R}$ 的圓上。</td></tr><tr class="grow"><td class="gen">roots of unity</td><td class="gzh">單位根</td><td class="gno">$\sqrt[n]{1}$ 的 $n$ 個解，把單位圓等分成 $n$ 份。</td></tr><tr class="grow"><td class="gen">equally spaced</td><td class="gzh">等角分布</td><td class="gno">相鄰兩個解的角度差固定是 $2\pi/n$。</td></tr></table></div></div>
+<div class="gblock" data-h="複變函數 complex variable complex function real / imaginary parts domain / range"><h3><a href="#c4">複變函數</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">complex variable</td><td class="gzh">複變數</td><td class="gno">輸入的變數 $z$ 本身就是複數。</td></tr><tr class="grow"><td class="gen">complex function</td><td class="gzh">複變函數</td><td class="gno">$w=f(z)$：一個 $z$ 對到一個 $w$。</td></tr><tr class="grow"><td class="gen">real / imaginary parts</td><td class="gzh">實部與虛部函數</td><td class="gno">$w=u+iv$，$u$、$v$ 各是 $x$、$y$ 的實函數。</td></tr><tr class="grow"><td class="gen">domain / range</td><td class="gzh">定義域／值域</td><td class="gno">定義域是允許的 $z$，值域是跑出來的 $w$。</td></tr></table></div></div>
+<div class="gblock" data-h="向量的運算 vector magnitude / norm unit vector dot product orthogonal cross product right-hand rule parallelogram position vector tangent vector arc length"><h3><a href="#c5">向量的運算</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">vector</td><td class="gzh">向量</td><td class="gno">有大小有方向的量，記成 $[a_1,a_2,a_3]$。</td></tr><tr class="grow"><td class="gen">magnitude / norm</td><td class="gzh">大小（模）</td><td class="gno">$|\vec a|=\sqrt{a_1^2+a_2^2+a_3^2}$。</td></tr><tr class="grow"><td class="gen">unit vector</td><td class="gzh">單位向量</td><td class="gno">$\hat a=\vec a/|\vec a|$，長度 1、方向與 $\vec a$ 相同。</td></tr><tr class="grow"><td class="gen">dot product</td><td class="gzh">內積</td><td class="gno">$\vec a\cdot\vec b=|\vec a||\vec b|\cos\theta$，算出來是一個數。</td></tr><tr class="grow"><td class="gen">orthogonal</td><td class="gzh">正交（垂直）</td><td class="gno">$\vec a\cdot\vec b=0$ 就是互相垂直。</td></tr><tr class="grow"><td class="gen">cross product</td><td class="gzh">外積</td><td class="gno">$\vec a\times\vec b$ 用 $3\times3$ 行列式算，結果垂直於兩者。</td></tr><tr class="grow"><td class="gen">right-hand rule</td><td class="gzh">右手定則</td><td class="gno">食指指 $\vec a$、中指指 $\vec b$，拇指方向就是 $\vec a\times\vec b$。</td></tr><tr class="grow"><td class="gen">parallelogram</td><td class="gzh">平行四邊形</td><td class="gno">$|\vec a\times\vec b|$ 等於兩向量張出的平行四邊形面積。</td></tr><tr class="grow"><td class="gen">position vector</td><td class="gzh">位置向量</td><td class="gno">$\vec r(t)=[x(t),y(t),z(t)]$，把曲線寫成向量。</td></tr><tr class="grow"><td class="gen">tangent vector</td><td class="gzh">切向量</td><td class="gno">$\vec r'(t)$，指向曲線前進的方向。</td></tr><tr class="grow"><td class="gen">arc length</td><td class="gzh">弧長</td><td class="gno">$L=\int_a^b|\vec r'(t)|\,dt$，把速率對時間積分。</td></tr></table></div></div>
+<div class="gblock" data-h="梯度與方向導數 scalar field vector field gradient del operator directional derivative normal vector level surface chain rule"><h3><a href="#c6">梯度與方向導數</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">scalar field</td><td class="gzh">純量場</td><td class="gno">每一點對應一個數，例如房間裡的溫度 $f(x,y,z)$。</td></tr><tr class="grow"><td class="gen">vector field</td><td class="gzh">向量場</td><td class="gno">每一點對應一支箭，例如水流速度。</td></tr><tr class="grow"><td class="gen">gradient</td><td class="gzh">梯度</td><td class="gno">$\nabla f=[f_x,f_y,f_z]$，指向最陡上升方向。</td></tr><tr class="grow"><td class="gen">del operator</td><td class="gzh">$\nabla$ 算子</td><td class="gno">$\nabla=\frac{\partial}{\partial x}\hat i+\frac{\partial}{\partial y}\hat j+\frac{\partial}{\partial z}\hat k$，等著被餵函數。</td></tr><tr class="grow"><td class="gen">directional derivative</td><td class="gzh">方向導數</td><td class="gno">$D_{\vec a}f=\hat a\cdot\nabla f$，往指定方向的變化率。</td></tr><tr class="grow"><td class="gen">normal vector</td><td class="gzh">法向量</td><td class="gno">垂直於曲面的向量；$\nabla f$ 就是它。</td></tr><tr class="grow"><td class="gen">level surface</td><td class="gzh">等值面</td><td class="gno">$f(x,y,z)=c$ 的曲面，$\nabla f$ 與它垂直。</td></tr><tr class="grow"><td class="gen">chain rule</td><td class="gzh">連鎖律</td><td class="gno">$\frac{d}{dt}f(\vec r(t))=\nabla f\cdot\vec r'$，是法向量定理的關鍵。</td></tr></table></div></div>
+<div class="gblock" data-h="散度 · 旋度 · Laplacian divergence curl Laplacian incompressible source / sink"><h3><a href="#c7">散度 · 旋度 · Laplacian</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">divergence</td><td class="gzh">散度</td><td class="gno">$\nabla\cdot\vec v$：每點「往外冒」多少，結果是純量。</td></tr><tr class="grow"><td class="gen">curl</td><td class="gzh">旋度</td><td class="gno">$\nabla\times\vec v$：每點「打轉」多少，結果是向量。</td></tr><tr class="grow"><td class="gen">Laplacian</td><td class="gzh">拉普拉斯算子</td><td class="gno">$\nabla^2=\operatorname{div}(\operatorname{grad})$，二階偏導數的和。</td></tr><tr class="grow"><td class="gen">incompressible</td><td class="gzh">不可壓縮</td><td class="gno">$\nabla\cdot\vec v=0$，代表既沒有源也沒有匯。</td></tr><tr class="grow"><td class="gen">source / sink</td><td class="gzh">源／匯</td><td class="gno">散度為正是源（水龍頭），為負是匯（排水孔）。</td></tr></table></div></div>
+<div class="gblock" data-h="線積分 line integral parametrization conservative field potential function path independence circulation work"><h3><a href="#c8">線積分</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">line integral</td><td class="gzh">線積分</td><td class="gno">沿曲線把 $\vec F\cdot d\vec r$ 一小段一小段加起來。</td></tr><tr class="grow"><td class="gen">parametrization</td><td class="gzh">參數化</td><td class="gno">把路徑寫成 $\vec r(t)$，並決定 $t$ 的範圍。</td></tr><tr class="grow"><td class="gen">conservative field</td><td class="gzh">保守場</td><td class="gno">可以寫成某個 $\nabla f$ 的向量場。</td></tr><tr class="grow"><td class="gen">potential function</td><td class="gzh">位勢函數</td><td class="gno">那個 $f$；線積分只要算頭尾位勢差。</td></tr><tr class="grow"><td class="gen">path independence</td><td class="gzh">路徑無關</td><td class="gno">走哪條路都一樣，只看起點與終點。</td></tr><tr class="grow"><td class="gen">circulation</td><td class="gzh">環流</td><td class="gno">沿封閉曲線繞一圈的線積分 $\oint_C\vec F\cdot d\vec r$。</td></tr><tr class="grow"><td class="gen">work</td><td class="gzh">功</td><td class="gno">物理上線積分就是力沿路徑所做的功。</td></tr></table></div></div>
+<div class="gblock" data-h="格林定理 Green's theorem simple closed curve counterclockwise double integral boundary"><h3><a href="#c9">格林定理</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">Green's theorem</td><td class="gzh">格林定理</td><td class="gno">$\oint_C(F_1dx+F_2dy)=\iint_R\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dA$。</td></tr><tr class="grow"><td class="gen">simple closed curve</td><td class="gzh">簡單封閉曲線</td><td class="gno">不自我交叉、頭尾相接的曲線。</td></tr><tr class="grow"><td class="gen">counterclockwise</td><td class="gzh">逆時針（正向）</td><td class="gno">格林定理要求的邊界方向；反向要變號。</td></tr><tr class="grow"><td class="gen">double integral</td><td class="gzh">雙重積分</td><td class="gno">對平面區域做兩次積分。</td></tr><tr class="grow"><td class="gen">boundary</td><td class="gzh">邊界</td><td class="gno">區域 $R$ 的邊界曲線 $C$。</td></tr></table></div></div>
+<div class="gblock" data-h="座標系與表面積分 cylindrical coordinates spherical coordinates surface integral area element volume element scaling factor normal derivative"><h3><a href="#c10">座標系與表面積分</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">cylindrical coordinates</td><td class="gzh">柱（圓柱）座標</td><td class="gno">$(\rho,\varphi,z)$，體積元素 $dV=\rho\,d\rho\,d\varphi\,dz$。</td></tr><tr class="grow"><td class="gen">spherical coordinates</td><td class="gzh">球座標</td><td class="gno">$(r,\theta,\varphi)$，體積元素 $dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$。</td></tr><tr class="grow"><td class="gen">surface integral</td><td class="gzh">表面積分</td><td class="gno">在曲面上積分，需要面積元素 $dA$。</td></tr><tr class="grow"><td class="gen">area element</td><td class="gzh">面積元素</td><td class="gno">曲面上的一小塊面積，例如 $\sqrt{1+g_x^2+g_y^2}\,dxdy$。</td></tr><tr class="grow"><td class="gen">volume element</td><td class="gzh">體積元素</td><td class="gno">換座標後出現的比例因子乘積。</td></tr><tr class="grow"><td class="gen">scaling factor</td><td class="gzh">比例因子</td><td class="gno">球座標多了 $r^2\sin\theta$、柱座標多了 $\rho$ 的那個因子。</td></tr><tr class="grow"><td class="gen">normal derivative</td><td class="gzh">法向導數</td><td class="gno">$\frac{\partial f}{\partial n}=\nabla f\cdot\hat n$，沿外法線方向的變化率。</td></tr></table></div></div>
+<div class="gblock" data-h="高斯散度定理 divergence theorem flux closed surface triple integral outward normal"><h3><a href="#c11">高斯散度定理</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">divergence theorem</td><td class="gzh">散度定理</td><td class="gno">$\iint_S\vec F\cdot\hat n\,dA=\iiint_T\nabla\cdot\vec F\,dV$，也叫高斯定理。</td></tr><tr class="grow"><td class="gen">flux</td><td class="gzh">通量</td><td class="gno">穿過表面的總流量。</td></tr><tr class="grow"><td class="gen">closed surface</td><td class="gzh">封閉曲面</td><td class="gno">像球面、圓柱面這種密閉的曲面。</td></tr><tr class="grow"><td class="gen">triple integral</td><td class="gzh">三重積分</td><td class="gno">對體積做三次積分。</td></tr><tr class="grow"><td class="gen">outward normal</td><td class="gzh">外法向量</td><td class="gno">朝曲面外面的單位法向量 $\hat n$。</td></tr></table></div></div>
+<div class="gblock" data-h="斯托克斯定理 Stokes' theorem curl flux orientation boundary curve"><h3><a href="#c12">斯托克斯定理</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">Stokes' theorem</td><td class="gzh">斯托克斯定理</td><td class="gno">$\oint_C\vec F\cdot d\vec r=\iint_S(\nabla\times\vec F)\cdot\hat n\,dA$。</td></tr><tr class="grow"><td class="gen">curl flux</td><td class="gzh">旋度通量</td><td class="gno">曲面上的旋度通量，就是右邊那個面積分。</td></tr><tr class="grow"><td class="gen">orientation</td><td class="gzh">方向（定向）</td><td class="gno">曲面法向量與邊界繞向要符合右手定則。</td></tr><tr class="grow"><td class="gen">boundary curve</td><td class="gzh">邊界曲線</td><td class="gno">曲面 $S$ 的邊界 $C$。</td></tr></table></div></div>
+<div class="gblock" data-h="矩陣與線性方程組 matrix entry / element row / column coefficient matrix augmented matrix transpose symmetric matrix diagonal matrix identity matrix row operation Gaussian elimination inconsistent scalar multiplication"><h3><a href="#c13">矩陣與線性方程組</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">matrix</td><td class="gzh">矩陣</td><td class="gno">把數字排成長方形再加括號。</td></tr><tr class="grow"><td class="gen">entry / element</td><td class="gzh">元素</td><td class="gno">$a_{jk}$：第 $j$ 列第 $k$ 行的數字。</td></tr><tr class="grow"><td class="gen">row / column</td><td class="gzh">列／行</td><td class="gno">列是橫的（row）、行是直的（column）。</td></tr><tr class="grow"><td class="gen">coefficient matrix</td><td class="gzh">係數矩陣</td><td class="gno">$A$，把所有未知數的係數排起來。</td></tr><tr class="grow"><td class="gen">augmented matrix</td><td class="gzh">增廣矩陣</td><td class="gno">$[A\mid B]$，把常數項也併進同一張表。</td></tr><tr class="grow"><td class="gen">transpose</td><td class="gzh">轉置</td><td class="gno">$A^{T}$：列變行、行變列。</td></tr><tr class="grow"><td class="gen">symmetric matrix</td><td class="gzh">對稱矩陣</td><td class="gno">$A^{T}=A$，沿對角線對折會重合。</td></tr><tr class="grow"><td class="gen">diagonal matrix</td><td class="gzh">對角矩陣</td><td class="gno">非對角線元素全是 0。</td></tr><tr class="grow"><td class="gen">identity matrix</td><td class="gzh">單位矩陣</td><td class="gno">$I$：對角線是 1、其餘是 0，矩陣界的 1。</td></tr><tr class="grow"><td class="gen">row operation</td><td class="gzh">列運算</td><td class="gno">互換、乘非零常數、加另一列的倍數，都不改變解。</td></tr><tr class="grow"><td class="gen">Gaussian elimination</td><td class="gzh">高斯消去法</td><td class="gno">用列運算把方程組化到階梯型再回代。</td></tr><tr class="grow"><td class="gen">inconsistent</td><td class="gzh">不一致（無解）</td><td class="gno">消去後出現 $0=$ 非零的矛盾列。</td></tr><tr class="grow"><td class="gen">scalar multiplication</td><td class="gzh">純量乘法</td><td class="gno">$cA$：每個元素都乘 $c$。</td></tr></table></div></div>
+<div class="gblock" data-h="線性獨立與秩 linear independence linear dependence rank row echelon form pivot"><h3><a href="#c14">線性獨立與秩</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">linear independence</td><td class="gzh">線性獨立</td><td class="gno">只有係數全為 0 才能組出零向量。</td></tr><tr class="grow"><td class="gen">linear dependence</td><td class="gzh">線性相關</td><td class="gno">有不全為 0 的係數也能組出零向量。</td></tr><tr class="grow"><td class="gen">rank</td><td class="gzh">秩</td><td class="gno">線性獨立列（或行）的最大個數。</td></tr><tr class="grow"><td class="gen">row echelon form</td><td class="gzh">列階梯形</td><td class="gno">左上往右下排成階梯狀，方便數秩。</td></tr><tr class="grow"><td class="gen">pivot</td><td class="gzh">樞元（主元）</td><td class="gno">階梯型中每一列的第一個非零元素。</td></tr></table></div></div>
+<div class="gblock" data-h="行列式 determinant minor cofactor cofactor expansion sign pattern singular"><h3><a href="#c15">行列式</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">determinant</td><td class="gzh">行列式</td><td class="gno">把方陣壓縮成的一個數，記作 $\det A$。</td></tr><tr class="grow"><td class="gen">minor</td><td class="gzh">子行列式</td><td class="gno">刪掉某列某行後剩下的行列式 $M_{jk}$。</td></tr><tr class="grow"><td class="gen">cofactor</td><td class="gzh">餘因子</td><td class="gno">$C_{jk}=(-1)^{j+k}M_{jk}$，就是加了正負號的 minor。</td></tr><tr class="grow"><td class="gen">cofactor expansion</td><td class="gzh">餘因子展開</td><td class="gno">沿一列（或一行）展開來算高階行列式。</td></tr><tr class="grow"><td class="gen">sign pattern</td><td class="gzh">符號棋盤</td><td class="gno">$+$、$-$ 交替的記號表，左上角永遠是 $+$。</td></tr><tr class="grow"><td class="gen">singular</td><td class="gzh">奇異</td><td class="gno">$\det A=0$，沒有反矩陣。</td></tr></table></div></div>
+<div class="gblock" data-h="克拉瑪公式 Cramer's rule unique solution numerator / denominator"><h3><a href="#c16">克拉瑪公式</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">Cramer's rule</td><td class="gzh">克拉瑪公式</td><td class="gno">$x_k$＝（把第 $k$ 行換成 $\vec b$ 的行列式）$\div\det A$。</td></tr><tr class="grow"><td class="gen">unique solution</td><td class="gzh">唯一解</td><td class="gno">$\det A\ne0$ 時恰有一組解。</td></tr><tr class="grow"><td class="gen">numerator / denominator</td><td class="gzh">分子／分母</td><td class="gno">分子是換過行的行列式，分母是 $\det A$。</td></tr></table></div></div>
+<div class="gblock" data-h="反矩陣 inverse matrix nonsingular Gauss–Jordan elimination unique verify"><h3><a href="#c17">反矩陣</a></h3><div class="tw"><table class="gtable"><tr><th>English</th><th>中文</th><th>一句話解釋</th></tr><tr class="grow"><td class="gen">inverse matrix</td><td class="gzh">反矩陣</td><td class="gno">$A^{-1}$，滿足 $AA^{-1}=A^{-1}A=I$。</td></tr><tr class="grow"><td class="gen">nonsingular</td><td class="gzh">非奇異</td><td class="gno">$\det A\ne0$，所以有反矩陣。</td></tr><tr class="grow"><td class="gen">Gauss–Jordan elimination</td><td class="gzh">高斯－喬登消去法</td><td class="gno">$[A\mid I]\to[I\mid A^{-1}]$ 的列運算流程。</td></tr><tr class="grow"><td class="gen">unique</td><td class="gzh">唯一的</td><td class="gno">反矩陣若存在，只會有一個。</td></tr><tr class="grow"><td class="gen">verify</td><td class="gzh">驗算</td><td class="gno">把答案乘回去，確認得到 $I$。</td></tr></table></div></div>
+  <div class="gempty" id="gempty" style="display:none">找不到符合的術語，換個關鍵字試試（例如只打前幾個字母）。</div>
+  <hr class="rule">
+</section>
+<section id="c18">
+  <h2><span class="chip">＋</span>公式總表 · 考前速記<span class="pgbadge">附錄</span></h2>
+  <p class="lede">這一頁是把 23 頁原稿裡「一定會用到的式子」集中起來。考前只看這一頁複習。</p>
+
+  <h3>① 複數（第 1–3 章）</h3>
+  <div class="tw"><table>
+    <tr><th>項目</th><th>式子</th></tr>
+    <tr><td>複數與 i</td><td>$i=\sqrt{-1}$，$i^2=-1$；$z=x+iy$</td></tr>
+    <tr><td>加／乘</td><td>$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$</td></tr>
+    <tr><td>除法（有理化）</td><td>$\dfrac{z_1}{z_2}=\dfrac{z_1\bar z_2}{z_2\bar z_2}$，$z\bar z=x^2+y^2$</td></tr>
+    <tr><td>實部／虛部用共軛表示</td><td>$\operatorname{Re}z=\dfrac{z+\bar z}{2}$，$\operatorname{Im}z=\dfrac{z-\bar z}{2i}$</td></tr>
+    <tr><td>模與極式</td><td>$|z|=r=\sqrt{x^2+y^2}$，$z=r(\cos\theta+i\sin\theta)=re^{i\theta}$</td></tr>
+    <tr><td>歐拉公式</td><td>$e^{i\theta}=\cos\theta+i\sin\theta$</td></tr>
+    <tr><td>乘／除／次方</td><td>$z_1z_2=r_1r_2e^{i(\theta_1+\theta_2)}$；$\frac{z_1}{z_2}=\frac{r_1}{r_2}e^{i(\theta_1-\theta_2)}$；$z^n=r^ne^{in\theta}$</td></tr>
+    <tr><td>n 次方根</td><td>$\sqrt[n]{z}=\sqrt[n]{r}\left[\cos\frac{\theta+2k\pi}{n}+i\sin\frac{\theta+2k\pi}{n}\right]$，$k=0,\dots,n-1$（$n$ 個解）</td></tr>
+    <tr><td>夾角／模的性質</td><td>$\cos\theta=\dfrac{\vec a\cdot\vec b}{|\vec a||\vec b|}$（向量用）；$|z_1z_2|=|z_1||z_2|$</td></tr>
+  </table></div>
+
+  <h3>② 向量（第 5 章）</h3>
+  <div class="tw"><table>
+    <tr><th>項目</th><th>式子</th></tr>
+    <tr><td>由兩點求向量</td><td>$\overrightarrow{PQ}=Q-P$；$|\vec a|=\sqrt{a_1^2+a_2^2+a_3^2}$</td></tr>
+    <tr><td>單位向量</td><td>$\hat a=\dfrac{\vec a}{|\vec a|}$</td></tr>
+    <tr><td>內積</td><td>$\vec a\cdot\vec b=a_1b_1+a_2b_2+a_3b_3=|\vec a||\vec b|\cos\theta$</td></tr>
+    <tr><td>正交條件</td><td>$\vec a\perp\vec b\iff\vec a\cdot\vec b=0$</td></tr>
+    <tr><td>外積</td><td>$\vec a\times\vec b=\begin{vmatrix}\hat i&\hat j&\hat k\\a_1&a_2&a_3\\b_1&b_2&b_3\end{vmatrix}$；$|\vec a\times\vec b|=|\vec a||\vec b|\sin\theta$（平行四邊形面積）</td></tr>
+    <tr><td>弧長</td><td>$L=\int_a^b|\vec r'(t)|\,dt$</td></tr>
+  </table></div>
+
+  <h3>③ 向量微積分（第 6–7 章）</h3>
+  <div class="tw"><table>
+    <tr><th>項目</th><th>式子</th><th>一句話</th></tr>
+    <tr><td>梯度</td><td>$\nabla f=\left[\frac{\partial f}{\partial x},\frac{\partial f}{\partial y},\frac{\partial f}{\partial z}\right]$</td><td>最陡上升方向（向量）</td></tr>
+    <tr><td>方向導數</td><td>$D_{\vec a}f=\hat a\cdot\nabla f$</td><td>往指定方向的變化率（數）</td></tr>
+    <tr><td>梯度＝法向量</td><td>$f=c$ 的曲面法向 $\parallel\nabla f$；$\hat n=\pm\frac{\nabla f}{|\nabla f|}$</td><td>求切平面、通量都要用</td></tr>
+    <tr><td>散度</td><td>$\nabla\cdot\vec v=\frac{\partial v_1}{\partial x}+\frac{\partial v_2}{\partial y}+\frac{\partial v_3}{\partial z}$</td><td>冒出量（數）</td></tr>
+    <tr><td>旋度</td><td>$\nabla\times\vec v=\begin{vmatrix}\hat i&\hat j&\hat k\\ \partial_x&\partial_y&\partial_z\\ v_1&v_2&v_3\end{vmatrix}$</td><td>打轉量（向量）</td></tr>
+    <tr><td>Laplacian</td><td>$\nabla^2f=\operatorname{div}(\operatorname{grad}f)=\frac{\partial^2f}{\partial x^2}+\frac{\partial^2f}{\partial y^2}+\frac{\partial^2f}{\partial z^2}$</td><td>梯度的散度</td></tr>
+    <tr><td>兩個必背的 0</td><td>$\nabla\times(\nabla f)=\vec0$；$\nabla\cdot(\nabla\times\vec v)=0$</td><td>「梯度的旋度＝0」是判斷保守場最快的工具</td></tr>
+  </table></div>
+
+  <h3>④ 三大積分定理（第 9、11、12 章）</h3>
+  <div class="tw"><table>
+    <tr><th>定理</th><th>公式</th><th>換掉什麼</th></tr>
+    <tr><td>格林</td><td>$\oint_C(F_1dx+F_2dy)=\iint_R(\partial_xF_2-\partial_yF_1)dxdy$</td><td>平面邊界線積分 ↔ 平面積分</td></tr>
+    <tr><td>高斯（散度）</td><td>$\iint_S\vec F\cdot\hat n\,dA=\iiint_T\nabla\cdot\vec F\,dV$</td><td>封閉曲面通量 ↔ 體積分</td></tr>
+    <tr><td>斯托克斯</td><td>$\oint_C\vec F\cdot d\vec r=\iint_S(\nabla\times\vec F)\cdot\hat n\,dA$</td><td>邊界環流 ↔ 曲面旋度通量</td></tr>
+    <tr><td>法向導數版（p.13）</td><td>$\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$</td><td>Laplacian 面積分 ↔ 法向導數線積分</td></tr>
+  </table></div>
+
+  <h3>⑤ 座標系與體積元素（第 10–11 章）</h3>
+  <div class="tw"><table>
+    <tr><th>座標</th><th>轉換</th><th>$dV$／$dA$</th></tr>
+    <tr><td>柱座標 $(\rho,\varphi,z)$</td><td>$x=\rho\cos\varphi,\ y=\rho\sin\varphi,\ z=z$</td><td>$dV=\rho\,d\rho\,d\varphi\,dz$</td></tr>
+    <tr><td>球座標 $(r,\theta,\varphi)$</td><td>$x=r\sin\theta\cos\varphi,\ y=r\sin\theta\sin\varphi,\ z=r\cos\theta$</td><td>$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$</td></tr>
+    <tr><td>曲面 $z=g(x,y)$</td><td>—</td><td>$dA=\sqrt{1+g_x^2+g_y^2}\,dxdy$</td></tr>
+  </table></div>
+
+  <h3>⑥ 線性代數（第 13–17 章）</h3>
+  <div class="tw"><table>
+    <tr><th>項目</th><th>式子／規則</th></tr>
+    <tr><td>矩陣乘法尺寸</td><td>$[m\times n][n\times p]=[m\times p]$；$AB\ne BA$</td></tr>
+    <tr><td>轉置規則</td><td>$(A^T)^T=A$，$(A+B)^T=A^T+B^T$，$(AB)^T=B^TA^T$（<b>要換序</b>）</td></tr>
+    <tr><td>行列式</td><td>$n=2$：$a_{11}a_{22}-a_{12}a_{21}$；$n\ge3$：$\sum_k(-1)^{j+k}a_{jk}M_{jk}$（餘因子展開）</td></tr>
+    <tr><td>克拉瑪</td><td>$x_k=\dfrac{\det(A\text{ 的第 }k\text{ 行換成 }\vec b)}{\det A}$，$\det A\ne0$</td></tr>
+    <tr><td>反矩陣定義</td><td>$AA^{-1}=A^{-1}A=I$；$\det A=0\Rightarrow$ 不存在（singular）</td></tr>
+    <tr><td>$2\times2$ 反矩陣</td><td>$\begin{bmatrix}a&b\\c&d\end{bmatrix}^{-1}=\frac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$</td></tr>
+    <tr><td>反矩陣求法</td><td>$[A\mid I]\ \to\ [I\mid A^{-1}]$</td></tr>
+    <tr><td>解的存在性</td><td>$\operatorname{Rank}A<\operatorname{Rank}[A\mid\vec B]\Rightarrow$ 無解；$p=n$ ⇒ 唯一解；$p<n$ ⇒ 無限多解</td></tr>
+  </table></div>
+
+  <h3>原稿全部例題速查表</h3>
+  <div class="tw"><table>
+    <tr><th>原稿頁</th><th>題目主題</th><th>答案</th></tr>
+    <tr><td>p.1</td><td>複數：Re／Im／加／乘</td><td>$17+i$；$78+11i$</td></tr>
+    <tr><td>p.1</td><td>複數除法（有理化）</td><td>$\frac{66}{85}+\frac{43}{85}i$</td></tr>
+    <tr><td>p.1</td><td>用共軛求虛部</td><td>$\operatorname{Im}=3$</td></tr>
+    <tr><td>p.2</td><td>$1+i$ 的極式</td><td>$\sqrt2\,e^{i\pi/4}$</td></tr>
+    <tr><td>p.3</td><td>$\sqrt[3]{1}$</td><td>$1,\ -\frac12\pm\frac{\sqrt3}{2}i$</td></tr>
+    <tr><td>p.3</td><td>$\sqrt i$ 與 $\sqrt[5]{1}$</td><td>$\pm(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i)$；$e^{i2k\pi/5}$</td></tr>
+    <tr><td>p.4</td><td>$w=z^2+3z$ 在 $z=1+3i$</td><td>$-5+15i$（原稿筆誤 $1+15i$）</td></tr>
+    <tr><td>p.4</td><td>$\overrightarrow{PQ}$，$P(4,0,2),Q(6,-1,2)$</td><td>$(2,-1,0)$，$\sqrt5$</td></tr>
+    <tr><td>p.4</td><td>向量加法（分量／$\hat i\hat j\hat k$）</td><td>$[6,5,\frac43]$；$[6,-4,\frac43]$</td></tr>
+    <tr><td>p.5</td><td>內積、模、夾角</td><td>$-1$；$\sqrt5,\sqrt{14}$；$96.9^\circ$</td></tr>
+    <tr><td>p.5</td><td>外積</td><td>$(0,0,-3)$</td></tr>
+    <tr><td>p.7</td><td>方向導數</td><td>$\frac{2}{\sqrt6}$（原稿誤寫 $\sqrt5$）</td></tr>
+    <tr><td>p.7</td><td>錐面單位法向量</td><td>$\pm[\frac{2}{\sqrt5},0,-\frac{1}{\sqrt5}]$</td></tr>
+    <tr><td>p.9</td><td>旋度 $\vec v=[yz,3zx,z]$</td><td>$[-3x,y,2z]$</td></tr>
+    <tr><td>p.10</td><td>保守場線積分（$\vec F=[2x,2y,4z]$）</td><td>$16$</td></tr>
+    <tr><td>p.10–11</td><td>圓弧線積分（$\vec F=[-y,-xy]$）</td><td>$\frac\pi4-\frac13\approx0.4521$</td></tr>
+    <tr><td>p.11</td><td>格林定理（單位圓）</td><td>$9\pi$</td></tr>
+    <tr><td>p.13</td><td>$\iint\nabla^2f=\oint\partial f/\partial n$</td><td>推導題</td></tr>
+    <tr><td>p.14</td><td>高斯散度定理（圓柱）</td><td>$\frac{5\pi a^4h}{4}$（原稿未完成）</td></tr>
+    <tr><td>p.15</td><td>斯托克斯定理（碗形）</td><td>$-\pi$</td></tr>
+    <tr><td>p.16</td><td>寫成 $A\vec x=\vec B$</td><td>$\vec x=[3,\frac12,-1]^T$（補充）</td></tr>
+    <tr><td>p.17</td><td>矩陣乘法 $AB$（$3\times3$ 與 $3\times4$）</td><td>見例題 23</td></tr>
+    <tr><td>p.17</td><td>轉置</td><td>$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$</td></tr>
+    <tr><td>p.18</td><td>方程組（增廣矩陣）</td><td>$x_1=6,\ x_2=-2$</td></tr>
+    <tr><td>p.18</td><td>電路三條方程式</td><td>$(x_1,x_2,x_3)=(2,4,2)$</td></tr>
+    <tr><td>p.19</td><td>無限多組解的例子</td><td>消去後出現 0 列</td></tr>
+    <tr><td>p.19</td><td>無解的例子</td><td>消去後出現 $0=-6$</td></tr>
+    <tr><td>p.20</td><td>Rank</td><td>$\operatorname{Rank}A=2$；H.W. 也是 2</td></tr>
+    <tr><td>p.21</td><td>3×3 行列式</td><td>$-12$</td></tr>
+    <tr><td>p.22</td><td>克拉瑪公式</td><td>$x_1=6,\ x_2=-2$</td></tr>
+    <tr><td>p.23</td><td>反矩陣</td><td>$\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$</td></tr>
+  </table></div>
+
+  <div class="box warn">
+    <span class="lab">原稿的 5 個筆誤（自己複習時要記得改過來）</span>
+    <ol style="margin-bottom:0">
+      <li><b>p.4</b> $f(1+3i)$ 應為 $-5+15i$（原稿寫 $1+15i$）。</li>
+      <li><b>p.4</b> 向量加法第二分量 $1+(-5)=-4$（原稿寫 $-5$）。</li>
+      <li><b>p.7</b> $|\vec a|=\sqrt6$（原稿寫 $\sqrt5$），方向導數 $\frac{2}{\sqrt6}$。</li>
+      <li><b>p.10</b> 保守場那題的位勢差要用<b>路徑端點</b> $(0,0,0)\to(2,2,2)$ 算，$f$ 差為 16；$A(1,1,1)$ 只是圖上的標記點。</li>
+      <li><b>p.18</b> 電路第二條應為 $20x_1+10x_2=80$（原稿寫成 $10x_3$）。</li>
+    </ol>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">考前 60 秒自我檢查清單</span>
+    <ul style="margin-bottom:0">
+      <li>複數除法：分母乘的是<b>共軛</b>嗎？</li>
+      <li>開 $n$ 次方：角度用的是 $\frac{\theta+2k\pi}{n}$ 嗎？數了 <b>$n$ 個</b> 解嗎？</li>
+      <li>方向導數：方向向量<b>單位化</b>了嗎？</li>
+      <li>求曲面法向量：有沒有把方程式整理成 $f(x,y,z)=c$ 再取 $\nabla f$？</li>
+      <li>散度：每個分量對<b>自己的</b>變數微分嗎？（$v_1$ 對 $x$）</li>
+      <li>旋度：$\hat j$ 那一項的<b>負號</b>加了嗎？</li>
+      <li>換座標：$dV$ 的<b>比例因子</b>（$\rho$ 或 $r^2\sin\theta$）補了嗎？</li>
+      <li>三大定理：曲面／區域是<b>封閉</b>的嗎？方向（正負向）對嗎？</li>
+      <li>矩陣相乘：$AB$ 還是 $BA$？尺寸對得上嗎？</li>
+      <li>算完反矩陣／方程組：<b>回代驗算</b>了嗎？</li>
+    </ul>
+  </div>
+
+  <h4>綜合練習（答案在下面，先自己寫）</h4>
+  <details class="sc"><summary>1. 求 $\dfrac{(2+i)(3-2i)}{1+i}$。</summary><p class="a">分子：$(2+i)(3-2i)=6-4i+3i-2i^2=8-i$。再除以 $1+i$：$\frac{(8-i)(1-i)}{2}=\frac{8-8i-i+i^2}{2}=\frac{7-9i}{2}=\frac72-\frac92i$。</p></details>
+  <details class="sc"><summary>2. 寫出 $-1+i$ 的極式與 $(-1+i)^6$。</summary><p class="a">$r=\sqrt2$、主值輻角 $\frac{3\pi}{4}$ ⇒ $z=\sqrt2e^{i3\pi/4}$。$z^6=(\sqrt2)^6e^{i(18\pi/4)}=8e^{i9\pi/2}=8e^{i\pi/2}=8i$。</p></details>
+  <details class="sc"><summary>3. $f=x^2yz$，在 $P(1,2,3)$ 沿 $\vec a=[1,1,1]$ 的方向導數？</summary><p class="a">$\nabla f=[2xyz,\ x^2z,\ x^2y]$ ⇒ $\nabla f(P)=[12,3,2]$；$\hat a=\frac{1}{\sqrt3}[1,1,1]$ ⇒ $D=\frac{12+3+2}{\sqrt3}=\frac{17}{\sqrt3}\approx9.81$。</p></details>
+  <details class="sc"><summary>4. $\vec F=[2xy,\ x^2,\ 1]$ 是否保守？若是，求位勢函數。</summary><p class="a">$\nabla\times\vec F=(0-0,\ 0-0,\ 2x-2x)=\vec0$ ⇒ 保守。$f_x=2xy\Rightarrow f=x^2y+g(y,z)$；$f_y=x^2+g_y=x^2\Rightarrow g_y=0$；$f_z=g_z=1\Rightarrow g=z+C$。所以 $f=x^2y+z+C$。</p></details>
+  <details class="sc"><summary>5. 用格林定理算 $\oint_C(y^3dx+x^3dy)$，$C$ 為半徑 2 的圓。</summary><p class="a">$\partial_xF_2-\partial_yF_1=3x^2-3y^2$。用極座標：$3\int_0^{2\pi}\!\!\int_0^2(r^2\cos^2\theta-r^2\sin^2\theta)r\,dr\,d\theta=3\int_0^{2\pi}\cos2\theta\,d\theta\int_0^2r^3dr=0$（因為 $\cos2\theta$ 走一整圈積分為 0）⇒ 答案 0。</p></details>
+  <details class="sc"><summary>6. $A=\begin{bmatrix}1&2\\3&4\end{bmatrix}$，求 $A^{-1}$ 並解 $A\vec x=[5,11]^T$。</summary><p class="a">$\det=-2$ ⇒ $A^{-1}=\frac{1}{-2}\begin{bmatrix}4&-2\\-3&1\end{bmatrix}=\begin{bmatrix}-2&1\\1.5&-0.5\end{bmatrix}$。$\vec x=A^{-1}\vec B=\begin{bmatrix}-10+11\\7.5-5.5\end{bmatrix}=\begin{bmatrix}1\\2\end{bmatrix}$。驗算：$1+4=5$ ✓、$3+8=11$ ✓。</p></details>
+
+  <footer>
+    <p><b>工程數學 · 手寫講義精讀</b> — 依原稿 23 頁逐頁整理，每個例題都附思路。原稿縮圖可點擊放大對照。</p>
+    <p>使用方式：手機可直開這個資料夾的 <span class="kbd">index.html</span>；離線也能用（數學排版與原稿圖都在本機）。右上角可切換夜間模式。</p>
+  </footer>
+</section>
+</article>
+</main>
+</div>
+
+<div class="lb" id="lb"><button class="close" id="lbClose">關閉 ×</button><img id="lbImg" alt="原稿放大圖"></div>
+<button class="tbtn" id="totop" style="position:fixed">↑ 回頂端</button>
+
+<script src="assets/katex/katex.min.js"></script>
+<script src="assets/katex/auto-render.min.js"></script>
+<script>
+(function(){
+  // ---- math ----
+  function typeset(){
+    if(!window.renderMathInElement) return;
+    renderMathInElement(document.body,{
+      delimiters:[
+        {left:"$$",right:"$$",display:true},
+        {left:"$",right:"$",display:false}
+      ],
+      ignoredTags:["script","noscript","style","textarea","pre","code"],
+      throwOnError:false
+    });
+  }
+  if(document.readyState==="complete"||document.readyState==="interactive") typeset();
+  else document.addEventListener("DOMContentLoaded",typeset);
+  window.addEventListener("load",typeset);
+
+  // ---- theme ----
+  var themeBtn=document.getElementById("themeBtn");
+  var saved=localStorage.getItem("gs-theme");
+  if(saved==="dark") document.documentElement.setAttribute("data-theme","dark");
+  function syncBtn(){ themeBtn.textContent = document.documentElement.getAttribute("data-theme")==="dark" ? "日間" : "夜間"; }
+  syncBtn();
+  themeBtn.addEventListener("click",function(){
+    var dark=document.documentElement.getAttribute("data-theme")==="dark";
+    if(dark){document.documentElement.removeAttribute("data-theme");localStorage.setItem("gs-theme","light");}
+    else{document.documentElement.setAttribute("data-theme","dark");localStorage.setItem("gs-theme","dark");}
+    syncBtn();
+  });
+
+  // ---- mobile toc ----
+  var toc=document.getElementById("toc"), menuBtn=document.getElementById("menuBtn");
+  function checkW(){ menuBtn.style.display = window.innerWidth<=900 ? "" : "none"; if(window.innerWidth>900) toc.classList.remove("open"); }
+  checkW(); window.addEventListener("resize",checkW);
+  menuBtn.addEventListener("click",function(){ toc.classList.toggle("open"); });
+  toc.addEventListener("click",function(e){ if(e.target.tagName==="A" && window.innerWidth<=900) toc.classList.remove("open"); });
+
+  // ---- lightbox ----
+  var lb=document.getElementById("lb"), lbImg=document.getElementById("lbImg");
+  document.addEventListener("click",function(e){
+    var img=e.target.closest(".scan img");
+    if(img){ lbImg.src=img.src; lb.classList.add("on"); document.body.style.overflow="hidden"; }
+  });
+  function closeLb(){ lb.classList.remove("on"); lbImg.src=""; document.body.style.overflow=""; }
+  document.getElementById("lbClose").addEventListener("click",closeLb);
+  lb.addEventListener("click",function(e){ if(e.target===lb) closeLb(); });
+  document.addEventListener("keydown",function(e){ if(e.key==="Escape") closeLb(); });
+
+  // ---- progress + active toc + back to top ----
+  var bar=document.getElementById("progress"), totop=document.getElementById("totop");
+  var links=[].slice.call(document.querySelectorAll("nav.toc a"));
+  var secs=links.map(function(a){ return document.querySelector(a.getAttribute("href")); });
+  function onScroll(){
+    var h=document.documentElement.scrollHeight-window.innerHeight;
+    var y=window.scrollY||document.documentElement.scrollTop;
+    bar.style.width=(h>0?(y/h*100):0)+"%";
+    totop.classList.toggle("on", y>600);
+    var idx=0;
+    for(var i=0;i<secs.length;i++){
+      if(secs[i] && secs[i].getBoundingClientRect().top<=120) idx=i;
+    }
+    links.forEach(function(a,i){ a.classList.toggle("on", i===idx); });
+  }
+  window.addEventListener("scroll",onScroll,{passive:true}); onScroll();
+  totop.addEventListener("click",function(){ window.scrollTo({top:0,behavior:"smooth"}); });
+})();
+</script>
+
+<script>
+(function(){
+  // ---- interactive English term popover ----
+  var pop=document.createElement('div');
+  pop.id='pop'; document.body.appendChild(pop);
+  function showPop(btn){
+    pop.innerHTML='<div class="pen">'+btn.textContent+'</div><div class="pzh">'+(btn.dataset.zh||'')+'</div>'+
+                  '<p class="pnote">'+(btn.dataset.note||'')+'</p>';
+    if(window.renderMathInElement){renderMathInElement(pop,{delimiters:[{left:"$",right:"$",display:false}],throwOnError:false});}
+    pop.classList.add('on');
+    if(window.innerWidth>900){
+      var r=btn.getBoundingClientRect();
+      var w=pop.offsetWidth||330, h=pop.offsetHeight||110;
+      var left=Math.min(r.left+window.scrollX, document.documentElement.scrollWidth-w-16);
+      var top=r.bottom+window.scrollY+8;
+      if(r.bottom+h+20>document.documentElement.clientHeight){  // 下方空間不夠就往上翻
+        top=Math.max(window.scrollY+8, r.top+window.scrollY-h-8);
+      }
+      pop.style.left=Math.max(12,left)+'px';
+      pop.style.top=top+'px';
+    } else { pop.style.left=''; pop.style.top=''; }
+  }
+  document.addEventListener('click',function(e){
+    var b=e.target.closest('.term');
+    if(b){ e.preventDefault(); showPop(b); return; }
+    if(!e.target.closest('#pop')) pop.classList.remove('on');
+  });
+  window.addEventListener('scroll',function(){ pop.classList.remove('on'); },{passive:true});
+  window.addEventListener('resize',function(){ pop.classList.remove('on'); });
+  document.addEventListener('keydown',function(e){ if(e.key==='Escape') pop.classList.remove('on'); });
+
+  // ---- glossary search ----
+  var gs=document.getElementById('gsearch');
+  if(gs){
+    var blocks=[].slice.call(document.querySelectorAll('.gblock'));
+    var hint=document.getElementById('ghint'), empty=document.getElementById('gempty');
+    var all=blocks.reduce(function(n,b){ return n+b.querySelectorAll('.grow').length; },0);
+    gs.addEventListener('input',function(){
+      var q=gs.value.trim().toLowerCase(); var shown=0;
+      blocks.forEach(function(b){
+        var rows=[].slice.call(b.querySelectorAll('.grow')); var hit=0;
+        rows.forEach(function(tr){
+          var ok=!q||tr.textContent.toLowerCase().indexOf(q)>-1;
+          tr.style.display=ok?'':'none'; if(ok)hit++;
+        });
+        var bhit=!q||hit>0||b.dataset.h.toLowerCase().indexOf(q)>-1;
+        if(q&&hit===0&&b.dataset.h.toLowerCase().indexOf(q)>-1){ rows.forEach(function(tr){tr.style.display='';}); hit=rows.length; bhit=true; }
+        b.style.display=bhit?'':'none'; shown+=hit;
+      });
+      empty.style.display=shown?'none':'block';
+      hint.textContent=q?('找到 '+shown+' 個術語（共 '+all+' 個）'):('共 '+all+' 個術語 · 依章節排列');
+    });
+  }
+})();
+</script>
+</body>
+</html>
