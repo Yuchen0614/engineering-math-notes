@@ -23,6 +23,14 @@ pages/p01–p23.jpg   原稿掃描頁
 assets/katex/       離線數學排版（KaTeX + 字型）
 ```
 
+## 附件
+
+- **`工數-例題與重點.pdf`** — A4 兩頁考前速記：第 1 頁 32 題的完整計算過程＋答案，第 2 頁 17 章重點（每條公式附白話翻譯）。字體為華文細黑（非書法體），6pt 左右。
+- `cheatsheet.html` — 上面那份 PDF 的原始 HTML（用 Chrome 列印成 PDF 的那份）。
+- `source/工數原稿.pdf` — 上課手寫講義原檔（23 頁掃描）。
+
+線上直接下載：https://yuchen0614.github.io/engineering-math-notes/工數-例題與重點.pdf
+
 ## 筆記
 
 原稿是上課手寫筆記，內容中有 5 處筆誤（例如 p.7 的 $|\vec a|$、p.18 電路的那條方程式），
