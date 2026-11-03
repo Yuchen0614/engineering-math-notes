@@ -7,125 +7,190 @@
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 @font-face{font-family:FBook;src:url("file:///C:/Windows/Fonts/STXIHEI.TTF")}
 body{margin:0;font-family:FBook,"Microsoft JhengHei","微軟正黑體",sans-serif;
-     color:#1b1b1b;font-size:6.8pt;line-height:1.46}
+     color:#1b1b1b;font-size:5.85pt;line-height:1.40}
 .page{width:210mm;height:297mm;padding:6mm 7mm 5mm 10mm;position:relative;overflow:hidden;page-break-after:always}
 .page:last-child{page-break-after:auto}
 .page::before{content:"";position:absolute;left:7mm;top:0;bottom:0;width:.3mm;background:#f0c0c0}
 h1{font-size:13pt;margin:0 0 .5mm;letter-spacing:.6pt;font-weight:700}
 h1 small{font-size:7pt;color:#666;font-weight:400;letter-spacing:0}
 .hr{height:.5mm;background:linear-gradient(90deg,#2a5db0 0%,#2a5db0 55%,#e0c9a6 55%,#e0c9a6 100%);margin:.6mm 0 1.2mm;border-radius:2px}
-.cols{column-count:2;column-gap:4mm}
-.ex{break-inside:avoid;margin:0 0 1.05mm;padding-left:5.2mm;position:relative}
+.cols{column-count:2;column-gap:4mm;height:277mm;column-fill:auto}
+.ex{break-inside:avoid;margin:0 0 0.78mm;padding-left:5.2mm;position:relative}
 .ex .no{position:absolute;left:0;top:.1mm;color:#2a5db0;font-weight:700}
 .tt{color:#1a3f7a;font-weight:700}
 .pg{display:inline-block;font-size:.72em;color:#8a7a5f;border:.2mm solid #dcd0b8;border-radius:2px;
     padding:0 .6mm;margin-right:.6mm;vertical-align:.2mm}
 .so{display:block;color:#3a3a3a;margin:.15mm 0 0}
+.q{display:block;color:#173a6b;margin:.05mm 0 0}
+.q .lab{color:#a8681a;font-weight:700}
+.so{display:block;color:#4a4a4a;margin:.05mm 0 0}
 .ans{color:#b3261e;font-weight:700}
 .katex{font-size:1.03em}
 </style></head><body>
 
 <section class="page">
-  <h1>工程數學 · 課堂例題總整理 <small>／ 原稿 23 頁、32 題：題目、完整計算過程、答案</small></h1>
+  <h1>工程數學 · 課堂例題總整理 <small>／ 原稿 23 頁、32 題：完整題目、計算過程、答案</small></h1>
   <div class="hr"></div>
   <div class="cols">
 
-  <div class="ex"><span class="no">①</span><span class="pg">p.1</span><span class="tt">複數四則</span> $z_1=8+3i,\ z_2=9-2i$
-  <span class="so">解：$\operatorname{Re}z_1=8$、$\operatorname{Im}z_1=3$（讀係數）；$z_1+z_2=(8+9)+(3-2)i=17+i$；$z_1z_2=72-16i+27i-6i^2=72+11i+6$ <span class="ans">$=78+11i$</span>（$-6i^2=+6$）</span></div>
+  <div class="ex"><span class="no">①</span><span class="pg">p.1</span><span class="tt">複數四則</span>
+<span class="q"><span class="lab">題　</span>設 $z_1=8+3i$、$z_2=9-2i$，求 $\operatorname{Re}(z_1)$、$\operatorname{Im}(z_1)$、$z_1+z_2$、$z_1z_2$。</span>
+<span class="so">解：$\operatorname{Re}z_1=8$、$\operatorname{Im}z_1=3$（讀係數）；$z_1+z_2=(8+9)+(3-2)i=17+i$；$z_1z_2=72-16i+27i-6i^2=72+11i+6$ <span class="ans">$=78+11i$</span>（$-6i^2=+6$）</span></div>
 
-  <div class="ex"><span class="no">②</span><span class="pg">p.1</span><span class="tt">複數除法</span> $\dfrac{8+3i}{9-2i}$
-  <span class="so">解：上下同乘共軛 $9+2i$ ⇒ $\dfrac{(8+3i)(9+2i)}{9^2+2^2}=\dfrac{72-6+16i+27i}{85}$ <span class="ans">$=\dfrac{66}{85}+\dfrac{43}{85}i$</span></span></div>
 
-  <div class="ex"><span class="no">③</span><span class="pg">p.1</span><span class="tt">共軛取虛部</span> $z_1=4+3i$
-  <span class="so">解：$\bar z_1=4-3i$ ⇒ $z_1-\bar z_1=(4+3i)-(4-3i)=6i$ ⇒ $\operatorname{Im}z_1=\dfrac{6i}{2i}$ <span class="ans">$=3$</span>（實部互消，只留虛部）</span></div>
+  <div class="ex"><span class="no">②</span><span class="pg">p.1</span><span class="tt">複數除法</span>
+<span class="q"><span class="lab">題　</span>設 $z_1=8+3i$、$z_2=9-2i$，求 $\dfrac{z_1}{z_2}$。</span>
+<span class="so">解：上下同乘共軛 $9+2i$ ⇒ $\dfrac{(8+3i)(9+2i)}{9^2+2^2}=\dfrac{72-6+16i+27i}{85}$ <span class="ans">$=\dfrac{66}{85}+\dfrac{43}{85}i$</span></span></div>
+
+
+  <div class="ex"><span class="no">③</span><span class="pg">p.1</span><span class="tt">共軛取虛部</span>
+<span class="q"><span class="lab">題　</span>設 $z_1=4+3i$、$z_2=2+5i$，用 $\operatorname{Im}(z_1)=\dfrac{1}{2i}(z_1-\bar z_1)$ 求 $\operatorname{Im}(z_1)$。</span>
+<span class="so">解：$\bar z_1=4-3i$ ⇒ $z_1-\bar z_1=(4+3i)-(4-3i)=6i$ ⇒ $\operatorname{Im}z_1=\dfrac{6i}{2i}$ <span class="ans">$=3$</span>（實部互消，只留虛部）</span></div>
+
 
   <div class="ex"><span class="no">④</span><span class="pg">p.2</span><span class="tt">$z=1+i$ 化極式</span>
-  <span class="so">解：$r=\sqrt{1^2+1^2}=\sqrt2$；第一象限且 $\tan\theta=\frac11=1$ ⇒ $\theta=\frac{\pi}{4}$ ⇒ $z=\sqrt2(\cos\frac\pi4+i\sin\frac\pi4)$ <span class="ans">$=\sqrt2\,e^{i\pi/4}$</span>；一般角 $\operatorname{Arg}z=\frac\pi4+2n\pi$</span></div>
+<span class="q"><span class="lab">題　</span>設 $z=1+i$，求極式、$|z|$、主值 $\operatorname{Arg}z$ 與一般角 $\arg z$。</span>
+<span class="so">解：$r=\sqrt{1^2+1^2}=\sqrt2$；第一象限且 $\tan\theta=\frac11=1$ ⇒ $\theta=\frac{\pi}{4}$ ⇒ $z=\sqrt2(\cos\frac\pi4+i\sin\frac\pi4)$ <span class="ans">$=\sqrt2\,e^{i\pi/4}$</span>；一般角 $\operatorname{Arg}z=\frac\pi4+2n\pi$</span></div>
+
 
   <div class="ex"><span class="no">⑤</span><span class="pg">p.3</span><span class="tt">$\sqrt[3]{1}$</span>
-  <span class="so">解：$1=e^{i0}$ ⇒ 角度 $\frac{0+2k\pi}{3}=0,\frac{2\pi}{3},\frac{4\pi}{3}$（$k=0,1,2$），半徑 $1$ ⇒ <span class="ans">$1,\ -\frac12+\frac{\sqrt3}{2}i,\ -\frac12-\frac{\sqrt3}{2}i$</span>（三點把單位圓三等分）</span></div>
+<span class="q"><span class="lab">題　</span>求 $\sqrt[3]{1}$ 的三個解，並在複數平面上畫出它們的位置。</span>
+<span class="so">解：$1=e^{i0}$ ⇒ 角度 $\frac{0+2k\pi}{3}=0,\frac{2\pi}{3},\frac{4\pi}{3}$（$k=0,1,2$），半徑 $1$ ⇒ <span class="ans">$1,\ -\frac12+\frac{\sqrt3}{2}i,\ -\frac12-\frac{\sqrt3}{2}i$</span>（三點把單位圓三等分）</span></div>
 
-  <div class="ex"><span class="no">⑥</span><span class="pg">p.3</span><span class="tt">$\sqrt i$、$\sqrt[5]{1}$</span>
-  <span class="so">解：$i=e^{i\pi/2}$ ⇒ 角度 $\frac{\pi/2+2k\pi}{2}=\frac\pi4,\frac{5\pi}{4}$ ⇒ <span class="ans">$\pm\left(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i\right)$</span>；$\sqrt[5]{1}$：角度 $\frac{2k\pi}{5}$，$k=0..4$ <span class="ans">$=e^{i2k\pi/5}$</span></span></div>
+
+  <div class="ex"><span class="no">⑥</span><span class="pg">p.3</span><span class="tt">$\sqrt[5]{1}$</span>
+<span class="q"><span class="lab">題　</span>求 $\sqrt[5]{1}$ 的一般式，並說明 5 個解在複數平面上的位置。</span>
+<span class="so">解：$\sqrt[5]{1}$：$r=1$、$\theta=0$ ⇒ 角度 $\frac{0+2k\pi}{5}$，$k=0,\dots,4$ ⇒ <span class="ans">$e^{i2k\pi/5}=\cos\frac{2k\pi}{5}+i\sin\frac{2k\pi}{5}$</span>（單位圓五等分，正五邊形）。延伸：同一招可開 $\sqrt i$（$i=e^{i\pi/2}$）⇒ 角度 $\frac{\pi/4+2k\pi}{2}=\frac\pi4,\frac{5\pi}4$ ⇒ <span class="ans">$\pm\big(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i\big)$</span></span></div>
+
 
   <div class="ex"><span class="no">⑦</span><span class="pg">p.4</span><span class="tt">$w=z^2+3z$，$z=1+3i$</span>
-  <span class="so">解：$(1+3i)^2=1+6i+9i^2=-8+6i$；$3(1+3i)=3+9i$；相加 <span class="ans">$=-5+15i$</span>。分離式：$u=x^2-y^2+3x$、$v=2xy+3y$，代 $(x,y)=(1,3)$ 得 $u=1-9+3=-5$、$v=6+9=15$ ✓</span></div>
+<span class="q"><span class="lab">題　</span>設 $w=f(z)=z^2+3z$，求 $u(x,y)$、$v(x,y)$，並求 $z=1+3i$ 時的 $f(z)$。</span>
+<span class="so">解：$(1+3i)^2=1+6i+9i^2=-8+6i$；$3(1+3i)=3+9i$；相加 <span class="ans">$=-5+15i$</span>。分離式：$u=x^2-y^2+3x$、$v=2xy+3y$，代 $(x,y)=(1,3)$ 得 $u=1-9+3=-5$、$v=6+9=15$ ✓</span></div>
 
-  <div class="ex"><span class="no">⑧</span><span class="pg">p.4</span><span class="tt">向量與長度</span> $P(4,0,2)\to Q(6,-1,2)$
-  <span class="so">解：$\overrightarrow{PQ}=Q-P=(6-4,\ -1-0,\ 2-2)=(2,-1,0)$；$|\overrightarrow{PQ}|=\sqrt{2^2+(-1)^2+0^2}$ <span class="ans">$=\sqrt5$</span></span></div>
 
-  <div class="ex"><span class="no">⑨</span><span class="pg">p.4</span><span class="tt">向量加法（分量）</span> $[4,0,1]+[2,5,\frac13]$
-  <span class="so">解：對應位置相加 $=[4+2,\ 0+5,\ 1+\frac13]$ <span class="ans">$=[6,5,\frac43]$</span></span></div>
+  <div class="ex"><span class="no">⑧</span><span class="pg">p.4</span><span class="tt">向量與長度</span>
+<span class="q"><span class="lab">題　</span>設 $P(4,0,2)$、$Q(6,-1,2)$，求 $\overrightarrow{PQ}$ 與 $|\overrightarrow{PQ}|$。</span>
+<span class="so">解：$\overrightarrow{PQ}=Q-P=(6-4,\ -1-0,\ 2-2)=(2,-1,0)$；$|\overrightarrow{PQ}|=\sqrt{2^2+(-1)^2+0^2}$ <span class="ans">$=\sqrt5$</span></span></div>
+
+
+  <div class="ex"><span class="no">⑨</span><span class="pg">p.4</span><span class="tt">向量加法（分量）</span>
+<span class="q"><span class="lab">題　</span>設 $\vec a=[4,0,1]$、$\vec b=[2,5,\frac13]$，求 $\vec a+\vec b$。</span>
+<span class="so">解：對應位置相加 $=[4+2,\ 0+5,\ 1+\frac13]$ <span class="ans">$=[6,5,\frac43]$</span></span></div>
+
 
   <div class="ex"><span class="no">⑩</span><span class="pg">p.4</span><span class="tt">向量加法（$\hat i\hat j\hat k$）</span>
-  <span class="so">解：$(4\hat i+\hat j+\hat k)+(2\hat i-5\hat j+\frac13\hat k)=(4+2)\hat i+(1-5)\hat j+(1+\frac13)\hat k$ <span class="ans">$=6\hat i-4\hat j+\frac43\hat k$</span>（第二分量 $1-5=-4$）</span></div>
-
-  <div class="ex"><span class="no">⑪</span><span class="pg">p.5</span><span class="tt">內積與夾角</span> $\vec a=[1,2,0],\ \vec b=[3,-2,1]$
-  <span class="so">解：$\vec a\cdot\vec b=1(3)+2(-2)+0(1)=3-4+0=-1$；$|\vec a|=\sqrt5$、$|\vec b|=\sqrt{14}$；$\cos\theta=\dfrac{-1}{\sqrt{70}}\approx-0.1195$ ⇒ <span class="ans">$\theta\approx96.9^\circ$</span>（負值＝鈍角）</span></div>
-
-  <div class="ex"><span class="no">⑫</span><span class="pg">p.5</span><span class="tt">外積</span> $\vec a=[1,1,0],\ \vec b=[3,0,0]$
-  <span class="so">解：$\vec a\times\vec b=\hat i(1\cdot0-0\cdot0)-\hat j(1\cdot0-0\cdot3)+\hat k(1\cdot0-1\cdot3)=0\hat i-0\hat j-3\hat k$ <span class="ans">$=(0,0,-3)$</span>，面積 $|\vec a\times\vec b|=3$</span></div>
+<span class="q"><span class="lab">題　</span>設 $\vec a=4\hat i+\hat k$、$\vec b=2\hat i-5\hat j+\frac13\hat k$，求 $\vec a+\vec b$。</span>
+<span class="so">解：$(\hat i\hat j\hat k)$ 寫法一樣是分量相加，看出 $\vec a$ 沒有 $\hat j$ 項（$\hat j$ 分量為 0）⇒ $(4+2)\hat i+(0-5)\hat j+(1+\frac13)\hat k$ <span class="ans">$=6\hat i-5\hat j+\frac43\hat k$</span>；對照 ⑨（分量式）答案 $=[6,-5,\frac43]$ 完全相同</span></div>
 
 
-  <div class="ex"><span class="no">⑬</span><span class="pg">p.7</span><span class="tt">方向導數</span> $f=2x^2+3y^2+z^2$、$P(2,1,3)$、$\vec a=(1,1,-2)$
-  <span class="so">解：$\nabla f=[4x,6y,2z]$ ⇒ $\nabla f(P)=(8,6,6)$；$|\vec a|=\sqrt{1+1+4}=\sqrt6$；$D_{\vec a}f=\dfrac{[1,1,-2]}{\sqrt6}\cdot[8,6,6]=\dfrac{8+6-12}{\sqrt6}$ <span class="ans">$=\dfrac{2}{\sqrt6}=\dfrac{\sqrt6}{3}\approx0.816$</span></span></div>
+  <div class="ex"><span class="no">⑪</span><span class="pg">p.5</span><span class="tt">內積與夾角</span>
+<span class="q"><span class="lab">題　</span>設 $\vec a=[1,2,0]$、$\vec b=[3,-2,1]$，求 $\vec a\cdot\vec b$、$|\vec a|$、$|\vec b|$ 與夾角 $\theta$。</span>
+<span class="so">解：$\vec a\cdot\vec b=1(3)+2(-2)+0(1)=3-4+0=-1$；$|\vec a|=\sqrt5$、$|\vec b|=\sqrt{14}$；$\cos\theta=\dfrac{-1}{\sqrt{70}}\approx-0.1195$ ⇒ <span class="ans">$\theta\approx96.9^\circ$</span>（負值＝鈍角）</span></div>
 
-  <div class="ex"><span class="no">⑭</span><span class="pg">p.7</span><span class="tt">錐面單位法向量</span> $z^2=4(x^2+y^2)$、$P(1,0,2)$
-  <span class="so">解：移項 $f=4(x^2+y^2)-z^2=0$；$\nabla f=[8x,8y,-2z]$ ⇒ $\nabla f(P)=(8,0,-4)$；$|\nabla f(P)|=\sqrt{64+16}=4\sqrt5$ ⇒ <span class="ans">$\hat n=\pm\left[\frac{2}{\sqrt5},0,-\frac{1}{\sqrt5}\right]$</span></span></div>
 
-  <div class="ex"><span class="no">⑮</span><span class="pg">p.9</span><span class="tt">旋度</span> $\vec v=[yz,\ 3zx,\ z]$
-  <span class="so">解：$\left(\frac{\partial v_3}{\partial y}-\frac{\partial v_2}{\partial z}\right)\hat i-\left(\frac{\partial v_1}{\partial z}-\frac{\partial v_3}{\partial x}\right)\hat j+\left(\frac{\partial v_2}{\partial x}-\frac{\partial v_1}{\partial y}\right)\hat k=(0-3x)\hat i-(y-0)\hat j+(3z-z)\hat k$ <span class="ans">$=[-3x,\ y,\ 2z]$</span></span></div>
+  <div class="ex"><span class="no">⑫</span><span class="pg">p.5</span><span class="tt">外積</span>
+<span class="q"><span class="lab">題　</span>設 $\vec a=[1,1,0]$、$\vec b=[3,0,0]$，求 $\vec a\times\vec b$ 及其長度（＝兩向量張出的平行四邊形面積）。</span>
+<span class="so">解：$\vec a\times\vec b=\hat i(1\cdot0-0\cdot0)-\hat j(1\cdot0-0\cdot3)+\hat k(1\cdot0-1\cdot3)=0\hat i-0\hat j-3\hat k$ <span class="ans">$=(0,0,-3)$</span>，面積 $|\vec a\times\vec b|=3$</span></div>
 
-  <div class="ex"><span class="no">⑯</span><span class="pg">p.10</span><span class="tt">保守場線積分</span> $\vec F=[2x,2y,4z]=\nabla f$、$f=x^2+y^2+2z^2$、$\vec r(t)=[t,t,t]$，$0\le t\le2$
-  <span class="so">解（硬算）：$\vec F(\vec r(t))=[2t,2t,4t]$、$\vec r'=[1,1,1]$ ⇒ 內積 $=2t+2t+4t=8t$ ⇒ $\int_0^2 8t\,dt=4t^2\big|_0^2$ <span class="ans">$=16$</span>。解（位勢）：端點 $(0,0,0)\to(2,2,2)$ ⇒ $f(2,2,2)-f(0,0,0)=(4+4+8)-0=16$ ✓</span></div>
 
-  <div class="ex"><span class="no">⑰</span><span class="pg">p.10</span><span class="tt">非保守場線積分</span> $\vec F=[-y,-xy]$、單位圓第一象限弧
-  <span class="so">解：$x=\cos t,\ y=\sin t,\ 0\le t\le\frac\pi2$ ⇒ $\vec F(\vec r)=[-\sin t,\ -\cos t\sin t]$、$\vec r'=[-\sin t,\ \cos t]$ ⇒ 內積 $=\sin^2t-\cos^2t\sin t$ ⇒ $\int_0^{\pi/2}\sin^2t\,dt-\int_0^{\pi/2}\cos^2t\sin t\,dt=\frac\pi4-\left[-\frac{\cos^3t}{3}\right]_0^{\pi/2}$ <span class="ans">$=\frac\pi4-\frac13\approx0.4521$</span></span></div>
+  <div class="ex"><span class="no">⑬</span><span class="pg">p.7</span><span class="tt">方向導數</span>
+<span class="q"><span class="lab">題　</span>設 $f(x,y,z)=2x^2+3y^2+z^2$，在點 $P(2,1,3)$、沿方向 $\vec a=[1,0,-2]$，求方向導數 $D_{\vec a}f$。</span>
+<span class="so">解：$\nabla f=[4x,6y,2z]$ ⇒ $\nabla f(P)=(8,6,6)$；$|\vec a|=\sqrt{1+0+4}=\sqrt5$ ⇒ $D_{\vec a}f=\dfrac{[1,0,-2]}{\sqrt5}\cdot[8,6,6]=\dfrac{8+0-12}{\sqrt5}$ <span class="ans">$=-\dfrac{4}{\sqrt5}\approx-1.789$</span>（負值＝往這個方向走，函數值是下降的）</span></div>
 
-  <div class="ex"><span class="no">⑱</span><span class="pg">p.11</span><span class="tt">格林定理</span> $F_1=y^2-7y$、$F_2=2xy+2x$、$C:x^2+y^2=1$
-  <span class="so">解（格林）：$\frac{\partial F_2}{\partial x}=2y+2$、$\frac{\partial F_1}{\partial y}=2y-7$ ⇒ 差 $=9$ ⇒ $\iint_R 9\,dA=9\times$（圓面積 $\pi$） <span class="ans">$=9\pi$</span>。解（參數化）：$F_1=\sin^2t-7\sin t$、$F_2=2\cos t\sin t+2\cos t$ ⇒ $\oint(F_1x'+F_2y')dt=\int_0^{2\pi}(-\sin^3t+7\sin^2t+2\cos^2t\sin t+2\cos^2t)dt=0+7\pi+0+2\pi=9\pi$ ✓</span></div>
+
+  <div class="ex"><span class="no">⑭</span><span class="pg">p.7</span><span class="tt">錐面單位法向量</span>
+<span class="q"><span class="lab">題　</span>求迴轉錐面 $z^2=4(x^2+y^2)$ 在點 $P(1,0,2)$ 的單位法向量 $\hat n$。</span>
+<span class="so">解：移項 $f=4(x^2+y^2)-z^2=0$；$\nabla f=[8x,8y,-2z]$ ⇒ $\nabla f(P)=(8,0,-4)$；$|\nabla f(P)|=\sqrt{64+16}=4\sqrt5$ ⇒ <span class="ans">$\hat n=\pm\left[\frac{2}{\sqrt5},0,-\frac{1}{\sqrt5}\right]$</span></span></div>
+
+
+  <div class="ex"><span class="no">⑮</span><span class="pg">p.9</span><span class="tt">旋度</span>
+<span class="q"><span class="lab">題　</span>設向量函數 $\vec v=[yz,\ 3zx,\ z]=yz\,\hat i+3zx\,\hat j+z\,\hat k$，求 $\operatorname{curl}\vec v=\nabla\times\vec v$。</span>
+<span class="so">解：$\nabla\times\vec v=\hat i\Big(\frac{\partial v_3}{\partial y}-\frac{\partial v_2}{\partial z}\Big)+\hat j\Big(\frac{\partial v_1}{\partial z}-\frac{\partial v_3}{\partial x}\Big)+\hat k\Big(\frac{\partial v_2}{\partial x}-\frac{\partial v_1}{\partial y}\Big)$ $=(0-3x)\hat i+(y-0)\hat j+(3z-z)\hat k$ <span class="ans">$=[-3x,\ y,\ 2z]$</span>（$y$ 那一項來自 $\frac{\partial(yz)}{\partial z}=y$）</span></div>
+
+
+  <div class="ex"><span class="no">⑯</span><span class="pg">p.10</span><span class="tt">保守場線積分</span>
+<span class="q"><span class="lab">題　</span>設 $\vec F=[2x,2y,4z]$、$f=x^2+y^2+2z^2$（$\vec F=\nabla f$）；取 $A(1,1,1)$、$B(0,0,0)$。若有一路徑 $C:\vec r(t)=[t,t,t]$、$0\le t\le 2$，求 $\displaystyle\int_C\vec F\cdot d\vec r$。</span>
+<span class="so">解（硬算）：$\vec F(\vec r(t))=[2t,2t,4t]$、$\vec r'=[1,1,1]$ ⇒ 內積 $=2t+2t+4t=8t$ ⇒ $\int_0^2 8t\,dt=4t^2\big|_0^2$ <span class="ans">$=16$</span>。解（位勢）：端點 $(0,0,0)\to(2,2,2)$ ⇒ $f(2,2,2)-f(0,0,0)=(4+4+8)-0=16$ ✓</span></div>
+
+
+  <div class="ex"><span class="no">⑰</span><span class="pg">p.10</span><span class="tt">非保守場線積分</span>
+<span class="q"><span class="lab">題　</span>設 $\vec F=[-y,\,-xy]$；$C$ 為單位圓上由 $(1,0)$ 逆時針走到 $(0,1)$ 的第一象限弧（$x=\cos t$、$y=\sin t$、$0\le t\le\frac\pi2$），求 $\displaystyle\int_C\vec F\cdot d\vec r$。</span>
+<span class="so">解：$x=\cos t,\ y=\sin t,\ 0\le t\le\frac\pi2$ ⇒ $\vec F(\vec r)=[-\sin t,\ -\cos t\sin t]$、$\vec r'=[-\sin t,\ \cos t]$ ⇒ 內積 $=\sin^2t-\cos^2t\sin t$ ⇒ $\int_0^{\pi/2}\sin^2t\,dt-\int_0^{\pi/2}\cos^2t\sin t\,dt=\frac\pi4-\left[-\frac{\cos^3t}{3}\right]_0^{\pi/2}$ <span class="ans">$=\frac\pi4-\frac13\approx0.4521$</span></span></div>
+
+
+  <div class="ex"><span class="no">⑱</span><span class="pg">p.11</span><span class="tt">格林定理</span>
+<span class="q"><span class="lab">題　</span>設 $F_1=y^2-7y$、$F_2=2xy+2x$、$C:x^2+y^2=1$（逆時針）。用格林定理驗證 $\displaystyle\iint_R\Big(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\Big)dx\,dy=\oint_C(F_1\,dx+F_2\,dy)$（兩邊都算）。</span>
+<span class="so">解（格林）：$\frac{\partial F_2}{\partial x}=2y+2$、$\frac{\partial F_1}{\partial y}=2y-7$ ⇒ 差 $=9$ ⇒ $\iint_R 9\,dA=9\times$（圓面積 $\pi$） <span class="ans">$=9\pi$</span>。解（參數化）：$F_1=\sin^2t-7\sin t$、$F_2=2\cos t\sin t+2\cos t$ ⇒ $\oint(F_1x'+F_2y')dt=\int_0^{2\pi}(-\sin^3t+7\sin^2t+2\cos^2t\sin t+2\cos^2t)dt=0+7\pi+0+2\pi=9\pi$ ✓</span></div>
+
 
   <div class="ex"><span class="no">⑲</span><span class="pg">p.13</span><span class="tt">推導：Laplacian 的面積分＝法向導數線積分</span>
-  <span class="so">解：要讓 $\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}=f_{xx}+f_{yy}$ ⇒ 取 $F_2=f_x$、$F_1=-f_y$ ⇒ 套格林 $\iint\nabla^2f\,dA=\oint(-f_y\,dx+f_x\,dy)$ ⇒ 寫成弧長參數 $=\oint\left(-f_y\frac{dx}{ds}+f_x\frac{dy}{ds}\right)ds=\oint\nabla f\cdot\hat n\,ds$ <span class="ans">$=\oint\frac{\partial f}{\partial n}ds$</span>（$\hat n=(\frac{dy}{ds},-\frac{dx}{ds})$）</span></div>
+<span class="q"><span class="lab">題　</span>設 $f$ 有二階連續偏導、$C$ 是區域 $R$ 的邊界、$s$ 為弧長，法向導數 $\dfrac{\partial f}{\partial n}=(\operatorname{grad}f)\cdot\hat n$。證明 $\displaystyle\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$。</span>
+<span class="so">解：要讓 $\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}=f_{xx}+f_{yy}$ ⇒ 取 $F_2=f_x$、$F_1=-f_y$ ⇒ 套格林 $\iint\nabla^2f\,dA=\oint(-f_y\,dx+f_x\,dy)$ ⇒ 寫成弧長參數 $=\oint\left(-f_y\frac{dx}{ds}+f_x\frac{dy}{ds}\right)ds=\oint\nabla f\cdot\hat n\,ds$ <span class="ans">$=\oint\frac{\partial f}{\partial n}ds$</span>（$\hat n=(\frac{dy}{ds},-\frac{dx}{ds})$）</span></div>
 
-  <div class="ex"><span class="no">⑳</span><span class="pg">p.14</span><span class="tt">高斯散度定理</span> $\vec F=[x^3,x^2y,x^2z]$、半徑 $a$ 高 $h$ 圓柱
-  <span class="so">解：$\nabla\cdot\vec F=\frac{\partial x^3}{\partial x}+\frac{\partial(x^2y)}{\partial y}+\frac{\partial(x^2z)}{\partial z}=3x^2+x^2+x^2=5x^2$；換柱座標 $x=\rho\cos\varphi$、$dV=\rho\,d\rho\,d\varphi\,dz$ ⇒ $\iiint 5\rho^2\cos^2\varphi\cdot\rho\,d\rho\,d\varphi\,dz=5\left(\int_0^h\!dz\right)\left(\int_0^{2\pi}\!\cos^2\varphi\,d\varphi\right)\left(\int_0^a\!\rho^3d\rho\right)=5\cdot h\cdot\pi\cdot\frac{a^4}{4}$ <span class="ans">$=\frac{5\pi a^4h}{4}$</span></span></div>
 
-  <div class="ex"><span class="no">㉑</span><span class="pg">p.15</span><span class="tt">斯托克斯定理</span> $z=1-(x^2+y^2)$、$\vec F=[y,z,x]$
-  <span class="so">左（邊界）：$z=0$ ⇒ $x^2+y^2=1$；令 $x=\cos s,\ y=\sin s$ ⇒ $\vec F(\vec r)=[\sin s,0,\cos s]$、$\vec r'=[-\sin s,\cos s,0]$ ⇒ $\oint\!=-\int_0^{2\pi}\!\sin^2s\,ds$ <span class="ans">$=-\pi$</span>。右（曲面）：$\nabla\times\vec F=(-1,-1,-1)$、$\nabla\phi=[2x,2y,1]$ ⇒ $\iint(-2x-2y-1)dxdy$，其中 $\iint2x\,dA=\iint2y\,dA=0$（對稱）⇒ $-\iint dA$ <span class="ans">$=-\pi$</span> ✓</span></div>
+  <div class="ex"><span class="no">⑳</span><span class="pg">p.14</span><span class="tt">高斯散度定理</span>
+<span class="q"><span class="lab">題　</span>設 $\vec F=[x^3,x^2y,x^2z]$，$T$ 是半徑 $a$、高 $h$ 的圓柱（$0\le z\le h$、$x^2+y^2=a^2$）。用散度定理求通量 $\displaystyle\iint_S\vec F\cdot\hat n\,dA=\iiint_T\operatorname{div}\vec F\,dV$。</span>
+<span class="so">解：$\nabla\cdot\vec F=\frac{\partial x^3}{\partial x}+\frac{\partial(x^2y)}{\partial y}+\frac{\partial(x^2z)}{\partial z}=3x^2+x^2+x^2=5x^2$；換柱座標 $x=\rho\cos\varphi$、$dV=\rho\,d\rho\,d\varphi\,dz$ ⇒ $\iiint 5\rho^2\cos^2\varphi\cdot\rho\,d\rho\,d\varphi\,dz=5\left(\int_0^h\!dz\right)\left(\int_0^{2\pi}\!\cos^2\varphi\,d\varphi\right)\left(\int_0^a\!\rho^3d\rho\right)=5\cdot h\cdot\pi\cdot\frac{a^4}{4}$ <span class="ans">$=\frac{5\pi a^4h}{4}$</span></span></div>
 
-  <div class="ex"><span class="no">㉒</span><span class="pg">p.16</span><span class="tt">寫成 $A\vec x=\vec B$</span> $4x_1+6x_2+9x_3=6$、$6x_1-2x_3=20$、$5x_1-8x_2+x_3=10$
-  <span class="so">解：第二式沒有 $x_2$ ⇒ 係數補 0 ⇒ $A=\begin{bmatrix}4&6&9\\6&0&-2\\5&-8&1\end{bmatrix}$、$\vec B=[6,20,10]^T$、$\vec x=[x_1,x_2,x_3]^T$；解得 <span class="ans">$\vec x=[3,\frac12,-1]^T$</span>（回代：$12+3-9=6$、$18+2=20$、$15-4-1=10$ ✓）</span></div>
 
-  <div class="ex"><span class="no">㉓</span><span class="pg">p.17</span><span class="tt">矩陣乘法 $AB$</span>（$3\times3$ 乘 $3\times4$）
-  <span class="so">解（列乘行，逐格）：$C_{11}=3(2)+5(5)+(-1)(9)=22$；$C_{12}=3(-2)+0+(-1)(-4)=-2$；$C_{13}=9+35-1=43$；$C_{14}=3+40-1=42$；$C_{21}=8+0+18=26$；$C_{22}=-8+0-8=-16$；$C_{23}=12+0+2=14$；$C_{24}=4+0+2=6$；$C_{31}=-12-15+18=-9$；$C_{32}=12+0-8=4$；$C_{33}=-18-21+2=-37$；$C_{34}=-6-24+2=-28$ ⇒ <span class="ans">$AB=\begin{bmatrix}22&-2&43&42\\26&-16&14&6\\-9&4&-37&-28\end{bmatrix}$</span></span></div>
+  <div class="ex"><span class="no">㉑</span><span class="pg">p.15</span><span class="tt">斯托克斯定理</span>
+<span class="q"><span class="lab">題　</span>設 $S$ 為 $z=f(x,y)=1-(x^2+y^2)$ 且 $z\ge0$ 的部分（一個碗形蓋），$\vec F=[y,z,x]$。用斯托克斯定理驗證 $\displaystyle\iint_S(\nabla\times\vec F)\cdot\hat n\,dA=\oint_C\vec F\cdot d\vec r$。</span>
+<span class="so">左（邊界）：$z=0$ ⇒ $x^2+y^2=1$；令 $x=\cos s,\ y=\sin s$ ⇒ $\vec F(\vec r)=[\sin s,0,\cos s]$、$\vec r'=[-\sin s,\cos s,0]$ ⇒ $\oint\!=-\int_0^{2\pi}\!\sin^2s\,ds$ <span class="ans">$=-\pi$</span>。右（曲面）：$\nabla\times\vec F=(-1,-1,-1)$、$\nabla\phi=[2x,2y,1]$ ⇒ $\iint(-2x-2y-1)dxdy$，其中 $\iint2x\,dA=\iint2y\,dA=0$（對稱）⇒ $-\iint dA$ <span class="ans">$=-\pi$</span> ✓</span></div>
 
-  <div class="ex"><span class="no">㉔</span><span class="pg">p.17</span><span class="tt">轉置</span> $A=\begin{bmatrix}5&-8\\4&0\end{bmatrix}$
-  <span class="so">解：列變行、行變列（$a_{12}=-8$ 搬到 $a_{21}$、$a_{21}=4$ 搬到 $a_{12}$，對角線不動）⇒ <span class="ans">$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$</span></span></div>
 
-  <div class="ex"><span class="no">㉕</span><span class="pg">p.18</span><span class="tt">二元方程組（列運算）</span> $2x_1+5x_2=2$、$-4x_1+3x_2=-30$
-  <span class="so">解：增廣矩陣 $\begin{bmatrix}2&5&|&2\\-4&3&|&-30\end{bmatrix}$；$\text{R}_2+2\text{R}_1$（把 $-4$ 消掉）⇒ $\begin{bmatrix}2&5&|&2\\0&13&|&-26\end{bmatrix}$ ⇒ $13x_2=-26\Rightarrow x_2=-2$；代回 $2x_1+5(-2)=2\Rightarrow 2x_1=12$ ⇒ <span class="ans">$x_1=6,\ x_2=-2$</span></span></div>
+  <div class="ex"><span class="no">㉒</span><span class="pg">p.16</span><span class="tt">寫成 $A\vec x=\vec B$</span>
+<span class="q"><span class="lab">題　</span>把方程組 $4x_1+6x_2+9x_3=6$、$6x_1-2x_3=20$、$5x_1-8x_2+x_3=10$ 寫成 $A\vec x=\vec B$，並說出未知數與方程式各有幾個。</span>
+<span class="so">解：第二式沒有 $x_2$ ⇒ 係數補 0 ⇒ $A=\begin{bmatrix}4&6&9\\6&0&-2\\5&-8&1\end{bmatrix}$、$\vec B=[6,20,10]^T$、$\vec x=[x_1,x_2,x_3]^T$；解得 <span class="ans">$\vec x=[3,\frac12,-1]^T$</span>（回代：$12+3-9=6$、$18+2=20$、$15-4-1=10$ ✓）</span></div>
 
-  <div class="ex"><span class="no">㉖</span><span class="pg">p.18</span><span class="tt">電路三條方程式</span> $x_1-x_2+x_3=0$、$20x_1+10x_2=80$、$10x_2+25x_3=90$
-  <span class="so">解：$\text{R}_3-20\text{R}_1=[0,30,-20\,|\,80]$、$\text{R}_4=[0,10,25\,|\,90]$；交換得 $[0,10,25\,|\,90]$ 在上 ⇒ $\text{R}_3-3\text{R}_2=[0,0,-95\,|\,-190]$ ⇒ $-95x_3=-190\Rightarrow x_3=2$；回代 $10x_2+25(2)=90\Rightarrow10x_2=40\Rightarrow x_2=4$；$x_1-4+2=0\Rightarrow x_1=2$ ⇒ <span class="ans">$(x_1,x_2,x_3)=(2,4,2)$</span></span></div>
 
-  <div class="ex"><span class="no">㉗</span><span class="pg">p.19</span><span class="tt">無限多組解的情況</span>（4 未知數、3 式，小數係數）
-  <span class="so">解：$\text{R}_2-0.2\text{R}_1=[0,\ 1.1,\ 1.1,\ -4.4\,|\,1.1]$、$\text{R}_3-0.4\text{R}_1=[0,\ -1.1,\ -1.1,\ 4.4\,|\,-1.1]$；$\text{R}_3+\text{R}_2$ 得到整列 0（$0=0$ 是廢話，這條方程式沒提供新資訊）⇒ 4 個未知數只有 2 個獨立條件 ⇒ <span class="ans">無限多組解</span>（可自由選 2 個變數當參數）</span></div>
+  <div class="ex"><span class="no">㉓</span><span class="pg">p.17</span><span class="tt">矩陣乘法 $AB$</span>
+<span class="q"><span class="lab">題　</span>設 $A=\begin{bmatrix}3&5&-1\\4&0&2\\-6&-3&2\end{bmatrix}$、$B=\begin{bmatrix}2&-2&3&1\\5&0&7&8\\9&-4&1&1\end{bmatrix}$，求 $AB$。</span>
+<span class="so">解（列乘行，逐格）：$C_{11}=3(2)+5(5)+(-1)(9)=22$；$C_{12}=3(-2)+0+(-1)(-4)=-2$；$C_{13}=9+35-1=43$；$C_{14}=3+40-1=42$；$C_{21}=8+0+18=26$；$C_{22}=-8+0-8=-16$；$C_{23}=12+0+2=14$；$C_{24}=4+0+2=6$；$C_{31}=-12-15+18=-9$；$C_{32}=12+0-8=4$；$C_{33}=-18-21+2=-37$；$C_{34}=-6-24+2=-28$ ⇒ <span class="ans">$AB=\begin{bmatrix}22&-2&43&42\\26&-16&14&6\\-9&4&-37&-28\end{bmatrix}$</span></span></div>
 
-  <div class="ex"><span class="no">㉘</span><span class="pg">p.19</span><span class="tt">無解的情況</span>（第三式左邊＝第二式的一半）
-  <span class="so">解：$2x_1+x_2+x_3=6$、$6x_1+2x_2+4x_3=6$、$3x_1+x_2+2x_3=-3$；互換後 $\text{R}_2-\frac13\text{R}_1=[0,\frac13,-\frac13\,|\,4]$、$\text{R}_3-\frac12\text{R}_1=[0,0,0\,|\,-6]$ ⇒ $0=-6$ 矛盾 ⇒ <span class="ans">無解</span>（不一致）</span></div>
 
-  <div class="ex"><span class="no">㉙</span><span class="pg">p.20</span><span class="tt">求秩</span> $\begin{bmatrix}3&0&2\\-6&42&24\\21&-21&0\end{bmatrix}$；作業 $\begin{bmatrix}1&2&3\\2&4&6\\0&1&1\end{bmatrix}$
-  <span class="so">解：$\text{R}_2+2\text{R}_1=[0,42,28\,|\,58]$、$\text{R}_3-7\text{R}_1=[0,-21,-14\,|\,1]$；係數後兩列成 $-\frac12$ 比例 ⇒ 只有 2 個獨立列 ⇒ <span class="ans">$\operatorname{Rank}A=2$</span>（常數 $58$ 與 $-29$ 不成比例 ⇒ 無解）。作業：第 2 列 $=2\times$ 第 1 列 ⇒ <span class="ans">Rank $=2$</span></span></div>
+  <div class="ex"><span class="no">㉔</span><span class="pg">p.17</span><span class="tt">轉置</span>
+<span class="q"><span class="lab">題　</span>設 $A=\begin{bmatrix}5&-8&1\\4&0&0\end{bmatrix}$，求轉置 $A^T$。</span>
+<span class="so">解：列變行、行變列 ⇒ <span class="ans">$A^T=\begin{bmatrix}5&4\\-8&0\\1&0\end{bmatrix}$</span>（$2\times3$ 轉置後變 $3\times2$：$a_{13}=1$ 搬到 $(3,1)$ 的位置）</span></div>
 
-  <div class="ex"><span class="no">㉚</span><span class="pg">p.21</span><span class="tt">3×3 行列式</span> $D=\begin{vmatrix}1&3&0\\2&6&4\\-1&0&2\end{vmatrix}$
-  <span class="so">解（沿第一列餘因子展開）：$D=1\cdot\begin{vmatrix}6&4\\0&2\end{vmatrix}-3\cdot\begin{vmatrix}2&4\\-1&2\end{vmatrix}+0\cdot(\dots)=1(12-0)-3(4+4)+0=12-24$ <span class="ans">$=-12$</span>（第三項乘 0 不用算）</span></div>
+
+  <div class="ex"><span class="no">㉕</span><span class="pg">p.18</span><span class="tt">二元方程組（列運算）</span>
+<span class="q"><span class="lab">題　</span>解方程組 $2x_1+5x_2=2$、$-4x_1+3x_2=-30$（用列運算把增廣矩陣化簡）。</span>
+<span class="so">解：增廣矩陣 $\left[\begin{array}{cc|c}2&5&2\\-4&3&-30\end{array}\right]$；$\text{R}_2+2\text{R}_1$（把 $-4$ 消掉）⇒ $\left[\begin{array}{cc|c}2&5&2\\0&13&-26\end{array}\right]$ ⇒ $13x_2=-26\Rightarrow x_2=-2$；代回 $2x_1+5(-2)=2\Rightarrow 2x_1=12$ ⇒ <span class="ans">$x_1=6,\ x_2=-2$</span></span></div>
+
+
+  <div class="ex"><span class="no">㉖</span><span class="pg">p.18</span><span class="tt">電路三條方程式</span>
+<span class="q"><span class="lab">題　</span>雙迴路電路：左支路 80 V、右支路 90 V 電源，電阻 20Ω、25Ω、10Ω、15Ω；迴路電流記為 $x_1,x_2,x_3$。寫出方程組並求解。</span>
+<span class="so">解：$\text{R}_3-20\text{R}_1=[0,30,-20\mid80]$、$\text{R}_4=[0,10,25\mid90]$；交換得 $[0,10,25\mid90]$ 在上 ⇒ $\text{R}_3-3\text{R}_2=[0,0,-95\mid-190]$ ⇒ $-95x_3=-190\Rightarrow x_3=2$；回代 $10x_2+25(2)=90\Rightarrow10x_2=40\Rightarrow x_2=4$；$x_1-4+2=0\Rightarrow x_1=2$ ⇒ <span class="ans">$(x_1,x_2,x_3)=(2,4,2)$</span></span></div>
+
+
+  <div class="ex"><span class="no">㉗</span><span class="pg">p.19</span><span class="tt">無限多組解的情況</span>
+<span class="q"><span class="lab">題　</span>解方程組並判斷解的情形（4 個未知數、3 條方程式，小數係數；原稿以增廣矩陣給出）$\left[\begin{array}{cccc|c}3&2&2&-5&8\\0.6&1.5&1.5&-5.4&2.7\\1.2&-0.3&-0.3&2.4&2.1\end{array}\right]$</span>
+<span class="so">解：$\text{R}_2-0.2\text{R}_1=[0,\ 1.1,\ 1.1,\ -4.4\mid1.1]$、$\text{R}_3-0.4\text{R}_1=[0,\ -1.1,\ -1.1,\ 4.4\mid-1.1]$；$\text{R}_3+\text{R}_2$ 得到整列 0（$0=0$ 是廢話，這條方程式沒提供新資訊）⇒ 4 個未知數只有 2 個獨立條件 ⇒ <span class="ans">無限多組解</span>（可自由選 2 個變數當參數）</span></div>
+
+
+  <div class="ex"><span class="no">㉘</span><span class="pg">p.19</span><span class="tt">無解的情況</span>
+<span class="q"><span class="lab">題　</span>解方程組並判斷解的情形：$3x_1+2x_2+x_3=3$、$2x_1+x_2+x_3=0$、$6x_1+2x_2+4x_3=6$。</span>
+<span class="so">解：把 $\text{R}_3$ 換到第一列（原稿先交換）⇒ $\text{R}_2-\frac13\text{R}_1=[0,\frac13,-\frac13\mid-2]$、$\text{R}_3-\frac12\text{R}_1=[0,1,-1\mid0]$ ⇒ $3\text{R}_2-\text{R}_3=[0,0,0\mid-6]$ ⇒ $0=-6$ 矛盾 ⇒ <span class="ans">無解</span>（方程組不一致，係數矩陣的秩 $\ne$ 增廣矩陣的秩）</span></div>
+
+
+  <div class="ex"><span class="no">㉙</span><span class="pg">p.20</span><span class="tt">求秩</span>
+<span class="q"><span class="lab">題　</span>求 $\operatorname{Rank}A$（原稿把常數行一起列運算）$\left[\begin{array}{ccc|c}3&0&2&2\\-6&42&24&54\\21&-21&0&15\end{array}\right]$；作業：$A=\begin{bmatrix}1&2&3\\2&4&6\\0&1&1\end{bmatrix}$，求 $\operatorname{Rank}A$ 與 $\operatorname{Rank}A^T$。</span>
+<span class="so">解：$\text{R}_2+2\text{R}_1=[0,42,28\mid58]$、$\text{R}_3-7\text{R}_1=[0,-21,-14\mid1]$；係數後兩列成 $-\frac12$ 比例 ⇒ 只有 2 個獨立列 ⇒ <span class="ans">$\operatorname{Rank}A=2$</span>（常數 $58$ 與 $-29$ 不成比例 ⇒ 無解）。作業：第 2 列 $=2\times$ 第 1 列 ⇒ <span class="ans">Rank $=2$</span></span></div>
+
+
+  <div class="ex"><span class="no">㉚</span><span class="pg">p.21</span><span class="tt">3×3 行列式</span>
+<span class="q"><span class="lab">題　</span>求三階行列式 $D=\begin{vmatrix}1&3&0\\2&6&4\\-1&0&2\end{vmatrix}$（用餘因子展開）。</span>
+<span class="so">解（沿第一列餘因子展開）：$D=1\cdot\begin{vmatrix}6&4\\0&2\end{vmatrix}-3\cdot\begin{vmatrix}2&4\\-1&2\end{vmatrix}+0\cdot(\dots)=1(12-0)-3(4+4)+0=12-24$ <span class="ans">$=-12$</span>（第三項乘 0 不用算）</span></div>
+
 
   <div class="ex"><span class="no">㉛</span><span class="pg">p.22</span><span class="tt">克拉瑪公式解 ㉕</span>
-  <span class="so">解：$\det A=\begin{vmatrix}2&5\\-4&3\end{vmatrix}=6+20=26$；$x_1=\dfrac{\begin{vmatrix}2&5\\-30&3\end{vmatrix}}{26}=\dfrac{6+150}{26}=\dfrac{156}{26}=6$；$x_2=\dfrac{\begin{vmatrix}2&2\\-4&-30\end{vmatrix}}{26}=\dfrac{-60+8}{26}$ <span class="ans">$=-2$</span></span></div>
+<span class="q"><span class="lab">題　</span>用克拉瑪公式解 ㉕ 那一組 $2x_1+5x_2=2$、$-4x_1+3x_2=-30$（原稿先寫一般式 $a_{11}x_1+a_{12}x_2=b_1$、$a_{21}x_1+a_{22}x_2=b_2$，再代數字）。</span>
+<span class="so">解：$\det A=\begin{vmatrix}2&5\\-4&3\end{vmatrix}=6+20=26$；$x_1=\dfrac{\begin{vmatrix}2&5\\-30&3\end{vmatrix}}{26}=\dfrac{6+150}{26}=\dfrac{156}{26}=6$；$x_2=\dfrac{\begin{vmatrix}2&2\\-4&-30\end{vmatrix}}{26}=\dfrac{-60+8}{26}$ <span class="ans">$=-2$</span></span></div>
 
-  <div class="ex"><span class="no">㉜</span><span class="pg">p.23</span><span class="tt">反矩陣（Gauss–Jordan）</span> $A=\begin{bmatrix}-1&1&2\\3&-1&1\\-1&3&4\end{bmatrix}$
-  <span class="so">解：寫 $[A|I]$；$\text{R}_2+3\text{R}_1=[0,2,7\,|\,3,1,0]$、$\text{R}_3-\text{R}_1=[0,2,2\,|\,-1,0,1]$；繼續用列運算把左半清成 $I$（右半同步做）⇒ <span class="ans">$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$</span>（$\det A=10$；驗算 $(AA^{-1})_{11}=0.7+0.6-0.3=1$ ✓、$(AA^{-1})_{12}=-0.7-0.2+0.9=0$ ✓）</span></div>
+
+  <div class="ex"><span class="no">㉜</span><span class="pg">p.23</span><span class="tt">反矩陣（Gauss–Jordan）</span>
+<span class="q"><span class="lab">題　</span>設 $A=\begin{bmatrix}-1&1&2\\3&-1&1\\-1&3&4\end{bmatrix}$，用 $[A\mid I]\to[I\mid A^{-1}]$ 求 $A^{-1}$。</span>
+<span class="so">解：寫 $[A|I]$；$\text{R}_2+3\text{R}_1=[0,2,7\mid3,1,0]$、$\text{R}_3-\text{R}_1=[0,2,2\mid-1,0,1]$；繼續用列運算把左半清成 $I$（右半同步做）⇒ <span class="ans">$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$</span>（$\det A=10$；驗算 $(AA^{-1})_{11}=0.7+0.6-0.3=1$ ✓、$(AA^{-1})_{12}=-0.7-0.2+0.9=0$ ✓）</span></div>
 
   </div>
 </section>

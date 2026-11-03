@@ -309,7 +309,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
   <div class="box warn">
     <span class="lab">讀之前先知道三件事</span>
     <ul style="margin-bottom:0">
-      <li>原稿是<b>上課邊聽邊寫</b>的筆記，難免有小筆誤（例如 p.7 的 $|\vec a|$、p.18 電路那條方程式）。我在對應例題的「提醒」都會標出來並給正確版本，你照正確的算就好。</li>
+      <li>原稿是<b>上課邊聽邊寫</b>的筆記，難免有小筆誤（例如 p.18 電路那條方程式、p.10 保守場那題的位勢差那句）。我在對應例題的「提醒」都會標出來並給正確版本，你照正確的算就好。</li>
       <li>數學式如果太寬，手機上可以左右滑動（公式區塊本身可橫向滾動）。</li>
       <li>右上角有「夜間」可以切深色模式，晚自習比較不刺眼。</li>
     </ul>
@@ -673,18 +673,18 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
   <div class="eg">
     <div class="eg-head"><b>例題 9 · 10</b><span>向量加法（分量式與 $\hat i\hat j\hat k$ 式）</span></div>
     <div class="eg-body">
-      <div class="eg-q">(a) $\vec a=[4,0,1]$、$\vec b=[2,5,\tfrac13]$，求 $\vec a+\vec b$。<br>(b) $\vec a=4\hat i+\hat j+\hat k$、$\vec b=2\hat i-5\hat j+\tfrac13\hat k$，求 $\vec a+\vec b$。</div>
+      <div class="eg-q">(a) $\vec a=[4,0,1]$、$\vec b=[2,5,\tfrac13]$，求 $\vec a+\vec b$。<br>(b) $\vec a=4\hat i+\hat k$（沒有 $\hat j$ 項）、$\vec b=2\hat i-5\hat j+\tfrac13\hat k$，求 $\vec a+\vec b$。</div>
       <h5>思路</h5>
       <ol class="think">
         <li>兩種寫法其實是同一件事：$[a_1,a_2,a_3]$ 只是把 $\hat i\hat j\hat k$ 的係數排成一列。所以<b>對應位置相加就好</b>。</li>
         <li>(a) 第三分量 $1+\frac13=\frac43$。</li>
-        <li>(b) 第二分量 $1+(-5)=-4$，第三分量 $1+\frac13=\frac43$。（原稿把第二分量寫成 $-5$，是手算漏加。）</li>
+        <li>(b) <b>$\vec a$ 沒有寫 $\hat j$，代表 $\hat j$ 的係數是 0</b>——第二分量 $0+(-5)=-5$，第三分量 $1+\frac13=\frac43$。（漏掉「沒寫＝0」這一步，就會算成 $-4$。）</li>
       </ol>
       <div class="sol">
         $$\text{(a)}\quad\vec a+\vec b=[4+2,\ 0+5,\ 1+\tfrac13]=[6,5,\tfrac43]$$
-        $$\text{(b)}\quad\vec a+\vec b=(4+2)\hat i+(1-5)\hat j+(1+\tfrac13)\hat k=6\hat i-4\hat j+\tfrac43\hat k=[6,-4,\tfrac43]$$
+        $$\text{(b)}\quad\vec a+\vec b=(4+2)\hat i+(0-5)\hat j+(1+\tfrac13)\hat k=6\hat i-5\hat j+\tfrac43\hat k=[6,-5,\tfrac43]$$
       </div>
-      <div class="ans">(a) $[6,5,\frac43]$　(b) $[6,-4,\frac43]$</div>
+      <div class="ans">(a) $[6,5,\frac43]$　(b) $[6,-5,\frac43]$</div>
     </div>
   </div>
 
@@ -823,23 +823,23 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
   <div class="eg">
     <div class="eg-head"><b>例題 13</b><span>求梯度與指定方向的方向導數</span></div>
     <div class="eg-body">
-      <div class="eg-q">設 $f(x,y,z)=2x^2+3y^2+z^2$，在點 $P(2,1,3)$、方向 $\vec a=[1,1,-2]$，求 $\nabla f(P)$ 與 $D_{\vec a}f$。</div>
+      <div class="eg-q">設 $f(x,y,z)=2x^2+3y^2+z^2$，在點 $P(2,1,3)$、方向 $\vec a=[1,0,-2]$，求 $\nabla f(P)$ 與 $D_{\vec a}f$。</div>
       <h5>思路</h5>
       <ol class="think">
         <li><b>第一步一定是算梯度</b>（不能先算方向導數）。逐項偏微：$2x^2\to4x$、$3y^2\to6y$、$z^2\to2z$。對 $x$ 微分時，$3y^2$ 和 $z^2$ 都當常數，導數 0。</li>
         <li>把 $P(2,1,3)$ 代進去得到該點的梯度向量 $(8,6,6)$。</li>
-        <li>把方向 $\vec a$ 化成單位向量：先算 $|\vec a|=\sqrt{1^2+1^2+(-2)^2}=\sqrt{6}$，所以 $\hat a=\frac{1}{\sqrt6}[1,1,-2]$。</li>
-        <li>做內積：$\hat a\cdot\nabla f(P)=\frac{1}{\sqrt6}(1\cdot8+1\cdot6+(-2)\cdot6)=\frac{1}{\sqrt6}(8+6-12)=\frac{2}{\sqrt6}$。</li>
-        <li>$\frac{2}{\sqrt6}$ 化簡（分子分母同乘 $\sqrt6$）＝ $\frac{2\sqrt6}{6}=\frac{\sqrt6}{3}\approx0.816$。既然是「率」，單位是「$f$ 的單位／長度」。</li>
+        <li>把方向 $\vec a$ 化成單位向量：先算 $|\vec a|=\sqrt{1^2+0^2+(-2)^2}=\sqrt{5}$，所以 $\hat a=\frac{1}{\sqrt5}[1,0,-2]$。<b>$\vec a$ 的第二個分量是 0，別抄成 1</b>。</li>
+        <li>做內積：$\hat a\cdot\nabla f(P)=\frac{1}{\sqrt5}(1\cdot8+0\cdot6+(-2)\cdot6)=\frac{1}{\sqrt5}(8+0-12)=-\frac{4}{\sqrt5}$。</li>
+        <li>答案是<b>負的</b>：$-\frac{4}{\sqrt5}=-\frac{4\sqrt5}{5}\approx-1.789$，表示往 $\vec a$ 這個方向走，$f$ 的值是<b>下降</b>的（方向導數是「率」，單位是「$f$ 的單位／長度」）。</li>
       </ol>
       <div class="sol">
-        $$\nabla f=[4x,\ 6y,\ 2z],\qquad \nabla f(P)=(8,6,6),\qquad |\vec a|=\sqrt6$$
-        $$D_{\vec a}f=\frac{[1,1,-2]}{\sqrt6}\cdot[8,6,6]=\frac{1}{\sqrt6}(8+6-12)=\frac{2}{\sqrt6}\approx0.816$$
+        $$\nabla f=[4x,\ 6y,\ 2z],\qquad \nabla f(P)=(8,6,6),\qquad |\vec a|=\sqrt5$$
+        $$D_{\vec a}f=\frac{[1,0,-2]}{\sqrt5}\cdot[8,6,6]=\frac{1}{\sqrt5}(8+0-12)=-\frac{4}{\sqrt5}\approx-1.789$$
       </div>
-      <div class="ans">$\nabla f(P)=(8,6,6)$，$D_{\vec a}f=\dfrac{2}{\sqrt6}=\dfrac{\sqrt6}{3}\approx0.816$（沿 $\vec a$ 走 $f$ 在變大）</div>
+      <div class="ans">$\nabla f(P)=(8,6,6)$，$D_{\vec a}f=-\dfrac{4}{\sqrt5}=-\dfrac{4\sqrt5}{5}\approx-1.789$（負值＝沿 $\vec a$ 走 $f$ 在變小）</div>
       <div class="box warn" style="margin-bottom:0">
-        <span class="lab">提醒（原稿筆誤）</span>
-        <p style="margin:0">原稿這裡寫 $|\vec a|=\sqrt5$，但 $\vec a=(1,1,-2)$ 的長度是 $\sqrt{1+1+4}=\sqrt6$，所以答案是 $\frac{2}{\sqrt6}$ 而不是 $\frac2{\sqrt5}$。<b>考試時 $\vec a$ 的長度一定要重新算一遍</b>，這是最常見的失分點。</p>
+        <span class="lab">提醒（最常見的抄錯）</span>
+        <p style="margin:0">原稿的方向向量是 $\vec a=(1,\mathbf{0},-2)$，<b>第二個分量是 0</b>；很多人（包括之前的版本）會順手抄成 $(1,1,-2)$，那長度就變成 $\sqrt6$、答案也會變成 $+\frac{2}{\sqrt6}$，方向導數甚至會由負轉正。<b>抄方向向量時一格一格對，$|\vec a|$ 也要重新算一遍</b>。</p>
       </div>
     </div>
   </div>
@@ -1417,17 +1417,17 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
   <div class="eg">
     <div class="eg-head"><b>例題 24</b><span>轉置</span></div>
     <div class="eg-body">
-      <div class="eg-q">設 $A=\begin{bmatrix}5&-8\\4&0\end{bmatrix}$，求 $A^T$。</div>
+      <div class="eg-q">設 $A=\begin{bmatrix}5&-8&1\\4&0&0\end{bmatrix}$，求 $A^T$。</div>
       <h5>思路</h5>
       <ol class="think">
-        <li>轉置就是「沿著左上→右下那條對角線翻過去」：第 1 列變成第 1 <b>行</b>。</li>
-        <li>所以 $(5,-8)$ 那一列會變成第一行 $(5,4)^T$…等等，要一格一格看：$a_{12}=-8$ 會搬到 $a_{21}$ 的位置。</li>
-        <li>結果就是原矩陣的「鏡射」：$2\times2$ 的情況，兩邊斜對角的元素互換、對角線上的兩個不動。</li>
+        <li>轉置就是「列變行、行變列」：<b>第 $i$ 列整條搬去當第 $i$ 行</b>。</li>
+        <li>先看形狀：$A$ 是 $2\times3$（2 列 3 行），所以 $A^T$ 一定是 $3\times2$。<b>先寫出尺寸，就不會漏元素。</b></li>
+        <li>逐格對：$a_{13}=1$ 搬到 $(3,1)$、$a_{12}=-8$ 搬到 $(2,1)$、$a_{11}=5$ 留在 $(1,1)$。對角線上的元素位置不變。</li>
       </ol>
       <div class="sol">
-        $$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$$
+        $$A=\begin{bmatrix}5&-8&1\\4&0&0\end{bmatrix}_{2\times3},\qquad A^T=\begin{bmatrix}5&4\\-8&0\\1&0\end{bmatrix}_{3\times2}$$
       </div>
-      <div class="ans">$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$</div>
+      <div class="ans">$A^T=\begin{bmatrix}5&4\\-8&0\\1&0\end{bmatrix}$（$2\times3$ 轉置後變 $3\times2$）</div>
       <p style="margin-bottom:0"><b>轉置的四條規則（原稿右側，全部要背）：</b></p>
       $$(A^T)^T=A,\qquad (A+B)^T=A^T+B^T,\qquad (cA)^T=cA^T,\qquad \boxed{(AB)^T=B^TA^T}$$
       <p style="margin-bottom:0"><b>最後一條最容易寫錯</b>：順序要反過來（先 $B^T$ 再 $A^T$）！這跟反矩陣的規則 $(AB)^{-1}=B^{-1}A^{-1}$ 是同一個道理（見第 17 章）。</p>
@@ -1449,7 +1449,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
   <div class="box idea">
     <span class="lab">核心觀念 ③ · 增廣矩陣（augmented matrix）</span>
     <p style="margin-top:0">把係數矩陣 $A$ 和常數項 $\vec B$ 併在一起，中間畫一條線：</p>
-    $$[\,A\mid\vec B\,]=\begin{bmatrix}2&5&\vline&2\\-4&3&\vline&-30\end{bmatrix}$$
+    $$[\,A\mid\vec B\,]=\left[\begin{array}{cc|c}2&5&2\\-4&3&-30\end{array}\right]$$
     <p style="margin-bottom:0">為什麼要併在一起？因為解方程組時，我們對係數和常數<b>做一模一樣的運算</b>，併起來才不會漏掉常數那一欄。下面三種「列運算」不會改變解：<b>① 兩列互換 ② 某列乘非零常數 ③ 某列加另一列的倍數</b>。</p>
   </div>
 
@@ -1462,12 +1462,12 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
         <li>寫增廣矩陣：第一列讀第一式、第二列讀第二式。</li>
         <li>目標是讓左下角變成 0（變成上三角），這樣最後一列只含一個未知數。</li>
         <li>觀察：$2\times2=4$，而第二列的第一個元素是 $-4$。所以做 $\text{R}_2+2\text{R}_1$ 正好把 $-4$ 消掉。</li>
-        <li>新的第二列是 $[0,\ 3+10\ \vline\ -30+4]=[0,13\vline-26]$。</li>
+        <li>新的第二列是 $[0,\ 3+10\mid-30+4]=[0,13\mid-26]$。</li>
         <li>回推：$13x_2=-26\Rightarrow x_2=-2$；代回第一式 $2x_1+5(-2)=2\Rightarrow 2x_1=12\Rightarrow x_1=6$。</li>
       </ol>
       <div class="sol">
-        $$\begin{bmatrix}2&5&\vline&2\\-4&3&\vline&-30\end{bmatrix}
-        \xrightarrow{\text{R}_2+2\text{R}_1}\begin{bmatrix}2&5&\vline&2\\0&13&\vline&-26\end{bmatrix}$$
+        $$\left[\begin{array}{cc|c}2&5&2\\-4&3&-30\end{array}\right]
+        \xrightarrow{\text{R}_2+2\text{R}_1}\left[\begin{array}{cc|c}2&5&2\\0&13&-26\end{array}\right]$$
         $$13x_2=-26\ \Rightarrow\ x_2=-2;\qquad 2x_1+5(-2)=2\ \Rightarrow\ x_1=6$$
       </div>
       <div class="ans">$x_1=6,\ x_2=-2$（檢查：$2(6)+5(-2)=2$ ✓，$-4(6)+3(-2)=-30$ ✓）</div>
@@ -1484,13 +1484,13 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
         <li><b>為什麼會有三條方程式？</b> 兩個獨立迴路（左、右）各寫一條 KVL（沿迴路走一圈，電壓升＝電壓降），再加上一條「$i_1-i_2+i_3=0$」這種把電流互相關聯起來的關係式（節點／迴路關係）。</li>
         <li>全部寫成增廣矩陣。原稿把第一條（0 常數列）也寫進去，所以是 4 列：$x_1-x_2+x_3=0$ 有兩條（互為負號，是多餘的），列運算後會自然變成 0 列。</li>
         <li>列運算：$\text{R}_2+2\text{R}_1$ 消掉第一行；$\text{R}_3-20\text{R}_1$ 消掉第一行；接著把第 2、3 列搭配消去第二行。</li>
-        <li>化到最簡後出現 $[0,0,-95\ \vline\ -190]$ ⇒ $-95x_3=-190\Rightarrow x_3=2$。</li>
+        <li>化到最簡後出現 $[0,0,-95\mid-190]$ ⇒ $-95x_3=-190\Rightarrow x_3=2$。</li>
         <li>往上回代：$10x_2+25(2)=90\Rightarrow10x_2=40\Rightarrow x_2=4$；再由 $x_1-x_2+x_3=0\Rightarrow x_1=4-2=2$。</li>
       </ol>
       <div class="sol">
-        $$\begin{bmatrix}1&-1&1&\vline&0\\-1&1&-1&\vline&0\\20&10&0&\vline&80\\0&10&25&\vline&90\end{bmatrix}
-        \longrightarrow\begin{bmatrix}1&-1&1&\vline&0\\0&30&-20&\vline&80\\0&10&25&\vline&90\\0&0&0&\vline&0\end{bmatrix}
-        \longrightarrow\begin{bmatrix}1&-1&1&\vline&0\\0&0&-95&\vline&-190\\0&10&25&\vline&90\\0&0&0&\vline&0\end{bmatrix}$$
+        $$\left[\begin{array}{ccc|c}1&-1&1&0\\-1&1&-1&0\\20&10&0&80\\0&10&25&90\end{array}\right]
+        \longrightarrow\left[\begin{array}{ccc|c}1&-1&1&0\\0&30&-20&80\\0&10&25&90\\0&0&0&0\end{array}\right]
+        \longrightarrow\left[\begin{array}{ccc|c}1&-1&1&0\\0&0&-95&-190\\0&10&25&90\\0&0&0&0\end{array}\right]$$
         $$x_3=2,\qquad 10x_2+25(2)=90\Rightarrow x_2=4,\qquad x_1-4+2=0\Rightarrow x_1=2$$
       </div>
       <div class="ans">$x_1=2,\ x_2=4,\ x_3=2$（三個都代回原式檢查：$20(2)+10(4)=80$ ✓、$10(4)+25(2)=90$ ✓、$2-4+2=0$ ✓）</div>
@@ -1517,22 +1517,23 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
         <li>「$0=0$」是一句廢話 ⇒ 這條方程式<b>沒有提供新資訊</b>。4 個未知數只有 2 個獨立條件 ⇒ 有無限多組解（可以自由選 2 個變數當參數）。</li>
       </ol>
       <div class="sol">
-        $$\begin{bmatrix}3&2&2&-5&\vline&8\\0.6&1.5&1.5&-5.4&\vline&2.7\\1.2&-0.3&-0.3&2.4&\vline&2.1\end{bmatrix}
-        \longrightarrow\begin{bmatrix}3&2&2&-5&\vline&8\\0&1.1&1.1&-4.4&\vline&1.1\\0&0&0&0&\vline&0\end{bmatrix}\ \Rightarrow\ \textbf{無限多組解}$$
+        $$\left[\begin{array}{cccc|c}3&2&2&-5&8\\0.6&1.5&1.5&-5.4&2.7\\1.2&-0.3&-0.3&2.4&2.1\end{array}\right]
+        \longrightarrow\left[\begin{array}{cccc|c}3&2&2&-5&8\\0&1.1&1.1&-4.4&1.1\\0&0&0&0&0\end{array}\right]\ \Rightarrow\ \textbf{無限多組解}$$
       </div>
 
       <h5>(b) 無解的例子</h5>
       <ol class="think">
         <li>系統：
-        $$2x_1+x_2+x_3=6,\qquad 6x_1+2x_2+4x_3=6,\qquad 3x_1+x_2+2x_3=-3$$</li>
-        <li>看下面一眼就知道會出事：<b>第三式的左邊剛好是第二式左邊的一半</b>（$3,1,2$ 是 $6,2,4$ 的一半），但右邊 $-3$ 卻不是 $6$ 的一半（應該要是 3）。</li>
-        <li>列運算：先互換讓第一列是 $[6,2,4\mid6]$，再做 $\text{R}_2-\frac13\text{R}_1$、$\text{R}_3-\frac12\text{R}_1$。</li>
-        <li>第三列變成 $[0,\ 0,\ 0\ \vline\ -3-3]=[0,0,0\mid-6]$ ⇒ 也就是「$0=-6$」。<b>這是矛盾的算式</b>，代表沒有任何 $(x_1,x_2,x_3)$ 能同時滿足三條 ⇒ 無解（方程組不一致 inconsistent）。</li>
+        $$3x_1+2x_2+x_3=3,\qquad 2x_1+x_2+x_3=0,\qquad 6x_1+2x_2+4x_3=6$$</li>
+        <li>先互換，把係數最漂亮的第三式拉上來當第一列（$6$ 當主元，後面除起來比較好看）。</li>
+        <li>列運算：$\text{R}_2-\frac13\text{R}_1=[0,\frac13,-\frac13\mid-2]$、$\text{R}_3-\frac12\text{R}_1=[0,1,-1\mid0]$。注意第二、三列的<b>係數部分成比例</b>（$(1,-1)$ 是 $(\frac13,-\frac13)$ 的 3 倍），所以再消一次，左邊一定會變成整列 0。</li>
+        <li>做 $3\text{R}_2-\text{R}_3=[0,0,0\mid-6]$ ⇒ 也就是「$0=-6$」。<b>這是矛盾的算式</b>，代表沒有任何 $(x_1,x_2,x_3)$ 能同時滿足三條 ⇒ 無解（inconsistent）。順帶檢查：$\det A=0$（所以不會是唯一解），而係數矩陣的秩 $\ne$ 增廣矩陣的秩，屬於「無解」那一類。</li>
       </ol>
       <div class="sol">
-        $$\begin{bmatrix}2&1&1&\vline&6\\6&2&4&\vline&6\\3&1&2&\vline&-3\end{bmatrix}
-        \xrightarrow{\ \text{互換}\ }\begin{bmatrix}6&2&4&\vline&6\\2&1&1&\vline&6\\3&1&2&\vline&-3\end{bmatrix}
-        \longrightarrow\begin{bmatrix}6&2&4&\vline&6\\0&\frac13&-\frac13&\vline&4\\0&0&0&\vline&-6\end{bmatrix}\ \Rightarrow\ 0=-6\ \textbf{無解}$$
+        $$\left[\begin{array}{ccc|c}3&2&1&3\\2&1&1&0\\6&2&4&6\end{array}\right]
+        \xrightarrow{\ \text{互換}\ }\left[\begin{array}{ccc|c}6&2&4&6\\2&1&1&0\\3&2&1&3\end{array}\right]
+        \longrightarrow\left[\begin{array}{ccc|c}6&2&4&6\\0&\frac13&-\frac13&-2\\0&1&-1&0\end{array}\right]
+        \longrightarrow\left[\begin{array}{ccc|c}6&2&4&6\\0&\frac13&-\frac13&-2\\0&0&0&-6\end{array}\right]\ \Rightarrow\ 0=-6\ \textbf{無解}$$
       </div>
 
       <div class="box idea" style="margin-bottom:0">
@@ -1554,7 +1555,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
 
   <h4>馬上練</h4>
   <details class="sc"><summary>1. $A=\begin{bmatrix}1&2\\3&4\end{bmatrix}$、$B=\begin{bmatrix}0&1\\1&0\end{bmatrix}$，求 $AB$ 與 $BA$。</summary><p class="a">$AB=\begin{bmatrix}2&1\\4&3\end{bmatrix}$、$BA=\begin{bmatrix}3&4\\1&2\end{bmatrix}$。<b>兩者不同 ⇒ 再用一個例子確認「矩陣乘法不能交換」。</b></p></details>
-  <details class="sc"><summary>2. 用列運算解 $\begin{cases}x+y+z=6\\2x-y+z=3\\x+2y-z=2\end{cases}$</summary><p class="a">增廣矩陣：$\begin{bmatrix}1&1&1&\vline&6\\2&-1&1&\vline&3\\1&2&-1&\vline&2\end{bmatrix}$。做 $\text{R}_2-2\text{R}_1$、$\text{R}_3-\text{R}_1$ 得 $\begin{bmatrix}1&1&1&\vline&6\\0&-3&-1&\vline&-9\\0&1&-2&\vline&-4\end{bmatrix}$，再 $\text{R}_3+\frac13\text{R}_2$ 得 $\begin{bmatrix}1&1&1&\vline&6\\0&-3&-1&\vline&-9\\0&0&-\frac73&\vline&-7\end{bmatrix}$ ⇒ $z=3$、$-3y-3=-9\Rightarrow y=2$、$x+2+3=6\Rightarrow x=1$。<br>回代三式：$1+2+3=6$ ✓、$2(1)-2+3=3$ ✓、$1+2(2)-3=2$ ✓ <b>三條都對</b>。所以 $x=1,\ y=2,\ z=3$。</p></details>
+  <details class="sc"><summary>2. 用列運算解 $\begin{cases}x+y+z=6\\2x-y+z=3\\x+2y-z=2\end{cases}$</summary><p class="a">增廣矩陣：$\left[\begin{array}{ccc|c}1&1&1&6\\2&-1&1&3\\1&2&-1&2\end{array}\right]$。做 $\text{R}_2-2\text{R}_1$、$\text{R}_3-\text{R}_1$ 得 $\left[\begin{array}{ccc|c}1&1&1&6\\0&-3&-1&-9\\0&1&-2&-4\end{array}\right]$，再 $\text{R}_3+\frac13\text{R}_2$ 得 $\left[\begin{array}{ccc|c}1&1&1&6\\0&-3&-1&-9\\0&0&-\frac73&-7\end{array}\right]$ ⇒ $z=3$、$-3y-3=-9\Rightarrow y=2$、$x+2+3=6\Rightarrow x=1$。<br>回代三式：$1+2+3=6$ ✓、$2(1)-2+3=3$ ✓、$1+2(2)-3=2$ ✓ <b>三條都對</b>。所以 $x=1,\ y=2,\ z=3$。</p></details>
   <hr class="rule">
 </section>
 <section id="c14">
@@ -1598,8 +1599,8 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
         <li>加上第一列，共有 2 個獨立列 ⇒ $\operatorname{Rank}A=2$（雖然 $A$ 是 $3\times3$，但「有效資訊」只有 2 維）。</li>
       </ol>
       <div class="sol">
-        $$\begin{bmatrix}3&0&2&\vline&2\\-6&42&24&\vline&54\\21&-21&0&\vline&15\end{bmatrix}
-        \longrightarrow\begin{bmatrix}3&0&2&\vline&2\\0&42&28&\vline&58\\0&-21&-14&\vline&1\end{bmatrix}\ \Rightarrow\ \operatorname{Rank}A=2$$
+        $$\left[\begin{array}{ccc|c}3&0&2&2\\-6&42&24&54\\21&-21&0&15\end{array}\right]
+        \longrightarrow\left[\begin{array}{ccc|c}3&0&2&2\\0&42&28&58\\0&-21&-14&1\end{array}\right]\ \Rightarrow\ \operatorname{Rank}A=2$$
       </div>
       <div class="ans">$\operatorname{Rank}A=2$</div>
       <div class="box warn" style="margin-bottom:0">
@@ -1774,8 +1775,8 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
         <li>左半變成 $I$ 時，右半就是答案。原稿算出：</li>
       </ol>
       <div class="sol">
-        $$[A\mid I]=\begin{bmatrix}-1&1&2&\vline&1&0&0\\3&-1&1&\vline&0&1&0\\-1&3&4&\vline&0&0&1\end{bmatrix}
-        \longrightarrow\begin{bmatrix}-1&1&2&\vline&1&0&0\\0&2&7&\vline&3&1&0\\0&2&2&\vline&-1&0&1\end{bmatrix}\longrightarrow\cdots\longrightarrow[\,I\mid A^{-1}\,]$$
+        $$[A\mid I]=\left[\begin{array}{ccc|ccc}-1&1&2&1&0&0\\3&-1&1&0&1&0\\-1&3&4&0&0&1\end{array}\right]
+        \longrightarrow\left[\begin{array}{ccc|ccc}-1&1&2&1&0&0\\0&2&7&3&1&0\\0&2&2&-1&0&1\end{array}\right]\longrightarrow\cdots\longrightarrow[\,I\mid A^{-1}\,]$$
         $$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$$
       </div>
       <div class="ans">$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$（$\det A=10$）</div>
@@ -1907,13 +1908,13 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
     <tr><td>p.1</td><td>用共軛求虛部</td><td>$\operatorname{Im}=3$</td></tr>
     <tr><td>p.2</td><td>$1+i$ 的極式</td><td>$\sqrt2\,e^{i\pi/4}$</td></tr>
     <tr><td>p.3</td><td>$\sqrt[3]{1}$</td><td>$1,\ -\frac12\pm\frac{\sqrt3}{2}i$</td></tr>
-    <tr><td>p.3</td><td>$\sqrt i$ 與 $\sqrt[5]{1}$</td><td>$\pm(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i)$；$e^{i2k\pi/5}$</td></tr>
+    <tr><td>p.3</td><td>$\sqrt[5]{1}$（延伸：$\sqrt i$）</td><td>$e^{i2k\pi/5}$；$\pm(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i)$</td></tr>
     <tr><td>p.4</td><td>$w=z^2+3z$ 在 $z=1+3i$</td><td>$-5+15i$（原稿筆誤 $1+15i$）</td></tr>
     <tr><td>p.4</td><td>$\overrightarrow{PQ}$，$P(4,0,2),Q(6,-1,2)$</td><td>$(2,-1,0)$，$\sqrt5$</td></tr>
-    <tr><td>p.4</td><td>向量加法（分量／$\hat i\hat j\hat k$）</td><td>$[6,5,\frac43]$；$[6,-4,\frac43]$</td></tr>
+    <tr><td>p.4</td><td>向量加法（分量／$\hat i\hat j\hat k$）</td><td>$[6,5,\frac43]$；$[6,-5,\frac43]$</td></tr>
     <tr><td>p.5</td><td>內積、模、夾角</td><td>$-1$；$\sqrt5,\sqrt{14}$；$96.9^\circ$</td></tr>
     <tr><td>p.5</td><td>外積</td><td>$(0,0,-3)$</td></tr>
-    <tr><td>p.7</td><td>方向導數</td><td>$\frac{2}{\sqrt6}$（原稿誤寫 $\sqrt5$）</td></tr>
+    <tr><td>p.7</td><td>方向導數（$\vec a=[1,0,-2]$）</td><td>$-\frac{4}{\sqrt5}\approx-1.789$</td></tr>
     <tr><td>p.7</td><td>錐面單位法向量</td><td>$\pm[\frac{2}{\sqrt5},0,-\frac{1}{\sqrt5}]$</td></tr>
     <tr><td>p.9</td><td>旋度 $\vec v=[yz,3zx,z]$</td><td>$[-3x,y,2z]$</td></tr>
     <tr><td>p.10</td><td>保守場線積分（$\vec F=[2x,2y,4z]$）</td><td>$16$</td></tr>
@@ -1924,7 +1925,7 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
     <tr><td>p.15</td><td>斯托克斯定理（碗形）</td><td>$-\pi$</td></tr>
     <tr><td>p.16</td><td>寫成 $A\vec x=\vec B$</td><td>$\vec x=[3,\frac12,-1]^T$（補充）</td></tr>
     <tr><td>p.17</td><td>矩陣乘法 $AB$（$3\times3$ 與 $3\times4$）</td><td>見例題 23</td></tr>
-    <tr><td>p.17</td><td>轉置</td><td>$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$</td></tr>
+    <tr><td>p.17</td><td>轉置（$2\times3\to3\times2$）</td><td>$A^T=\left[\begin{array}{cc}5&4\\-8&0\\1&0\end{array}\right]$</td></tr>
     <tr><td>p.18</td><td>方程組（增廣矩陣）</td><td>$x_1=6,\ x_2=-2$</td></tr>
     <tr><td>p.18</td><td>電路三條方程式</td><td>$(x_1,x_2,x_3)=(2,4,2)$</td></tr>
     <tr><td>p.19</td><td>無限多組解的例子</td><td>消去後出現 0 列</td></tr>
@@ -1936,14 +1937,21 @@ footer{border-top:1px solid var(--line);margin-top:60px;padding:28px 0 0;color:v
   </table></div>
 
   <div class="box warn">
-    <span class="lab">原稿的 5 個筆誤（自己複習時要記得改過來）</span>
+    <span class="lab">原稿的 3 個筆誤（自己複習時要記得改過來）</span>
     <ol style="margin-bottom:0">
       <li><b>p.4</b> $f(1+3i)$ 應為 $-5+15i$（原稿寫 $1+15i$）。</li>
-      <li><b>p.4</b> 向量加法第二分量 $1+(-5)=-4$（原稿寫 $-5$）。</li>
-      <li><b>p.7</b> $|\vec a|=\sqrt6$（原稿寫 $\sqrt5$），方向導數 $\frac{2}{\sqrt6}$。</li>
-      <li><b>p.10</b> 保守場那題的位勢差要用<b>路徑端點</b> $(0,0,0)\to(2,2,2)$ 算，$f$ 差為 16；$A(1,1,1)$ 只是圖上的標記點。</li>
+      <li><b>p.10</b> 保守場那題的位勢差要用<b>路徑端點</b> $(0,0,0)\to(2,2,2)$ 算，$f$ 差為 16；$A(1,1,1)$ 只是圖上的標記點，代進去是 4。</li>
       <li><b>p.18</b> 電路第二條應為 $20x_1+10x_2=80$（原稿寫成 $10x_3$）。</li>
     </ol>
+  </div>
+
+  <div class="box idea">
+    <span class="lab">3 個「看起來像筆誤、其實原稿是對的」（舊版誤判，已修正）</span>
+    <ul style="margin-bottom:0">
+      <li><b>p.4 向量加法</b>：原稿寫 $\vec a=4\hat i+\hat k$——<b>沒寫 $\hat j$ 代表係數是 0</b>，所以第二分量是 $0-5=-5$（不是 $-4$）。</li>
+      <li><b>p.7 方向導數</b>：方向向量是 $\vec a=[1,0,-2]$（第二個分量是 0），$|\vec a|=\sqrt5$、答案 $-\frac{4}{\sqrt5}$。原稿寫的 $\sqrt5$ 是對的。</li>
+      <li><b>p.17 轉置</b>：原稿的 $A$ 是 $2\times3$（$\begin{bmatrix}5&-8&1\\4&0&0\end{bmatrix}$），轉置後是 $3\times2$，所以會多出一列（$A_{13}=1$ 會跑到第 3 列第 1 行）。</li>
+    </ul>
   </div>
 
   <div class="box idea">
