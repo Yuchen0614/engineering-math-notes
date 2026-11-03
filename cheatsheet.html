@@ -6,232 +6,211 @@
 @page{size:A4;margin:0}
 *{box-sizing:border-box;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 body{margin:0;font-family:"DFKai-SB","標楷體","STKaiti","華文楷體",KaiTi,serif;
-     color:#1c1c1c;font-size:9.8pt;line-height:1.5}
-.page{width:210mm;height:297mm;padding:9mm 9mm 7mm 13mm;position:relative;overflow:hidden;page-break-after:always}
+     color:#1b1b1b;font-size:9.3pt;line-height:1.45}
+.page{width:210mm;height:297mm;padding:6.5mm 8mm 6mm 12mm;position:relative;overflow:hidden;page-break-after:always}
 .page:last-child{page-break-after:auto}
-.page::before{content:"";position:absolute;left:9mm;top:0;bottom:0;width:.35mm;background:#f0bcbc}
-h1{font-size:15pt;margin:0 0 1mm;letter-spacing:.5pt;font-weight:400}
-h1 small{font-size:8.5pt;color:#666;letter-spacing:0}
-.hr{height:.5mm;background:linear-gradient(90deg,#2a5db0 0%,#2a5db0 62%,#e0c9a6 62%,#e0c9a6 100%);margin:1.5mm 0 2.5mm;border-radius:2px}
-.cols{column-count:2;column-gap:5mm}
-.ex{break-inside:avoid;margin:0 0 1.7mm;padding-left:6.5mm;position:relative;text-indent:0}
-.ex .no{position:absolute;left:0;top:.2mm;color:#2a5db0;font-size:8.6pt}
-.pg{display:inline-block;font-size:6.6pt;color:#8a7a5f;border:.25mm solid #dcd0b8;border-radius:2px;
-    padding:0 .8mm;margin-right:1mm;vertical-align:.3mm;letter-spacing:.2px}
-.ex b{color:#1a3f7a;font-weight:400}
+.page::before{content:"";position:absolute;left:8mm;top:0;bottom:0;width:.35mm;background:#f0bcbc}
+h1{font-family:"LiSu","隸書","STLiti","華文隸書",serif;font-size:14pt;margin:0 0 .6mm;letter-spacing:1pt;font-weight:400}
+h1 small{font-family:"DFKai-SB","標楷體",serif;font-size:7.6pt;color:#666;letter-spacing:0}
+.hr{height:.6mm;background:linear-gradient(90deg,#2a5db0 0%,#2a5db0 55%,#e0c9a6 55%,#e0c9a6 100%);margin:.8mm 0 1.5mm;border-radius:2px}
+.cols{column-count:2;column-gap:4.6mm}
+.ex{break-inside:avoid;margin:0 0 1.25mm;padding-left:6mm;position:relative}
+.ex .no{position:absolute;left:0;top:.1mm;color:#2a5db0;font-size:.96em}
+.pg{display:inline-block;font-size:.72em;color:#8a7a5f;border:.25mm solid #dcd0b8;border-radius:2px;
+    padding:0 .7mm;margin-right:.8mm;vertical-align:.3mm}
 .ans{color:#b3261e}
-.arw{color:#9a8f80;padding:0 .4mm}
-.note{position:absolute;bottom:5mm;left:13mm;right:9mm;font-size:7.4pt;color:#5c5348;
-      border-top:.3mm dashed #d8cfc0;padding-top:1.4mm}
+.st{color:#6a6155;font-size:.85em}
+.st::before{content:"▸ ";color:#b9ab93}
+.arw{color:#9a8f80;padding:0 .3mm}
 .katex{font-size:1.02em}
-.page:first-of-type .box{margin:4mm 0 0;padding:2mm 3mm;font-size:9pt}
-.page:first-of-type .box h3{font-size:9.8pt;margin-bottom:1.2mm}
-.page:first-of-type .box ul{column-count:2;column-gap:8mm;font-size:9pt;padding-left:4.4mm}
-.page:first-of-type .box li{margin:.3mm 0}
 </style></head><body>
 
 <section class="page">
-  <h1>工程數學 · 課堂例題總整理 <small>／ 原稿 23 頁、32 題，答案一頁看完</small></h1>
+  <h1>工程數學 · 課堂例題總整理 <small>／ 原稿 23 頁、32 題：題目、關鍵步驟、答案</small></h1>
   <div class="hr"></div>
   <div class="cols">
 
-    <div class="ex"><span class="no">①</span><span class="pg">p.1</span>複數四則：$z_1=8+3i,\;z_2=9-2i$ <span class="arw">→</span> <span class="ans">$\operatorname{Re}z_1=8,\ \operatorname{Im}z_1=3$；$z_1+z_2=17+i$；$z_1z_2=78+11i$</span></div>
+  <div class="ex"><span class="no">①</span><span class="pg">p.1</span>$z_1=8+3i,\ z_2=9-2i$ <span class="arw">→</span> <span class="ans">$\operatorname{Re}z_1=8,\ \operatorname{Im}z_1=3$；$z_1+z_2=17+i$；$z_1z_2=78+11i$</span><br><span class="st">Re/Im 直接讀係數；乘法照展開，$-6i^2=+6$</span></div>
 
-    <div class="ex"><span class="no">②</span><span class="pg">p.1</span>複數除法 <span class="arw">→</span> <span class="ans">$\dfrac{8+3i}{9-2i}=\dfrac{66}{85}+\dfrac{43}{85}i$</span>（分母乘共軛 $9+2i$）</div>
+  <div class="ex"><span class="no">②</span><span class="pg">p.1</span>$\dfrac{8+3i}{9-2i}$ <span class="arw">→</span> <span class="ans">$\dfrac{66}{85}+\dfrac{43}{85}i$</span><br><span class="st">上下同乘共軛 $9+2i$；分母 $9^2+2^2=85$</span></div>
 
-    <div class="ex"><span class="no">③</span><span class="pg">p.1</span>用共軛取虛部：$z_1=4+3i$ <span class="arw">→</span> <span class="ans">$z_1-\bar z_1=6i$，$\operatorname{Im}z_1=\dfrac{6i}{2i}=3$</span></div>
+  <div class="ex"><span class="no">③</span><span class="pg">p.1</span>$z_1=4+3i$ 求 $\operatorname{Im}z_1$ <span class="arw">→</span> <span class="ans">$3$</span><br><span class="st">$z_1-\bar z_1=6i$（實部互消），$\frac{6i}{2i}=3$</span></div>
 
-    <div class="ex"><span class="no">④</span><span class="pg">p.2</span>$z=1+i$ 化極式 <span class="arw">→</span> <span class="ans">$r=\sqrt2$、$\arg z=\frac{\pi}{4}$、$z=\sqrt2\,e^{i\pi/4}$</span>（$\operatorname{Arg}z=\frac{\pi}{4}+2n\pi$）</div>
+  <div class="ex"><span class="no">④</span><span class="pg">p.2</span>$z=1+i$ 化極式 <span class="arw">→</span> <span class="ans">$r=\sqrt2$、$\arg z=\frac{\pi}{4}$、$\sqrt2\,e^{i\pi/4}$</span><br><span class="st">$r=\sqrt{1^2+1^2}$；第一象限 $\tan\theta=1\Rightarrow45^\circ$；$r$ 記得提出來</span></div>
 
-    <div class="ex"><span class="no">⑤</span><span class="pg">p.3</span>$\sqrt[3]{1}$ <span class="arw">→</span> <span class="ans">$1,\ -\frac12+\frac{\sqrt3}{2}i,\ -\frac12-\frac{\sqrt3}{2}i$</span>（單位圓三等分）</div>
+  <div class="ex"><span class="no">⑤</span><span class="pg">p.3</span>$\sqrt[3]{1}$ <span class="arw">→</span> <span class="ans">$1,\ -\frac12+\frac{\sqrt3}{2}i,\ -\frac12-\frac{\sqrt3}{2}i$</span><br><span class="st">角度 $\frac{0+2k\pi}{3}$，$k=0,1,2$；三點把單位圓三等分</span></div>
 
-    <div class="ex"><span class="no">⑥</span><span class="pg">p.3</span>$\sqrt{i}$ 與 $\sqrt[5]{1}$ <span class="arw">→</span> <span class="ans">$\sqrt i=\pm\left(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i\right)$；$\sqrt[5]{1}=e^{i2k\pi/5},\ k=0..4$</span></div>
+  <div class="ex"><span class="no">⑥</span><span class="pg">p.3</span>$\sqrt i$、$\sqrt[5]{1}$ <span class="arw">→</span> <span class="ans">$\pm\left(\frac{\sqrt2}{2}+\frac{\sqrt2}{2}i\right)$；$e^{i2k\pi/5},\ k=0..4$</span><br><span class="st">$i=e^{i\pi/2}$，角度除以 2 得 $45^\circ,225^\circ$</span></div>
 
-    <div class="ex"><span class="no">⑦</span><span class="pg">p.4</span>$w=z^2+3z$ 在 $z=1+3i$ <span class="arw">→</span> <span class="ans">$w=-5+15i$</span>；$u=x^2-y^2+3x,\ v=2xy+3y$</div>
+  <div class="ex"><span class="no">⑦</span><span class="pg">p.4</span>$w=z^2+3z$，$z=1+3i$ <span class="arw">→</span> <span class="ans">$-5+15i$</span>；$u=x^2-y^2+3x,\ v=2xy+3y$<br><span class="st">$(1+3i)^2=-8+6i$；$3(1+3i)=3+9i$；相加</span></div>
 
-    <div class="ex"><span class="no">⑧</span><span class="pg">p.4</span>$P(4,0,2)\to Q(6,-1,2)$ <span class="arw">→</span> <span class="ans">$\overrightarrow{PQ}=(2,-1,0)$，$|\overrightarrow{PQ}|=\sqrt5$</span></div>
+  <div class="ex"><span class="no">⑧</span><span class="pg">p.4</span>$P(4,0,2)\to Q(6,-1,2)$ <span class="arw">→</span> <span class="ans">$\overrightarrow{PQ}=(2,-1,0)$，$|\overrightarrow{PQ}|=\sqrt5$</span><br><span class="st">終點減起點；長度＝三軸平方和開根號</span></div>
 
-    <div class="ex"><span class="no">⑨</span><span class="pg">p.4</span>向量加法（分量）<span class="arw">→</span> <span class="ans">$[4,0,1]+[2,5,\frac13]=[6,5,\frac43]$</span></div>
+  <div class="ex"><span class="no">⑨</span><span class="pg">p.4</span>$[4,0,1]+[2,5,\frac13]$ <span class="arw">→</span> <span class="ans">$[6,5,\frac43]$</span><br><span class="st">對應位置相加</span></div>
 
-    <div class="ex"><span class="no">⑩</span><span class="pg">p.4</span>向量加法（$\hat i\hat j\hat k$）<span class="arw">→</span> <span class="ans">$(4\hat i+\hat j+\hat k)+(2\hat i-5\hat j+\frac13\hat k)=6\hat i-4\hat j+\frac43\hat k$</span></div>
+  <div class="ex"><span class="no">⑩</span><span class="pg">p.4</span>$(4\hat i+\hat j+\hat k)+(2\hat i-5\hat j+\frac13\hat k)$ <span class="arw">→</span> <span class="ans">$6\hat i-4\hat j+\frac43\hat k$</span><br><span class="st">$1+(-5)=-4$</span></div>
 
-    <div class="ex"><span class="no">⑪</span><span class="pg">p.5</span>內積：$\vec a=[1,2,0],\ \vec b=[3,-2,1]$ <span class="arw">→</span> <span class="ans">$\vec a\cdot\vec b=-1$、$|\vec a|=\sqrt5$、$|\vec b|=\sqrt{14}$、$\theta\approx96.9^\circ$</span></div>
+  <div class="ex"><span class="no">⑪</span><span class="pg">p.5</span>$\vec a=[1,2,0],\ \vec b=[3,-2,1]$ <span class="arw">→</span> <span class="ans">$\vec a\cdot\vec b=-1$、$|\vec a|=\sqrt5$、$|\vec b|=\sqrt{14}$、$\theta\approx96.9^\circ$</span><br><span class="st">$3-4+0$；$\cos\theta=\frac{-1}{\sqrt{70}}$；負值代表鈍角</span></div>
 
-    <div class="ex"><span class="no">⑫</span><span class="pg">p.5</span>外積：$\vec a=[1,1,0],\ \vec b=[3,0,0]$ <span class="arw">→</span> <span class="ans">$\vec a\times\vec b=(0,0,-3)$</span>，面積 $=3$</div>
+  <div class="ex"><span class="no">⑫</span><span class="pg">p.5</span>$\vec a=[1,1,0]\times[3,0,0]$ <span class="arw">→</span> <span class="ans">$(0,0,-3)$</span>，面積 $3$<br><span class="st">行列式展開：$\hat i(0)-\hat j(0)+\hat k(1\cdot0-1\cdot3)$</span></div>
 
-    <div class="ex"><span class="no">⑬</span><span class="pg">p.7</span>方向導數：$f=2x^2+3y^2+z^2$、$P(2,1,3)$、$\vec a=(1,1,-2)$ <span class="arw">→</span> <span class="ans">$\nabla f(P)=(8,6,6)$，$D_{\vec a}f=\frac{2}{\sqrt6}$</span>（不是 $\sqrt5$！）</div>
+  <div class="ex"><span class="no">⑬</span><span class="pg">p.7</span>$f=2x^2+3y^2+z^2$、$P(2,1,3)$、$\vec a=(1,1,-2)$ <span class="arw">→</span> <span class="ans">$\nabla f(P)=(8,6,6)$，$D_{\vec a}f=\frac{2}{\sqrt6}$</span><br><span class="st">$\nabla f=[4x,6y,2z]$；$|\vec a|=\sqrt6$；$\frac{8+6-12}{\sqrt6}$</span></div>
 
-    <div class="ex"><span class="no">⑭</span><span class="pg">p.7</span>錐面 $z^2=4(x^2+y^2)$ 在 $P(1,0,2)$ 的法向量 <span class="arw">→</span> <span class="ans">$\hat n=\pm\left[\frac{2}{\sqrt5},0,-\frac{1}{\sqrt5}\right]$</span></div>
+  <div class="ex"><span class="no">⑭</span><span class="pg">p.7</span>$z^2=4(x^2+y^2)$ 在 $P(1,0,2)$ <span class="arw">→</span> <span class="ans">$\hat n=\pm\left[\frac{2}{\sqrt5},0,-\frac{1}{\sqrt5}\right]$</span><br><span class="st">整理成 $4(x^2+y^2)-z^2=0$；$\nabla f=[8x,8y,-2z]$；$/4\sqrt5$</span></div>
 
-    <div class="ex"><span class="no">⑮</span><span class="pg">p.9</span>旋度：$\vec v=[yz,\,3zx,\,z]$ <span class="arw">→</span> <span class="ans">$\nabla\times\vec v=[-3x,\ y,\ 2z]$</span>（$\hat j$ 那項別漏負號）</div>
+  <div class="ex"><span class="no">⑮</span><span class="pg">p.9</span>$\vec v=[yz,\ 3zx,\ z]$ <span class="arw">→</span> <span class="ans">$\nabla\times\vec v=[-3x,\ y,\ 2z]$</span><br><span class="st">$(0-3x)\hat i-(0-y)\hat j+(3z-z)\hat k$</span></div>
 
-    <div class="ex"><span class="no">⑯</span><span class="pg">p.10</span>保守場線積分：$\vec F=[2x,2y,4z]=\nabla f$、$f=x^2+y^2+2z^2$、$\vec r(t)=[t,t,t]$，$0\le t\le2$ <span class="arw">→</span> <span class="ans">$\int_C\vec F\cdot d\vec r=16$</span>（$=f(2,2,2)-f(0,0,0)$）</div>
+  <div class="ex"><span class="no">⑯</span><span class="pg">p.10</span>$\vec F=[2x,2y,4z]=\nabla f$、$f=x^2+y^2+2z^2$、$\vec r(t)=[t,t,t]$，$0\!\le\! t\!\le\!2$ <span class="arw">→</span> <span class="ans">$\int_C\vec F\cdot d\vec r=16$</span><br><span class="st">$\vec F(\vec r)=[2t,2t,4t]$，$\vec r'=[1,1,1]$，$\int_0^2 8t\,dt=4t^2$；或 $f(2,2,2)-f(0,0,0)$</span></div>
 
 
-    <div class="ex"><span class="no">⑰</span><span class="pg">p.10</span>非保守場線積分：$\vec F=[-y,-xy]$、單位圓第一象限弧 <span class="arw">→</span> <span class="ans">$\frac{\pi}{4}-\frac13\approx0.4521$</span></div>
+  <div class="ex"><span class="no">⑰</span><span class="pg">p.10</span>$\vec F=[-y,-xy]$、單位圓第一象限弧 <span class="arw">→</span> <span class="ans">$\frac{\pi}{4}-\frac13\approx0.4521$</span><br><span class="st">$\vec F(\vec r)=[-\sin t,-\cos t\sin t]$，$\vec r'=[-\sin t,\cos t]$，得 $\int(\sin^2t-\cos^2t\sin t)dt$</span></div>
 
-    <div class="ex"><span class="no">⑱</span><span class="pg">p.11</span>格林定理：$F_1=y^2-7y$、$F_2=2xy+2x$、$C:x^2+y^2=1$ <span class="arw">→</span> <span class="ans">$\oint_C=9\pi$</span>（$\iint(2y+2-(2y-7))=9\pi$；直接參數化也同）</div>
+  <div class="ex"><span class="no">⑱</span><span class="pg">p.11</span>格林定理：$F_1=y^2-7y$、$F_2=2xy+2x$、$C:x^2+y^2=1$ <span class="arw">→</span> <span class="ans">$9\pi$</span><br><span class="st">$\iint[(2y+2)-(2y-7)]dA=9\iint dA=9\pi$（$y$ 項互消，只剩圓面積 $\pi$）</span></div>
 
-    <div class="ex"><span class="no">⑲</span><span class="pg">p.13</span>推導題 <span class="arw">→</span> <span class="ans">$\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$</span>（取 $F_1=-f_y,\ F_2=f_x$ 套格林）</div>
+  <div class="ex"><span class="no">⑲</span><span class="pg">p.13</span>推導 <span class="arw">→</span> <span class="ans">$\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}ds$</span><br><span class="st">取 $F_1=-f_y$、$F_2=f_x$ 使 $\partial_xF_2-\partial_yF_1=f_{xx}+f_{yy}$，再套格林＋$\nabla f\cdot\hat n=\partial f/\partial n$</span></div>
 
-    <div class="ex"><span class="no">⑳</span><span class="pg">p.14</span>散度定理：$\vec F=[x^3,x^2y,x^2z]$、半徑 $a$ 高 $h$ 圓柱 <span class="arw">→</span> <span class="ans">$\nabla\!\cdot\!\vec F=5x^2$，通量 $=\frac{5\pi a^4h}{4}$</span></div>
+  <div class="ex"><span class="no">⑳</span><span class="pg">p.14</span>$\vec F=[x^3,x^2y,x^2z]$、半徑 $a$ 高 $h$ 圓柱 <span class="arw">→</span> <span class="ans">通量 $=\frac{5\pi a^4h}{4}$</span><br><span class="st">$\nabla\!\cdot\!\vec F=3x^2+x^2+x^2=5x^2$；換柱座標 $x=\rho\cos\varphi$、$dV=\rho\,d\rho\,d\varphi\,dz$，積分得 $5h\cdot\pi\cdot\frac{a^4}{4}$</span></div>
 
-    <div class="ex"><span class="no">㉑</span><span class="pg">p.15</span>斯托克斯定理：$z=1-(x^2+y^2)$、$\vec F=[y,z,x]$ <span class="arw">→</span> <span class="ans">兩邊都是 $-\pi$</span>（左：$\int_0^{2\pi}\!-\sin^2s\,ds$；右：$\iint(-2x-2y-1)dA$）</div>
+  <div class="ex"><span class="no">㉑</span><span class="pg">p.15</span>$z=1-(x^2+y^2)$、$\vec F=[y,z,x]$ <span class="arw">→</span> <span class="ans">兩邊都是 $-\pi$</span><br><span class="st">左：$r(s)=[\cos s,\sin s,0]$，$\int_0^{2\pi}\!-\sin^2s\,ds$；右：$\nabla\times\vec F=(-1,-1,-1)$，$\iint(-2x-2y-1)dA$（$2x,2y$ 對稱抵銷）</span></div>
 
-    <div class="ex"><span class="no">㉒</span><span class="pg">p.16</span>寫成 $A\vec x=\vec B$：$4x_1+6x_2+9x_3=6$、$6x_1-2x_3=20$、$5x_1-8x_2+x_3=10$ <span class="arw">→</span> <span class="ans">$\vec x=[3,\frac12,-1]^T$</span>（缺項係數補 0）</div>
+  <div class="ex"><span class="no">㉒</span><span class="pg">p.16</span>$4x_1+6x_2+9x_3=6$、$6x_1-2x_3=20$、$5x_1-8x_2+x_3=10$ <span class="arw">→</span> <span class="ans">$\vec x=[3,\frac12,-1]^T$</span><br><span class="st">第二列沒有 $x_2$，係數補 0 ⇒ $A=\begin{bmatrix}4&6&9\\6&0&-2\\5&-8&1\end{bmatrix}$</span></div>
 
-    <div class="ex"><span class="no">㉓</span><span class="pg">p.17</span>矩陣乘法 $AB$（$3\times3$ 乘 $3\times4$）<span class="arw">→</span> <span class="ans">$\begin{bmatrix}22&-2&43&42\\26&-16&14&6\\-9&4&-37&-28\end{bmatrix}$</span></div>
+  <div class="ex"><span class="no">㉓</span><span class="pg">p.17</span>$AB$（$3\times3$ 乘 $3\times4$）<span class="arw">→</span> <span class="ans">$\begin{bmatrix}22&-2&43&42\\26&-16&14&6\\-9&4&-37&-28\end{bmatrix}$</span><br><span class="st">列乘行：$C_{11}=3(2)+5(5)+(-1)(9)=22$；先畫好 $3\times4$ 的空格再逐格填</span></div>
 
-    <div class="ex"><span class="no">㉔</span><span class="pg">p.17</span>轉置：$A=\begin{bmatrix}5&-8\\4&0\end{bmatrix}$ <span class="arw">→</span> <span class="ans">$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$</span></div>
+  <div class="ex"><span class="no">㉔</span><span class="pg">p.17</span>$A=\begin{bmatrix}5&-8\\4&0\end{bmatrix}$ <span class="arw">→</span> <span class="ans">$A^T=\begin{bmatrix}5&4\\-8&0\end{bmatrix}$</span><br><span class="st">列變行、行變列（$a_{12}$ 搬到 $a_{21}$）</span></div>
 
-    <div class="ex"><span class="no">㉕</span><span class="pg">p.18</span>$2x_1+5x_2=2$、$-4x_1+3x_2=-30$ <span class="arw">→</span> <span class="ans">$x_1=6,\ x_2=-2$</span>（R$_2+2$R$_1$ 得 $13x_2=-26$）</div>
+  <div class="ex"><span class="no">㉕</span><span class="pg">p.18</span>$2x_1+5x_2=2$、$-4x_1+3x_2=-30$ <span class="arw">→</span> <span class="ans">$x_1=6,\ x_2=-2$</span><br><span class="st">$\text{R}_2+2\text{R}_1$ ⇒ $[0,13\,|\,-26]$ ⇒ $13x_2=-26$；代回 $2x_1=12$</span></div>
 
-    <div class="ex"><span class="no">㉖</span><span class="pg">p.18</span>電路三式：$x_1-x_2+x_3=0$、$20x_1+10x_2=80$、$10x_2+25x_3=90$ <span class="arw">→</span> <span class="ans">$(x_1,x_2,x_3)=(2,4,2)$</span></div>
+  <div class="ex"><span class="no">㉖</span><span class="pg">p.18</span>電路：$x_1-x_2+x_3=0$、$20x_1+10x_2=80$、$10x_2+25x_3=90$ <span class="arw">→</span> <span class="ans">$(2,4,2)$</span><br><span class="st">列運算得 $[0,0,-95\,|\,-190]$ ⇒ $x_3=2$，回代 $10x_2+50=90$ ⇒ $x_2=4$，$x_1=4-2$</span></div>
 
-    <div class="ex"><span class="no">㉗</span><span class="pg">p.19</span>小數係數那組（4 未知數、3 式）<span class="arw">→</span> <span class="ans">消去後出現整列 0 ⇒ 無限多組解</span></div>
+  <div class="ex"><span class="no">㉗</span><span class="pg">p.19</span>小數係數 4 未知數 3 式 <span class="arw">→</span> <span class="ans">無限多組解</span><br><span class="st">$\text{R}_2-0.2\text{R}_1$、$\text{R}_3-0.4\text{R}_1$ 後 $\text{R}_3+\text{R}_2$ 整列消成 0（$0=0$ 是廢話）</span></div>
 
-    <div class="ex"><span class="no">㉘</span><span class="pg">p.19</span>第三式左邊是第二式的一半那組 <span class="arw">→</span> <span class="ans">出現 $0=-6$ ⇒ 無解</span></div>
+  <div class="ex"><span class="no">㉘</span><span class="pg">p.19</span>第三式左邊是第二式一半那組 <span class="arw">→</span> <span class="ans">無解</span><br><span class="st">消去後得 $[0,0,0\,|\,-6]$，即 $0=-6$ 矛盾</span></div>
 
-    <div class="ex"><span class="no">㉙</span><span class="pg">p.20</span>求秩：$A=\begin{bmatrix}3&0&2\\-6&42&24\\21&-21&0\end{bmatrix}$ <span class="arw">→</span> <span class="ans">Rank$\,A=2$</span>；作業 $A=\begin{bmatrix}1&2&3\\2&4&6\\0&1&1\end{bmatrix}$ <span class="arw">→</span> <span class="ans">Rank $=2$</span></div>
+  <div class="ex"><span class="no">㉙</span><span class="pg">p.20</span>$\begin{bmatrix}3&0&2\\-6&42&24\\21&-21&0\end{bmatrix}$ 與作業 $\begin{bmatrix}1&2&3\\2&4&6\\0&1&1\end{bmatrix}$ <span class="arw">→</span> <span class="ans">Rank 都是 2</span><br><span class="st">前者：$\text{R}_2+2\text{R}_1$、$\text{R}_3-7\text{R}_1$ 後兩列成比例；後者：第 2 列＝第 1 列乘 2</span></div>
 
-    <div class="ex"><span class="no">㉚</span><span class="pg">p.21</span>行列式 $D=\begin{vmatrix}1&3&0\\2&6&4\\-1&0&2\end{vmatrix}$ <span class="arw">→</span> <span class="ans">$1(12)-3(8)+0=-12$</span></div>
+  <div class="ex"><span class="no">㉚</span><span class="pg">p.21</span>$D=\begin{vmatrix}1&3&0\\2&6&4\\-1&0&2\end{vmatrix}$ <span class="arw">→</span> <span class="ans">$-12$</span><br><span class="st">沿第一列：$1\begin{vmatrix}6&4\\0&2\end{vmatrix}-3\begin{vmatrix}2&4\\-1&2\end{vmatrix}+0=12-24$</span></div>
 
-    <div class="ex"><span class="no">㉛</span><span class="pg">p.22</span>克拉瑪解 ㉕ <span class="arw">→</span> <span class="ans">$\det A=26$，$x_1=\frac{156}{26}=6$，$x_2=\frac{-52}{26}=-2$</span></div>
+  <div class="ex"><span class="no">㉛</span><span class="pg">p.22</span>克拉瑪解 ㉕ <span class="arw">→</span> <span class="ans">$x_1=6,\ x_2=-2$</span><br><span class="st">$\det A=26$；$x_1=\frac{\left|\begin{smallmatrix}2&5\\-30&3\end{smallmatrix}\right|}{26}=\frac{156}{26}$；$x_2=\frac{-52}{26}$</span></div>
 
-    <div class="ex"><span class="no">㉜</span><span class="pg">p.23</span>反矩陣：$A=\begin{bmatrix}-1&1&2\\3&-1&1\\-1&3&4\end{bmatrix}$ <span class="arw">→</span> <span class="ans">$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$</span>（$\det A=10$）</div>
+  <div class="ex"><span class="no">㉜</span><span class="pg">p.23</span>$A=\begin{bmatrix}-1&1&2\\3&-1&1\\-1&3&4\end{bmatrix}$ <span class="arw">→</span> <span class="ans">$A^{-1}=\begin{bmatrix}-0.7&0.2&0.3\\-1.3&-0.2&0.7\\0.8&0.2&-0.2\end{bmatrix}$</span><br><span class="st">$[A|I]$ 列運算；$\text{R}_2+3\text{R}_1$、$\text{R}_3-\text{R}_1$ 起手；$\det A=10$，最後乘回去驗算 $=I$</span></div>
 
-  </div>
-  <div class="box">
-    <h3>原稿 5 處手寫筆誤（照這裡的算；其餘數字都與原稿一致）</h3>
-    <ul>
-      <li>p.4 $f(1+3i)=-5+15i$（原稿寫 $1+15i$）</li>
-      <li>p.4 向量第二分量 $1+(-5)=-4$（原稿寫 $-5$）</li>
-      <li>p.7 $|\vec a|=\sqrt6$，$D_{\vec a}f=\frac{2}{\sqrt6}$（原稿寫 $\sqrt5$）</li>
-      <li>p.10 位勢差要用路徑端點 $(0,0,0)\to(2,2,2)$，$f$ 差為 16</li>
-      <li>p.18 電路第二式應為 $20x_1+10x_2=80$（原稿寫成 $10x_3$）</li>
-    </ul>
   </div>
 </section>
 
 <section class="page">
   <style>
-    .page:nth-of-type(2){font-size:7.1pt;line-height:1.47}
-    h2{font-size:8.9pt;color:#1a3f7a;margin:2.6mm 0 .7mm;font-weight:400;border-bottom:.3mm solid #dbe3ef;padding-bottom:.3mm}
-    h2 .pg{font-size:6.8pt;margin-left:1mm}
-    .page p{margin:.55mm 0}
+    .page:nth-of-type(2){font-size:6.6pt;line-height:1.45}
+    h2{font-family:"LiSu","隸書","STLiti",serif;font-size:9.4pt;color:#1a3f7a;margin:2.2mm 0 .5mm;
+       font-weight:400;letter-spacing:.4pt;border-bottom:.3mm solid #dbe3ef;padding-bottom:.3mm}
+    h2 .pg{font-size:.8em;margin-left:1mm}
+    .page p{margin:.45mm 0}
     .r{color:#b3261e}
-    .lbl{color:#5c5348}
-    .box{border:.5mm solid #dfcfae;border-radius:5px 3px 6px 4px;padding:1.7mm 2.3mm;margin:2.4mm 0;background:#fdfaf2;break-inside:avoid}
-    .box h3{margin:0 0 .7mm;font-size:8.9pt;color:#8a5a1e;font-weight:400}
-    .box ul{margin:.3mm 0;padding-left:4.4mm}
-    .box li{margin:.25mm 0}
-    .cols2{column-count:2;column-gap:5mm}
+    .w{color:#8a5a1e}
+    .box{border:.5mm solid #dfcfae;border-radius:5px 3px 6px 4px;padding:1.4mm 2mm;margin:2mm 0;background:#fdfaf2;break-inside:avoid}
+    .box h3{font-family:"LiSu","隸書","STLiti",serif;margin:0 0 .5mm;font-size:8.6pt;color:#8a5a1e;font-weight:400}
   </style>
-  <h1>工程數學 · 重點整理 <small>／ 全 23 頁的公式、記法與易錯處</small></h1>
+  <h1>工程數學 · 重點整理 <small>／ 全 23 頁：每條公式都附白話翻譯（<span class="w">棕色</span>）與易錯提醒（<span class="r">紅色</span>）</small></h1>
   <div class="hr"></div>
-  <div class="cols2">
+  <div class="cols">
 
-    <h2>1 · 複數與四則運算 <span class="pg">p.1</span></h2>
-    <p>$i=\sqrt{-1}$，$i^2=-1$；$z=x+iy$，$\operatorname{Re}z=x$、$\operatorname{Im}z=y$（<span class="r">是實數，不含 $i$</span>）。$x=0$ 叫純虛數。</p>
-    <p>乘法照展開：$(a+bi)(c+di)=(ac-bd)+(ad+bc)i$，遇到 $i^2$ 換 $-1$。</p>
-    <p>除法：分子分母同乘分母的共軛 $\frac{z_1}{z_2}=\frac{z_1\bar z_2}{z_2\bar z_2}$，因 $z\bar z=x^2+y^2$。</p>
-    <p>共軛 $\bar z=x-iy$（對實軸鏡射）：$\operatorname{Re}z=\frac{z+\bar z}{2}$、$\operatorname{Im}z=\frac{z-\bar z}{2i}$；$\overline{z_1z_2}=\bar z_1\bar z_2$、$\overline{(z_1/z_2)}=\bar z_1/\bar z_2$。<span class="r">但 $\operatorname{Re}(z_1z_2)\ne\operatorname{Re}z_1\operatorname{Re}z_2$</span>。</p>
+  <h2>1 複數 <span class="pg">p.1</span></h2>
+  <p>$i=\sqrt{-1}$，即 $i^2=-1$；$z=x+iy$ <span class="w">白話：$i$ 的意思是「轉 90°」，所以 $i^2$ 就是轉 180°＝變成負號。</span></p>
+  <p>$\operatorname{Re}z=x$、$\operatorname{Im}z=y$ <span class="w">虛部是實數 $y$，不含 $i$；$x=0$ 叫純虛數。</span></p>
+  <p>乘法 $(a+bi)(c+di)=(ac-bd)+(ad+bc)i$ <span class="w">白話：照多項式展開，看到 $i^2$ 就換 $-1$。</span></p>
+  <p>除法 $\dfrac{z_1}{z_2}=\dfrac{z_1\bar z_2}{z_2\bar z_2}$，$z\bar z=x^2+y^2$ <span class="w">白話：跟 $\frac{1}{\sqrt2}$ 有理化同一招——上下同乘分母的共軛，把分母的 $i$ 消掉。</span></p>
+  <p>共軛 $\bar z=x-iy$：$\operatorname{Re}z=\frac{z+\bar z}{2}$、$\operatorname{Im}z=\frac{z-\bar z}{2i}$　<span class="r">$\operatorname{Re}(z_1z_2)\ne\operatorname{Re}z_1\cdot\operatorname{Re}z_2$</span></p>
 
-    <h2>2 · 極式與歐拉公式 <span class="pg">p.2</span></h2>
-    <p>$r=|z|=\sqrt{x^2+y^2}$，$x=r\cos\theta,\ y=r\sin\theta$，$z=r(\cos\theta+i\sin\theta)=re^{i\theta}$。</p>
-    <p>歐拉公式 $e^{i\theta}=\cos\theta+i\sin\theta$——整份講義最重要的一行。</p>
-    <p>$\operatorname{Arg}z$ 是全部角度（彼此差 $2n\pi$）；$\arg z$ 只取 $-\pi<\theta\le\pi$ 的主值。</p>
-    <p>四軸直接背：$1=e^{i0}$、$i=e^{i\pi/2}$、$-1=e^{i\pi}$、$-i=e^{i3\pi/2}$。求 $\theta$：先算 $\tan\theta$ 的參考角，<span class="r">再看點在第幾象限決定加多少</span>。</p>
+  <h2>2 極式與歐拉公式 <span class="pg">p.2</span></h2>
+  <p>$r=|z|=\sqrt{x^2+y^2}$；$x=r\cos\theta$、$y=r\sin\theta$ <span class="w">白話：同一個點，改說「朝 $\theta$ 方向走 $r$ 步」。</span></p>
+  <p>$z=r(\cos\theta+i\sin\theta)=re^{i\theta}$；歐拉公式 $e^{i\theta}=\cos\theta+i\sin\theta$ <span class="w">白話：指數與角度可以互相換算，這就是「極式相乘＝角度相加」的來源。</span></p>
+  <p>$\operatorname{Arg}z$＝全部角度（彼此差 $2n\pi$）；$\arg z$＝主值，只取 $-\pi<\theta\le\pi$</p>
+  <p>四軸直接背：$1=e^{i0}$、$i=e^{i\pi/2}$、$-1=e^{i\pi}$、$-i=e^{i3\pi/2}$　<span class="w">求 $\theta$：先算參考角，再看落在第幾象限調整。</span></p>
 
-    <h2>3 · 乘除、棣美弗、方根 <span class="pg">p.3</span></h2>
-    <p>$z_1z_2=r_1r_2e^{i(\theta_1+\theta_2)}$（長度相乘、角度相加）、$\frac{z_1}{z_2}=\frac{r_1}{r_2}e^{i(\theta_1-\theta_2)}$、$|z_1z_2|=|z_1||z_2|$。</p>
-    <p>棣美弗 $z^n=r^ne^{in\theta}=r^n[\cos n\theta+i\sin n\theta]$。</p>
-    <p>方根 $\sqrt[n]{z}=\sqrt[n]{r}\left[\cos\frac{\theta+2k\pi}{n}+i\sin\frac{\theta+2k\pi}{n}\right]$，$k=0,\dots,n-1$：<span class="r">共 $n$ 個解，在圓上等分</span>。</p>
-    <p class="lbl">記法：角度是「$(\theta+2k\pi)/n$」不是「$\theta/n+2k\pi$」。</p>
+  <h2>3 乘除、棣美弗、方根 <span class="pg">p.3</span></h2>
+  <p>$z_1z_2=r_1r_2e^{i(\theta_1+\theta_2)}$；$\dfrac{z_1}{z_2}=\dfrac{r_1}{r_2}e^{i(\theta_1-\theta_2)}$ <span class="w">白話：長度相乘（除）、角度相加（減）。</span></p>
+  <p>棣美弗 $z^n=r^ne^{in\theta}=r^n[\cos n\theta+i\sin n\theta]$ <span class="w">白話：$n$ 次方＝角度放大 $n$ 倍。</span></p>
+  <p>方根 $\sqrt[n]{z}=\sqrt[n]{r}\,e^{i(\theta+2k\pi)/n}$，$k=0,\dots,n-1$ <span class="w">白話：開 $n$ 次方有 $n$ 個答案（因為繞圈也要算），它們在半徑 $\sqrt[n]{r}$ 的圓上等分。</span> <span class="r">角度是 $\frac{\theta+2k\pi}{n}$，不是 $\frac{\theta}{n}+2k\pi$</span></p>
 
-    <h2>4 · 複變函數 <span class="pg">p.4</span></h2>
-    <p>$w=f(z)$：一個 $z$ 對一個 $w$；寫成 $w=u+iv$，$u=u(x,y)$、$v=v(x,y)$——<span class="r">一個複變函數＝兩條實函數綁在一起</span>。</p>
-    <p>驗算技巧：把 $(x,y)$ 代回 $u,v$ 的式子，應該和直接代 $z$ 算出來的一樣。</p>
+  <h2>4 複變函數 <span class="pg">p.4</span></h2>
+  <p>$w=f(z)=u+iv$，其中 $u=u(x,y)$、$v=v(x,y)$ <span class="w">白話：一個複數輸入 $z$ 會同時決定兩個實數（實部、虛部），像是把輸入平面的點搬到輸出平面。</span></p>
+  <p>驗算方法：把 $(x,y)$ 代進 $u,v$，答案要和直接把 $z$ 代進 $f$ 一樣。</p>
 
-    <h2>5 · 向量 <span class="pg">p.4–6</span></h2>
-    <p>$\vec a=[a_1,a_2,a_3]$、$|\vec a|=\sqrt{a_1^2+a_2^2+a_3^2}$、$\hat a=\vec a/|\vec a|$；$\overrightarrow{PQ}=Q-P$。</p>
-    <p>內積 $\vec a\cdot\vec b=a_1b_1+a_2b_2+a_3b_3=|\vec a||\vec b|\cos\theta$（純量）。<span class="r">$\vec a\cdot\vec b=0\iff$ 垂直</span>；正＝銳角、負＝鈍角。</p>
-    <p>外積 $\vec a\times\vec b=\begin{vmatrix}\hat i&\hat j&\hat k\\a_1&a_2&a_3\\b_1&b_2&b_3\end{vmatrix}$，$|\vec a\times\vec b|=|\vec a||\vec b|\sin\theta$＝平行四邊形面積；方向用右手定則，$\vec a\times\vec b=-(\vec b\times\vec a)$。<span class="r">只有三維有外積</span>。</p>
-    <p>向量函數 $\vec v(p)=[v_1,v_2,v_3]$：極限、連續、導數都逐分量做；$\frac{\partial\vec v}{\partial u}=\frac{\partial v_1}{\partial u}\hat i+\frac{\partial v_2}{\partial u}\hat j+\frac{\partial v_3}{\partial u}\hat k$。</p>
-    <p>位置向量 $\vec r(t)=[x(t),y(t),z(t)]$，切向量 $\vec r'(t)$，弧長 $L=\int_a^b|\vec r'(t)|\,dt$。</p>
+  <h2>5 向量 <span class="pg">p.4–6</span></h2>
+  <p>$|\vec a|=\sqrt{a_1^2+a_2^2+a_3^2}$；$\hat a=\dfrac{\vec a}{|\vec a|}$（長度壓成 1）；$\overrightarrow{PQ}=Q-P$</p>
+  <p>內積 $\vec a\cdot\vec b=a_1b_1+a_2b_2+a_3b_3=|\vec a||\vec b|\cos\theta$ <span class="w">白話：問「兩支箭有多像」——同向為正、垂直為零、反向為負；結果是一個數。</span> <span class="r">$\vec a\cdot\vec b=0\iff$ 垂直</span></p>
+  <p>外積 $\vec a\times\vec b=\begin{vmatrix}\hat i&\hat j&\hat k\\ a_1&a_2&a_3\\ b_1&b_2&b_3\end{vmatrix}$，$|\vec a\times\vec b|=|\vec a||\vec b|\sin\theta$ <span class="w">白話：把 $\vec a$ 放桌上、$\vec b$ 掃過去，$\vec a\times\vec b$ 是「往上」那支箭，長度＝兩向量張出的平行四邊形面積。</span> <span class="r">只有三維有外積；$\vec a\times\vec b=-(\vec b\times\vec a)$</span></p>
+  <p>位置向量 $\vec r(t)=[x(t),y(t),z(t)]$；$\vec r'(t)$ 是切向量（方向＝前進方向、大小＝速率）；弧長 $L=\int|\vec r'(t)|\,dt$ <span class="w">白話：把速率積分起來，就是走了多遠。</span></p>
 
-    <h2>6 · 梯度與方向導數 <span class="pg">p.7</span></h2>
-    <p>$\nabla=\frac{\partial}{\partial x}\hat i+\frac{\partial}{\partial y}\hat j+\frac{\partial}{\partial z}\hat k$；$\nabla f=[f_x,f_y,f_z]$＝<span class="r">最陡上升方向</span>，長度是最大上升率。</p>
-    <p>方向導數 $D_{\vec a}f=\hat a\cdot\nabla f=\frac{\vec a}{|\vec a|}\cdot\nabla f$：<span class="r">$\vec a$ 一定要先單位化</span>。又 $D_{\vec a}f=|\nabla f|\cos\phi$，朝梯度走最大。</p>
-    <p>法向量定理：$f(x,y,z)=c$ 的曲面，$\nabla f$ 垂直曲面（因 $\frac{d}{dt}f(\vec r(t))=\nabla f\cdot\vec r'=0$）；單位法向量 $\hat n=\pm\frac{\nabla f}{|\nabla f|}$（<span class="r">方向不確定時兩個都要寫</span>）。</p>
-    <p class="lbl">流程：先把方程式搬成 $f=$ 常數 → 算 $\nabla f$ → 代點 → 除以長度。</p>
+  <h2>6 梯度與方向導數 <span class="pg">p.7</span></h2>
+  <p>$\nabla f=[f_x,f_y,f_z]$；算子 $\nabla=\frac{\partial}{\partial x}\hat i+\frac{\partial}{\partial y}\hat j+\frac{\partial}{\partial z}\hat k$ <span class="w">白話：把 $f$ 想成一座山的高度，$\nabla f$ 就是「往哪走最陡」，它的長度是坡度。</span></p>
+  <p>方向導數 $D_{\vec a}f=\hat a\cdot\nabla f=\dfrac{\vec a}{|\vec a|}\cdot\nabla f=|\nabla f|\cos\phi$ <span class="w">白話：硬往 $\vec a$ 方向走的坡度；朝梯度方向走最大。</span> <span class="r">方向向量一定要先單位化</span></p>
+  <p>$f(x,y,z)=c$ 的曲面：$\nabla f$ 垂直曲面，$\hat n=\pm\dfrac{\nabla f}{|\nabla f|}$ <span class="w">白話：沿著等高線走高度不變（$\nabla f\cdot\vec r'=0$），所以梯度必垂直等高線。</span> <span class="r">方向沒指定時 $\pm$ 都要寫</span></p>
 
-    <h2>7 · 散度、旋度、Laplacian <span class="pg">p.8–9</span></h2>
-    <p>散度 $\nabla\cdot\vec v=\frac{\partial v_1}{\partial x}+\frac{\partial v_2}{\partial y}+\frac{\partial v_3}{\partial z}$（純量）：$>0$ 是源、$<0$ 是匯。<span class="r">每個分量只對自己的變數微分</span>。</p>
-    <p>旋度 $\nabla\times\vec v$（向量）＝行列式展開；<span class="r">$\hat j$ 那項的減號最容易漏</span>，建議先把三個分量公式抄在紙邊。</p>
-    <p>Laplacian $\nabla^2f=\operatorname{div}(\operatorname{grad}f)=f_{xx}+f_{yy}+f_{zz}$（梯度的散度就是 Laplacian）。</p>
-    <p>兩個必記的 0：$\nabla\times(\nabla f)=\vec 0$（梯度場無旋）、$\nabla\cdot(\nabla\times\vec v)=0$。</p>
+  <h2>7 散度、旋度、Laplacian <span class="pg">p.8–9</span></h2>
+  <p>散度 $\nabla\cdot\vec v=\frac{\partial v_1}{\partial x}+\frac{\partial v_2}{\partial y}+\frac{\partial v_3}{\partial z}$（純量） <span class="w">白話：在這一點放一個小水龍頭——流出（正）是水源、吸入（負）是排水孔。</span> <span class="r">每項只對自己的變數微分（$v_1$ 對 $x$）</span></p>
+  <p>旋度 $\nabla\times\vec v=\begin{vmatrix}\hat i&\hat j&\hat k\\ \partial_x&\partial_y&\partial_z\\ v_1&v_2&v_3\end{vmatrix}$（向量） <span class="w">白話：放一個小風車，看它會不會被轉起來。</span> <span class="r">$\hat j$ 那項有負號，最保險是先把三分量公式抄紙邊</span></p>
+  <p>Laplacian $\nabla^2f=f_{xx}+f_{yy}+f_{zz}=\operatorname{div}(\operatorname{grad}f)$ <span class="w">白話：每個方向各微分兩次再相加；名字的意思是「梯度的散度」。</span></p>
+  <p>$\nabla\times(\nabla f)=\vec0$、$\nabla\cdot(\nabla\times\vec v)=0$ <span class="w">白話：梯度場不會打轉——判斷是不是保守場最快的工具。</span></p>
 
-    <h2>8 · 線積分 <span class="pg">p.10–11</span></h2>
-    <p>$\int_C\vec F\cdot d\vec r=\int_a^b\vec F(\vec r(t))\cdot\vec r'(t)\,dt=\int_a^b(F_1x'+F_2y'+F_3z')dt$；四步：參數化 → 全換成 $t$ → 內積 → 對 $t$ 積分。</p>
-    <p>$C$ 封閉寫 $\oint_C$；$\vec F=\nabla f$（保守場）$\iff\oint_C\vec F\cdot d\vec r=0$，且 $\int_C\vec F\cdot d\vec r=f(\text{終})-f(\text{起})$——<span class="r">只看頭尾，與路徑無關</span>。</p>
-    <p>線性性質：$\int_C(\vec F+\vec G)\cdot d\vec r=\int_C\vec F\cdot d\vec r+\int_C\vec G\cdot d\vec r$、$\int_{C_1+C_2}=\int_{C_1}+\int_{C_2}$。</p>
-    <p class="lbl">積分技巧：$\int\sin^2$（或 $\cos^2$）用半角公式；$\int\cos^2t\sin t\,dt$ 令 $u=\cos t$。</p>
+  <h2>8 線積分 <span class="pg">p.10–11</span></h2>
+  <p>$\displaystyle\int_C\vec F\cdot d\vec r=\int_a^b\vec F(\vec r(t))\cdot\vec r'(t)\,dt$ <span class="w">白話：沿著路走，把每一小步的「力 · 位移」加起來＝總共做了多少功。</span></p>
+  <p>四步：①參數化 $\vec r(t)$ ②$\vec F$ 裡全部換成 $t$ ③內積 ④對 $t$ 積分。</p>
+  <p>$\vec F=\nabla f$（保守場）$\Rightarrow\int_C\vec F\cdot d\vec r=f(\text{終點})-f(\text{起點})$，且 $\oint_C\vec F\cdot d\vec r=0$ <span class="w">白話：只看頭尾，中間怎麼繞都一樣（像爬山只看起點與終點高度）。</span></p>
 
 
-    <h2>9 · 格林定理 <span class="pg">p.11</span></h2>
-    <p>$\oint_C(F_1\,dx+F_2\,dy)=\iint_R\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dA$：<span class="r">繞邊界一圈＝界內旋轉量總和</span>。</p>
-    <p>右邊括號就是 $(\nabla\times\vec F)$ 的 $z$ 分量；$C$ 取逆時針為正向（反向要變號）。</p>
-    <p>妙用：$\iint_R 1\,dA=\oint_C x\,dy$（用來算面積）；被積函數化簡後若 $y$ 項抵消，幾乎就是送分題。</p>
+  <h2>9 格林定理 <span class="pg">p.11</span></h2>
+  <p>$\displaystyle\oint_C(F_1\,dx+F_2\,dy)=\iint_R\left(\frac{\partial F_2}{\partial x}-\frac{\partial F_1}{\partial y}\right)dA$ <span class="w">白話：沿著邊界走一圈量到的總量，等於把界內每一小塊的「小旋轉」全部加起來（像繞操場一圈的風＝操場上所有小旋風的總和）。</span></p>
+  <p>右邊括號就是 $(\nabla\times\vec F)$ 的 $z$ 分量；$C$ 取逆時針為正向 <span class="r">順時針要變號</span></p>
+  <p>妙用：$\displaystyle\iint_R 1\,dA=\oint_C x\,dy$（用線積分算面積）</p>
 
-    <h2>10 · 座標系與表面積分 <span class="pg">p.12–13</span></h2>
-    <p>柱座標 $(\rho,\varphi,z)$：$x=\rho\cos\varphi,\ y=\rho\sin\varphi$，$dV=\rho\,d\rho\,d\varphi\,dz$。</p>
-    <p>球座標 $(r,\theta,\varphi)$：$x=r\sin\theta\cos\varphi,\ y=r\sin\theta\sin\varphi,\ z=r\cos\theta$，$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$。</p>
-    <p>球面參數式 $\vec F(u,v)=a\cos v\cos u\,\hat i+a\cos v\sin u\,\hat j+a\sin v\,\hat k$，$0\le u\le2\pi$、$-\frac\pi2\le v\le\frac\pi2$；$|\vec F|=a$（就是那個比例因子）。</p>
-    <p>曲面 $z=g(x,y)$ 的面積元素 $dA=\sqrt{1+g_x^2+g_y^2}\,dxdy$。</p>
-    <p>法向導數版：$\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$，其中 $\frac{\partial f}{\partial n}=\nabla f\cdot\hat n$。</p>
+  <h2>10 座標系與表面積分 <span class="pg">p.12–13</span></h2>
+  <p>柱座標 $(\rho,\varphi,z)$：$x=\rho\cos\varphi$、$y=\rho\sin\varphi$，$dV=\rho\,d\rho\,d\varphi\,dz$ <span class="w">白話：換量尺要補「比例因子」——越外圈，同樣角度走過的實際長度越長，所以要乘 $\rho$。</span></p>
+  <p>球座標 $(r,\theta,\varphi)$：$x=r\sin\theta\cos\varphi$、$y=r\sin\theta\sin\varphi$、$z=r\cos\theta$，$dV=r^2\sin\theta\,dr\,d\theta\,d\varphi$ <span class="r">忘掉 $r^2\sin\theta$ 是最常見的錯</span></p>
+  <p>曲面 $z=g(x,y)$ 的面積元素 $dA=\sqrt{1+g_x^2+g_y^2}\,dxdy$ <span class="w">白話：曲面是斜的，實際面積比投影大，根號就是放大率（平面時根號 $=1$）。</span></p>
+  <p>$\displaystyle\iint_R\nabla^2f\,dA=\oint_C\frac{\partial f}{\partial n}\,ds$ <span class="w">白話：區域內「與鄰居的平均差」＝邊界上法線方向的變化量總和；$\frac{\partial f}{\partial n}=\nabla f\cdot\hat n$。</span></p>
 
-    <h2>11 · 高斯散度定理 <span class="pg">p.14</span></h2>
-    <p>$\iint_S\vec F\cdot\hat n\,dA=\iiint_T\nabla\cdot\vec F\,dV$：<span class="r">內部冒出量＝表面總通量</span>；$S$ 必須封閉，$\hat n$ 朝外。</p>
-    <p>座標形式：$\iint_S(F_1\,dy\,dz+F_2\,dz\,dx+F_3\,dx\,dy)$；通量＝單位時間穿過表面的流量。</p>
-    <p class="lbl">看到「封閉曲面求通量」：先算散度，再換座標（<span class="r">別忘了 $dV$ 的 $\rho$ 或 $r^2\sin\theta$</span>）。</p>
+  <h2>11 高斯散度定理 <span class="pg">p.14</span></h2>
+  <p>$\displaystyle\iint_S\vec F\cdot\hat n\,dA=\iiint_T\nabla\cdot\vec F\,dV$ <span class="w">白話：想知道氣球裡有多少空氣在往外跑？不用鑽進去——在表面量「往外流的總量」就好。</span></p>
+  <p>通量的座標形式 $\iint_S(F_1\,dy\,dz+F_2\,dz\,dx+F_3\,dx\,dy)$；$\hat n$ 朝外，$S$ 必須封閉</p>
+  <p><span class="w">解題順序：題目給封閉曲面求通量 ⇒ ①先算散度 ②再換座標 ③別忘了 $dV$ 的比例因子。</span></p>
 
-    <h2>12 · 斯托克斯定理 <span class="pg">p.15</span></h2>
-    <p>$\oint_C\vec F\cdot d\vec r=\iint_S(\nabla\times\vec F)\cdot\hat n\,dA$：<span class="r">曲面旋度通量＝邊界環流</span>；格林是它在平面上的特例。</p>
-    <p>用法：曲面複雜但邊界簡單時，把面積分換成邊界線積分。<span class="r">方向要與 $\hat n$ 符合右手定則</span>（反了兩邊同時變號）。</p>
-    <p class="lbl">對稱性偷懶：$\iint_R x\,dA=\iint_R y\,dA=0$（對原點對稱），別真的去積。</p>
+  <h2>12 斯托克斯定理 <span class="pg">p.15</span></h2>
+  <p>$\displaystyle\oint_C\vec F\cdot d\vec r=\iint_S(\nabla\times\vec F)\cdot\hat n\,dA$ <span class="w">白話：想知道一片帆布上有多少小旋轉，不必整片檢查——沿著邊緣走一圈就知道了。</span></p>
+  <p>$C$ 的方向與 $\hat n$ 要符合右手定則 <span class="r">方向反了兩邊同時變號</span>；格林定理是它在平面上的特例</p>
+  <p>對稱偷懶法：$\iint_R x\,dA=\iint_R y\,dA=0$（對原點對稱時）<span class="w">省時間的關鍵</span></p>
 
-    <h2>13 · 矩陣與線性方程組 <span class="pg">p.16–19</span></h2>
-    <p>元素 $a_{jk}$（$j$ 列、$k$ 行）；$[m\times n][n\times p]=[m\times p]$、<span class="r">$AB\ne BA$</span>、$A+B$ 要同 size、$cA$ 每個元素乘 $c$。</p>
-    <p>轉置規則 $(A^T)^T=A$、$(A+B)^T=A^T+B^T$、$(cA)^T=cA^T$、<span class="r">$(AB)^T=B^TA^T$（要換序）</span>；$A^T=A$ 叫對稱矩陣。</p>
-    <p>特殊矩陣：對角（非對角線全 0）、上／下三角、純量（對角線同值）、單位 $I$。</p>
-    <p>方程組 $A\vec x=\vec B$：<span class="r">缺的項係數補 0</span>；增廣矩陣 $[A\mid B]$；三種列運算＝互換、乘非零常數、加另一列倍數（都不改變解）。</p>
-    <p>解的判別：出現 $0=$ 非零的矛盾列 ⇒ 無解；$p=n$ ⇒ 唯一解；$p<n$ ⇒ 無限多解（$p$＝非零列數）。</p>
+  <h2>13 矩陣與線性方程組 <span class="pg">p.16–19</span></h2>
+  <p>元素 $a_{jk}$：$j$ 是列、$k$ 是行；$[m\times n][n\times p]=[m\times p]$、<span class="r">$AB\ne BA$</span>、$A+B$ 要同 size、$cA$ 每個元素乘 $c$。</p>
+  <p>轉置$(A^T)^T=A$、$(A+B)^T=A^T+B^T$、$(cA)^T=cA^T$、<span class="r">$(AB)^T=B^TA^T$（順序要反）</span>；$A^T=A$ 叫對稱矩陣。</p>
+  <p>有名字的矩陣：對角（非對角線全 0）、上／下三角、純量（對角線同值）、單位 $I$（矩陣界的 1）。</p>
+  <p>$A\vec x=\vec B$：<span class="w">缺的項係數補 0</span>；增廣矩陣 $[A\mid B]$；三種列運算＝互換、乘非零常數、加另一列的倍數 <span class="w">（都不改變解，等同加減消去法）</span>。</p>
+  <p>解的判別：出現 $0=$ 非零的矛盾列 ⇒ 無解；$p=n$ ⇒ 唯一解；$p<n$ ⇒ 無限多組解（$p$＝非零列數）。</p>
 
-    <h2>14 · 線性獨立與秩 <span class="pg">p.20</span></h2>
-    <p>$\sum c_i\vec a_i=\vec 0$ 只有全 $c_i=0$ 才成立 ⇒ 線性獨立；有不全為零的解 ⇒ 線性相關（有向量是多餘的）。</p>
-    <p>Rank＝獨立列（＝獨立行）的最大個數；$A=0$ 時 Rank$\,=0$，否則 $\ge1$；$\operatorname{Rank}A=\operatorname{Rank}A^T\le\min(m,n)$。</p>
-    <p class="lbl">算法：列運算化成階梯型，數非零列。$\operatorname{Rank}A<\operatorname{Rank}[A\mid B]$ ⇒ 無解。</p>
+  <h2>14 線性獨立與秩 <span class="pg">p.20</span></h2>
+  <p>$c_1\vec a_1+\dots+c_n\vec a_n=\vec 0$ 只有全 $c_i=0$ 才成立 ⇒ 線性獨立 <span class="w">白話：每支箭都提供新方向；反之若有不全為零的解就叫線性相關（有向量是多餘的）。</span></p>
+  <p>Rank＝獨立列的最大個數＝獨立行的最大個數；$\operatorname{Rank}A=\operatorname{Rank}A^T\le\min(m,n)$；全零矩陣 Rank$\,=0$。</p>
+  <p><span class="w">算法：列運算化成階梯型，數留下幾個非零列。$\operatorname{Rank}A<\operatorname{Rank}[A\mid\vec B]$ ⇒ 無解。</span></p>
 
-    <h2>15 · 行列式 <span class="pg">p.21</span></h2>
-    <p>$n=2$：$a_{11}a_{22}-a_{12}a_{21}$（主對角減副對角）。$n\ge3$：$D=\sum_k(-1)^{j+k}a_{jk}M_{jk}$（沿第 $j$ 列餘因子展開）。</p>
-    <p>Minor $M_{jk}$：刪掉第 $j$ 列第 $k$ 行剩下的行列式；Cofactor $C_{jk}=(-1)^{j+k}M_{jk}$。<span class="r">選 0 最多的那一列展開</span>，$+/-$ 用符號棋盤（左上為 $+$）。</p>
-    <p>解的數量：$\det A\ne0$ ⇒ 唯一解；$\det A=0$ ⇒ 無解或無限多解（不可能剛好兩組解）。</p>
+  <h2>15 行列式 <span class="pg">p.21</span></h2>
+  <p>$n=2$：$a_{11}a_{22}-a_{12}a_{21}$；$n\ge3$：$D=\sum_k(-1)^{j+k}a_{jk}M_{jk}$（固定第 $j$ 列展開） <span class="w">白話：把一個方陣壓縮成一個數字。</span></p>
+  <p>Minor $M_{jk}$：刪掉第 $j$ 列與第 $k$ 行剩下的行列式；Cofactor $C_{jk}=(-1)^{j+k}M_{jk}$ <span class="w">選 0 最多的那一列展開；正負號用符號棋盤（左上為 $+$）。</span></p>
+  <p>$\det A\ne0$ ⇒ 唯一解；$\det A=0$ ⇒ 無解或無限多組解 <span class="w">（不可能剛好兩組解）</span></p>
 
-    <h2>16 · 克拉瑪公式 <span class="pg">p.22</span></h2>
-    <p>$x_k=\dfrac{\det(A\text{ 第 }k\text{ 行換成 }\vec b)}{\det A}$（$\det A\ne0$）：分母固定，<span class="r">求哪個未知數就換哪一行</span>。</p>
-    <p>限制：方程數＝未知數數，且 $\det A\ne0$；優點是只問一個未知數時超快，缺點是 $n$ 大時計算量爆炸。</p>
+  <h2>16 克拉瑪公式 <span class="pg">p.22</span></h2>
+  <p>$x_k=\dfrac{\det(A\text{ 的第 }k\text{ 行換成 }\vec b)}{\det A}$，$\det A\ne0$ <span class="w">白話：每個未知數＝兩個行列式相除；分母永遠是同一個 $\det A$，只有分子在換行——求哪個未知數就換哪一行。</span></p>
+  <p>限制：方程式條數＝未知數個數；只問一個未知數時最快，$n$ 大時改列運算。</p>
 
-    <h2>17 · 反矩陣 <span class="pg">p.22–23</span></h2>
-    <p>$AA^{-1}=A^{-1}A=I$；若存在則唯一；$\det A=0\iff$ singular（沒有反矩陣）；$(AB)^{-1}=B^{-1}A^{-1}$（換序）。</p>
-    <p>求法：$[A\mid I]\xrightarrow{\text{列運算}}[I\mid A^{-1}]$（右半邊是拿來記錄運算的）。</p>
-    <p>$2\times2$ 速解：$\begin{bmatrix}a&b\\c&d\end{bmatrix}^{-1}=\dfrac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$（主對角交換、副對角變號、除以行列式）。</p>
-    <p>解方程組：$\vec x=A^{-1}\vec B$。<span class="r">算完一定要乘回去驗算 $=I$</span>。</p>
+  <h2>17 反矩陣 <span class="pg">p.22–23</span></h2>
+  <p>$AA^{-1}=A^{-1}A=I$；若存在則唯一；$\det A=0\iff$ singular（沒有反矩陣）；$(AB)^{-1}=B^{-1}A^{-1}$ <span class="r">順序要反</span></p>
+  <p>求法 $[A\mid I]\ \xrightarrow{\text{列運算}}\ [I\mid A^{-1}]$ <span class="w">白話：右邊的 $I$ 是拿來記錄「你對 $A$ 做了哪些運算」的。</span></p>
+  <p>$2\times2$ 速解 $\begin{bmatrix}a&b\\c&d\end{bmatrix}^{-1}=\dfrac{1}{ad-bc}\begin{bmatrix}d&-b\\-c&a\end{bmatrix}$ <span class="w">主對角交換、副對角變號、除以行列式。</span></p>
+  <p>解方程組 $\vec x=A^{-1}\vec B$ <span class="r">算完一定要乘回去驗算 $=I$</span></p>
 
-    <div class="box">
-      <h3>三大定理一句話</h3>
-      <p style="margin:0"><b>格林</b>（平面）：繞邊界＝界內旋轉量總和；<b>高斯</b>（立體）：內部冒出量＝封閉面通量；<b>斯托克斯</b>（曲面）：曲面旋度通量＝邊界環流。</p>
-    </div>
+  <div class="box">
+    <h3>三大定理一句話</h3>
+    <p style="margin:0"><b>格林</b>（平面）$\oint_C=\iint_R$：繞邊界走一圈＝界內小旋轉總和。　<b>高斯</b>（立體）$\iint_S=\iiint_T$：封閉面通量＝內部冒出量。　<b>斯托克斯</b>（曲面）$\oint_C=\iint_S$：邊界環流＝曲面旋度通量。 <span class="w">句型：內的微分總和＝邊界上的總量。</span></p>
+  </div>
 
   </div>
 </section>
